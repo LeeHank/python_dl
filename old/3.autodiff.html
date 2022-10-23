@@ -1,0 +1,1221 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3. Introduction to gradients and automatic differentiation &#8212; My sample book</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. Introduction to modules, layers, and models" href="5.intro_to_modules.html" />
+    <link rel="prev" title="2. Introduction to Variables" href="2.variable.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  basics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1.tensor.html">
+   1. Introduction to Tensors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2.variable.html">
+   2. Introduction to Variables
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   3. Introduction to gradients and automatic differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5.intro_to_modules.html">
+   4. Introduction to modules, layers, and models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="6.basic_training_loops.html">
+   6. Basic training loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="7.keras_sequential_model.html">
+   7. The Sequential model
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/old/3.autodiff.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fold/3.autodiff.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/old/3.autodiff.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#automatic-differentiation-and-gradients">
+   3.1. Automatic Differentiation and Gradients
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   3.2. Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computing-gradients">
+   3.3. Computing gradients
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-tapes">
+   3.4. Gradient tapes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradients-with-respect-to-a-model">
+   3.5. Gradients with respect to a model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#controlling-what-the-tape-watches">
+   3.6. Controlling what the tape watches
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intermediate-results">
+   3.7. Intermediate results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notes-on-performance">
+   3.8. Notes on performance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradients-of-non-scalar-targets">
+   3.9. Gradients of non-scalar targets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#control-flow">
+   3.10. Control flow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cases-where-gradient-returns-none">
+   3.11. Cases where
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     gradient
+    </span>
+   </code>
+   returns
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     None
+    </span>
+   </code>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#replaced-a-variable-with-a-tensor">
+     3.11.1. 1. Replaced a variable with a tensor
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#did-calculations-outside-of-tensorflow">
+     3.11.2. 2. Did calculations outside of TensorFlow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#took-gradients-through-an-integer-or-string">
+     3.11.3. 3. Took gradients through an integer or string
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#took-gradients-through-a-stateful-object">
+     3.11.4. 4. Took gradients through a stateful object
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#no-gradient-registered">
+   3.12. No gradient registered
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#zeros-instead-of-none">
+   3.13. Zeros instead of None
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduction to gradients and automatic differentiation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#automatic-differentiation-and-gradients">
+   3.1. Automatic Differentiation and Gradients
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   3.2. Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computing-gradients">
+   3.3. Computing gradients
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-tapes">
+   3.4. Gradient tapes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradients-with-respect-to-a-model">
+   3.5. Gradients with respect to a model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#controlling-what-the-tape-watches">
+   3.6. Controlling what the tape watches
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intermediate-results">
+   3.7. Intermediate results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notes-on-performance">
+   3.8. Notes on performance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradients-of-non-scalar-targets">
+   3.9. Gradients of non-scalar targets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#control-flow">
+   3.10. Control flow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cases-where-gradient-returns-none">
+   3.11. Cases where
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     gradient
+    </span>
+   </code>
+   returns
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     None
+    </span>
+   </code>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#replaced-a-variable-with-a-tensor">
+     3.11.1. 1. Replaced a variable with a tensor
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#did-calculations-outside-of-tensorflow">
+     3.11.2. 2. Did calculations outside of TensorFlow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#took-gradients-through-an-integer-or-string">
+     3.11.3. 3. Took gradients through an integer or string
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#took-gradients-through-a-stateful-object">
+     3.11.4. 4. Took gradients through a stateful object
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#no-gradient-registered">
+   3.12. No gradient registered
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#zeros-instead-of-none">
+   3.13. Zeros instead of None
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="introduction-to-gradients-and-automatic-differentiation">
+<h1><span class="section-number">3. </span>Introduction to gradients and automatic differentiation<a class="headerlink" href="#introduction-to-gradients-and-automatic-differentiation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="automatic-differentiation-and-gradients">
+<h2><span class="section-number">3.1. </span>Automatic Differentiation and Gradients<a class="headerlink" href="#automatic-differentiation-and-gradients" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation">Automatic differentiation</a>
+is useful for implementing machine learning algorithms such as
+<a class="reference external" href="https://en.wikipedia.org/wiki/Backpropagation">backpropagation</a> for training
+neural networks.</p>
+<p>In this guide, you will explore ways to compute gradients with TensorFlow, especially in eager execution.</p>
+</div>
+<div class="section" id="setup">
+<h2><span class="section-number">3.2. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="computing-gradients">
+<h2><span class="section-number">3.3. </span>Computing gradients<a class="headerlink" href="#computing-gradients" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>To differentiate automatically, TensorFlow needs to remember what operations happen in what order during the <em>forward</em> pass.</p></li>
+<li><p>Then, during the <em>backward pass</em>, TensorFlow traverses this list of operations in reverse order to compute gradients.</p></li>
+</ul>
+</div>
+<div class="section" id="gradient-tapes">
+<h2><span class="section-number">3.4. </span>Gradient tapes<a class="headerlink" href="#gradient-tapes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>TensorFlow provides the <code class="docutils literal notranslate"><span class="pre">tf.GradientTape</span></code> API for automatic differentiation; that is, computing the gradient of a computation with respect to some inputs, usually <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code>s.</p></li>
+<li><p>TensorFlow “records” relevant operations executed inside the context of a <code class="docutils literal notranslate"><span class="pre">tf.GradientTape</span></code> onto a “tape”.</p></li>
+<li><p>TensorFlow then uses that tape to compute the gradients of a “recorded” computation using <a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation">reverse mode differentiation</a>.</p></li>
+<li><p>Here is a simple example:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Once you’ve recorded some operations, use <code class="docutils literal notranslate"><span class="pre">GradientTape.gradient(target,</span> <span class="pre">sources)</span></code> to calculate the gradient of some target (often a loss) relative to some source (often the model’s variables):</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dy_dx</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="c1"># y 對 x 微分，並帶入目前的 x 值 -&gt; dy_dx = 2x, 然後 x 用 3 帶入</span>
+<span class="n">dy_dx</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>The above example uses scalars, but <code class="docutils literal notranslate"><span class="pre">tf.GradientTape</span></code> works as easily on any tensor:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]]</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">(</span><span class="n">persistent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">@</span> <span class="n">w</span> <span class="o">+</span> <span class="n">b</span> <span class="c1"># y = f(w, b), y是 shape = (1,2) 的 array</span>
+  <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># loss = g(y) = g(f(w,b)), 所以等等要對 w, b 微分</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>To get the gradient of <code class="docutils literal notranslate"><span class="pre">loss</span></code> with respect to both variables, you can pass both as sources to the <code class="docutils literal notranslate"><span class="pre">gradient</span></code> method.</p></li>
+<li><p>The tape is flexible about how sources are passed and will accept any nested combination of lists or dictionaries and return the gradient structured the same way (see <code class="docutils literal notranslate"><span class="pre">tf.nest</span></code>).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">dl_dw</span><span class="p">,</span> <span class="n">dl_db</span><span class="p">]</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The gradient with respect to each source has the shape of the source:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dl_dw</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 2)
+(3, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is the gradient calculation again, this time passing a dictionary of variables:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_vars</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;w&#39;</span><span class="p">:</span> <span class="n">w</span><span class="p">,</span>
+    <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">b</span>
+<span class="p">}</span>
+
+<span class="n">grad</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">my_vars</span><span class="p">)</span>
+<span class="n">grad</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(2,), dtype=float32, numpy=array([-0.8894863,  6.220546 ], dtype=float32)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="gradients-with-respect-to-a-model">
+<h2><span class="section-number">3.5. </span>Gradients with respect to a model<a class="headerlink" href="#gradients-with-respect-to-a-model" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>It’s common to collect <code class="docutils literal notranslate"><span class="pre">tf.Variables</span></code> into a <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> or one of its subclasses (<code class="docutils literal notranslate"><span class="pre">layers.Layer</span></code>, <code class="docutils literal notranslate"><span class="pre">keras.Model</span></code>) for <span class="xref myst">checkpointing</span> and <span class="xref myst">exporting</span>.</p></li>
+<li><p>In most cases, you will want to calculate gradients with respect to a model’s trainable variables.</p></li>
+<li><p>Since all subclasses of <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> aggregate their variables in the <code class="docutils literal notranslate"><span class="pre">Module.trainable_variables</span></code> property, you can calculate these gradients in a few lines of code:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">layer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]])</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="c1"># Forward pass</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Calculate gradients with respect to every trainable variable</span>
+<span class="n">grad</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">layer</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>因為只用了 Dense(2)，所以可以知道， forward 的計算 (<code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">layer(x)</span></code>)，其實是 <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">xW</span> <span class="pre">+</span> <span class="pre">b</span></code>, x 是 1x3, W 是 3x2, b 是 1x2, 最終的 y 是 1x2</p></li>
+<li><p>那，要估的參數，就包括：</p>
+<ul>
+<li><p>kernel (i.e. W 矩陣) 是 (3, 2) 的矩陣</p></li>
+<li><p>bias (i.e. b) 是 (1,2) vector</p></li>
+</ul>
+</li>
+<li><p>而，layer 中的 <code class="docutils literal notranslate"><span class="pre">trainable_variables</span></code> 就是幫你搜集好這兩個了，所以微分後的結果如下：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grad</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tf.Tensor: shape=(3, 2), dtype=float32, numpy=
+ array([[1.7747442, 2.975191 ],
+        [3.5494883, 5.950382 ],
+        [5.3242326, 8.925573 ]], dtype=float32)&gt;,
+ &lt;tf.Tensor: shape=(2,), dtype=float32, numpy=array([1.7747442, 2.975191 ], dtype=float32)&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>加點資訊進去看就更清楚了：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">var</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">,</span> <span class="n">grad</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">, shape: </span><span class="si">{</span><span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dense/kernel:0, shape: (3, 2)
+dense/bias:0, shape: (2,)
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="watches"></a></p>
+</div>
+<div class="section" id="controlling-what-the-tape-watches">
+<h2><span class="section-number">3.6. </span>Controlling what the tape watches<a class="headerlink" href="#controlling-what-the-tape-watches" title="Permalink to this headline">¶</a></h2>
+<p>The default behavior is to record all operations after accessing a trainable <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code>. The reasons for this are:</p>
+<ul class="simple">
+<li><p>The tape needs to know which operations to record in the forward pass to calculate the gradients in the backwards pass.</p></li>
+<li><p>The tape holds references to intermediate outputs, so you don’t want to record unnecessary operations.</p></li>
+<li><p>The most common use case involves calculating the gradient of a loss with respect to all a model’s trainable variables.</p></li>
+</ul>
+<p>For example, the following fails to calculate a gradient because the <code class="docutils literal notranslate"><span class="pre">tf.Tensor</span></code> is not “watched” by default, and the <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code> is not trainable:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A trainable variable</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;x0&#39;</span><span class="p">)</span>
+<span class="c1"># Not trainable</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;x1&#39;</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1"># Not a Variable: A variable + tensor returns a tensor.</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;x2&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.0</span>
+<span class="c1"># Not a variable</span>
+<span class="n">x3</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;x3&#39;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">x0</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">x1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">x2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">grad</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">grad</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tf.Tensor(6.0, shape=(), dtype=float32)
+None
+None
+None
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can list the variables being watched by the tape using the <code class="docutils literal notranslate"><span class="pre">GradientTape.watched_variables</span></code> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">tape</span><span class="o">.</span><span class="n">watched_variables</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;x0:0&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">tf.GradientTape</span></code> provides hooks that give the user control over what is or is not watched.</p>
+<p>To record gradients with respect to a <code class="docutils literal notranslate"><span class="pre">tf.Tensor</span></code>, you need to call <code class="docutils literal notranslate"><span class="pre">GradientTape.watch(x)</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="n">tape</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># dy = 2x * dx</span>
+<span class="n">dy_dx</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dy_dx</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.0
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Conversely, to disable the default behavior of watching all <code class="docutils literal notranslate"><span class="pre">tf.Variables</span></code>, set <code class="docutils literal notranslate"><span class="pre">watch_accessed_variables=False</span></code> when creating the gradient tape.</p></li>
+<li><p>This calculation uses two variables, but only connects the gradient for one of the variables:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">(</span><span class="n">watch_accessed_variables</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="n">tape</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+  <span class="n">y0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+  <span class="n">y1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softplus</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">y0</span> <span class="o">+</span> <span class="n">y1</span>
+  <span class="n">ys</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since <code class="docutils literal notranslate"><span class="pre">GradientTape.watch</span></code> was not called on <code class="docutils literal notranslate"><span class="pre">x0</span></code>, no gradient is computed with respect to it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dys/dx1 = exp(x1) / (1 + exp(x1)) = sigmoid(x1)</span>
+<span class="n">grad</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x0&#39;</span><span class="p">:</span> <span class="n">x0</span><span class="p">,</span> <span class="s1">&#39;x1&#39;</span><span class="p">:</span> <span class="n">x1</span><span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;dy/dx0:&#39;</span><span class="p">,</span> <span class="n">grad</span><span class="p">[</span><span class="s1">&#39;x0&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;dy/dx1:&#39;</span><span class="p">,</span> <span class="n">grad</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dy/dx0: None
+dy/dx1: 0.9999546
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="intermediate-results">
+<h2><span class="section-number">3.7. </span>Intermediate results<a class="headerlink" href="#intermediate-results" title="Permalink to this headline">¶</a></h2>
+<p>You can also request gradients of the output with respect to intermediate values computed inside the <code class="docutils literal notranslate"><span class="pre">tf.GradientTape</span></code> context.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="n">tape</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="n">y</span>
+
+<span class="c1"># Use the tape to compute the gradient of z with respect to the</span>
+<span class="c1"># intermediate value y.</span>
+<span class="c1"># dz_dy = 2 * y and y = x ** 2 = 9</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18.0
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>By default, the resources held by a <code class="docutils literal notranslate"><span class="pre">GradientTape</span></code> are released as soon as the <code class="docutils literal notranslate"><span class="pre">GradientTape.gradient</span></code> method is called.</p></li>
+<li><p>To compute multiple gradients over the same computation, create a gradient tape with <code class="docutils literal notranslate"><span class="pre">persistent=True</span></code>.</p></li>
+<li><p>This allows multiple calls to the <code class="docutils literal notranslate"><span class="pre">gradient</span></code> method as resources are released when the tape object is garbage collected. For example:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">(</span><span class="n">persistent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="n">tape</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="n">y</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>  <span class="c1"># [4.0, 108.0] (4 * x**3 at x = [1.0, 3.0])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>  <span class="c1"># [2.0, 6.0] (2 * x at x = [1.0, 3.0])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[  4. 108.]
+[2. 6.]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">del</span> <span class="n">tape</span>   <span class="c1"># Drop the reference to the tape</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="notes-on-performance">
+<h2><span class="section-number">3.8. </span>Notes on performance<a class="headerlink" href="#notes-on-performance" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>There is a tiny overhead associated with doing operations inside a gradient tape context. For most eager execution this will not be a noticeable cost, but you should still use tape context around the areas only where it is required.</p></li>
+<li><p>Gradient tapes use memory to store intermediate results, including inputs and outputs, for use during the backwards pass.</p>
+<p>For efficiency, some ops (like <code class="docutils literal notranslate"><span class="pre">ReLU</span></code>) don’t need to keep their intermediate results and they are pruned during the forward pass. However, if you use <code class="docutils literal notranslate"><span class="pre">persistent=True</span></code> on your tape, <em>nothing is discarded</em> and your peak memory usage will be higher.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="gradients-of-non-scalar-targets">
+<h2><span class="section-number">3.9. </span>Gradients of non-scalar targets<a class="headerlink" href="#gradients-of-non-scalar-targets" title="Permalink to this headline">¶</a></h2>
+<p>A gradient is fundamentally an operation on a scalar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">(</span><span class="n">persistent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="n">y0</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+  <span class="n">y1</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">x</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span> <span class="c1"># 2x</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span> <span class="c1"># -x^(-2)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.0
+-0.25
+</pre></div>
+</div>
+</div>
+</div>
+<p>Thus, if you ask for the gradient of multiple targets, the result for each source is:</p>
+<ul class="simple">
+<li><p>The gradient of the sum of the targets, or equivalently</p></li>
+<li><p>The sum of the gradients of each target.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="n">y0</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+  <span class="n">y1</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">x</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">({</span><span class="s1">&#39;y0&#39;</span><span class="p">:</span> <span class="n">y0</span><span class="p">,</span> <span class="s1">&#39;y1&#39;</span><span class="p">:</span> <span class="n">y1</span><span class="p">},</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.75
+</pre></div>
+</div>
+</div>
+</div>
+<p>Similarly, if the target(s) are not scalar the gradient of the sum is calculated:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">2.</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="p">[</span><span class="mf">3.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>This makes it simple to take the gradient of the sum of a collection of losses, or the gradient of the sum of an element-wise loss calculation.</p>
+<p>If you need a separate gradient for each item, refer to <a class="reference external" href="advanced_autodiff.ipynb#jacobians">Jacobians</a>.</p>
+<p>In some cases you can skip the Jacobian. For an element-wise calculation, the gradient of the sum gives the derivative of each element with respect to its input-element, since each element is independent:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mi">200</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="n">tape</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">dy_dx</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dy_dx</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;dy/dx&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3.autodiff_53_0.png" src="../_images/3.autodiff_53_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="control-flow">
+<h2><span class="section-number">3.10. </span>Control flow<a class="headerlink" href="#control-flow" title="Permalink to this headline">¶</a></h2>
+<p>Because a gradient tape records operations as they are executed, Python control flow is naturally handled (for example, <code class="docutils literal notranslate"><span class="pre">if</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code> statements).</p>
+<p>Here a different variable is used on each branch of an <code class="docutils literal notranslate"><span class="pre">if</span></code>. The gradient only connects to the variable that was used:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="n">v0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">v1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">(</span><span class="n">persistent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="n">tape</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">v0</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">v1</span><span class="o">**</span><span class="mi">2</span> 
+
+<span class="n">dv0</span><span class="p">,</span> <span class="n">dv1</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">[</span><span class="n">v0</span><span class="p">,</span> <span class="n">v1</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">dv0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dv1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tf.Tensor(1.0, shape=(), dtype=float32)
+None
+</pre></div>
+</div>
+</div>
+</div>
+<p>Just remember that the control statements themselves are not differentiable, so they are invisible to gradient-based optimizers.</p>
+<p>Depending on the value of <code class="docutils literal notranslate"><span class="pre">x</span></code> in the above example, the tape either records <code class="docutils literal notranslate"><span class="pre">result</span> <span class="pre">=</span> <span class="pre">v0</span></code> or <code class="docutils literal notranslate"><span class="pre">result</span> <span class="pre">=</span> <span class="pre">v1**2</span></code>. The gradient with respect to <code class="docutils literal notranslate"><span class="pre">x</span></code> is always <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dx</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>None
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="cases-where-gradient-returns-none">
+<h2><span class="section-number">3.11. </span>Cases where <code class="docutils literal notranslate"><span class="pre">gradient</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code><a class="headerlink" href="#cases-where-gradient-returns-none" title="Permalink to this headline">¶</a></h2>
+<p>When a target is not connected to a source, <code class="docutils literal notranslate"><span class="pre">gradient</span></code> will return <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">2.</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">3.</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="n">y</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>None
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">z</span></code> is obviously not connected to <code class="docutils literal notranslate"><span class="pre">x</span></code>, but there are several less-obvious ways that a gradient can be disconnected.</p>
+<div class="section" id="replaced-a-variable-with-a-tensor">
+<h3><span class="section-number">3.11.1. </span>1. Replaced a variable with a tensor<a class="headerlink" href="#replaced-a-variable-with-a-tensor" title="Permalink to this headline">¶</a></h3>
+<p>In the section on <a class="reference external" href="#watches">“controlling what the tape watches”</a> you saw that the tape will automatically watch a <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code> but not a <code class="docutils literal notranslate"><span class="pre">tf.Tensor</span></code>.</p>
+<p>One common error is to inadvertently replace a <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code> with a <code class="docutils literal notranslate"><span class="pre">tf.Tensor</span></code>, instead of using <code class="docutils literal notranslate"><span class="pre">Variable.assign</span></code> to update the <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code>. Here is an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+  <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+
+  <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>   <span class="c1"># This should be `x.assign_add(1)`</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ResourceVariable : tf.Tensor(1.0, shape=(), dtype=float32)
+EagerTensor : None
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="did-calculations-outside-of-tensorflow">
+<h3><span class="section-number">3.11.2. </span>2. Did calculations outside of TensorFlow<a class="headerlink" href="#did-calculations-outside-of-tensorflow" title="Permalink to this headline">¶</a></h3>
+<p>The tape can’t record the gradient path if the calculation exits TensorFlow.
+For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span>
+                 <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+  <span class="c1"># This step is calculated with NumPy</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+  <span class="c1"># Like most ops, reduce_mean will cast the NumPy array to a constant tensor</span>
+  <span class="c1"># using `tf.convert_to_tensor`.</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>None
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="took-gradients-through-an-integer-or-string">
+<h3><span class="section-number">3.11.3. </span>3. Took gradients through an integer or string<a class="headerlink" href="#took-gradients-through-an-integer-or-string" title="Permalink to this headline">¶</a></h3>
+<p>Integers and strings are not differentiable. If a calculation path uses these data types there will be no gradient.</p>
+<p>Nobody expects strings to be differentiable, but it’s easy to accidentally create an <code class="docutils literal notranslate"><span class="pre">int</span></code> constant or variable if you don’t specify the <code class="docutils literal notranslate"><span class="pre">dtype</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">g</span><span class="p">:</span>
+  <span class="n">g</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:The dtype of the watched tensor must be floating (e.g. tf.float32), got tf.int32
+WARNING:tensorflow:The dtype of the target tensor must be floating (e.g. tf.float32) when calling GradientTape.gradient, got tf.int32
+WARNING:tensorflow:The dtype of the source tensor must be floating (e.g. tf.float32) when calling GradientTape.gradient, got tf.int32
+None
+</pre></div>
+</div>
+</div>
+</div>
+<p>TensorFlow doesn’t automatically cast between types, so, in practice, you’ll often get a type error instead of a missing gradient.</p>
+</div>
+<div class="section" id="took-gradients-through-a-stateful-object">
+<h3><span class="section-number">3.11.4. </span>4. Took gradients through a stateful object<a class="headerlink" href="#took-gradients-through-a-stateful-object" title="Permalink to this headline">¶</a></h3>
+<p>State stops gradients. When you read from a stateful object, the tape can only observe the current state, not the history that lead to it.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">tf.Tensor</span></code> is immutable. You can’t change a tensor once it’s created. It has a <em>value</em>, but no <em>state</em>. All the operations discussed so far are also stateless: the output of a <code class="docutils literal notranslate"><span class="pre">tf.matmul</span></code> only depends on its inputs.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code> has internal state—its value. When you use the variable, the state is read. It’s normal to calculate a gradient with respect to a variable, but the variable’s state blocks gradient calculations from going farther back. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="c1"># Update x1 = x1 + x0.</span>
+  <span class="n">x1</span><span class="o">.</span><span class="n">assign_add</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+  <span class="c1"># The tape starts recording from x1.</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">x1</span><span class="o">**</span><span class="mi">2</span>   <span class="c1"># y = (x1 + x0)**2</span>
+
+<span class="c1"># This doesn&#39;t work.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x0</span><span class="p">))</span>   <span class="c1">#dy/dx0 = 2*(x1 + x0)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>None
+</pre></div>
+</div>
+</div>
+</div>
+<p>Similarly, <code class="docutils literal notranslate"><span class="pre">tf.data.Dataset</span></code> iterators and <code class="docutils literal notranslate"><span class="pre">tf.queue</span></code>s are stateful, and will stop all gradients on tensors that pass through them.</p>
+</div>
+</div>
+<div class="section" id="no-gradient-registered">
+<h2><span class="section-number">3.12. </span>No gradient registered<a class="headerlink" href="#no-gradient-registered" title="Permalink to this headline">¶</a></h2>
+<p>Some <code class="docutils literal notranslate"><span class="pre">tf.Operation</span></code>s are <strong>registered as being non-differentiable</strong> and will return <code class="docutils literal notranslate"><span class="pre">None</span></code>. Others have <strong>no gradient registered</strong>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">tf.raw_ops</span></code> page shows which low-level ops have gradients registered.</p>
+<p>If you attempt to take a gradient through a float op that has no gradient registered the tape will throw an error instead of silently returning <code class="docutils literal notranslate"><span class="pre">None</span></code>. This way you know something has gone wrong.</p>
+<p>For example, the <code class="docutils literal notranslate"><span class="pre">tf.image.adjust_contrast</span></code> function wraps <code class="docutils literal notranslate"><span class="pre">raw_ops.AdjustContrastv2</span></code>, which could have a gradient but the gradient is not implemented:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">([[[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]]])</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="n">new_image</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">adjust_contrast</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">new_image</span><span class="p">,</span> <span class="p">[</span><span class="n">image</span><span class="p">,</span> <span class="n">delta</span><span class="p">]))</span>
+  <span class="k">assert</span> <span class="kc">False</span>   <span class="c1"># This should not happen.</span>
+<span class="k">except</span> <span class="ne">LookupError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LookupError: gradient registry has no entry for: AdjustContrastv2
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you need to differentiate through this op, you’ll either need to implement the gradient and register it (using <code class="docutils literal notranslate"><span class="pre">tf.RegisterGradient</span></code>) or re-implement the function using other ops.</p>
+</div>
+<div class="section" id="zeros-instead-of-none">
+<h2><span class="section-number">3.13. </span>Zeros instead of None<a class="headerlink" href="#zeros-instead-of-none" title="Permalink to this headline">¶</a></h2>
+<p>In some cases it would be convenient to get 0 instead of <code class="docutils literal notranslate"><span class="pre">None</span></code> for unconnected gradients.  You can decide what to return when you have unconnected gradients using the <code class="docutils literal notranslate"><span class="pre">unconnected_gradients</span></code> argument:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">([</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">3.</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">unconnected_gradients</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">UnconnectedGradients</span><span class="o">.</span><span class="n">ZERO</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tf.Tensor([0. 0.], shape=(2,), dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./old"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="2.variable.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">2. </span>Introduction to Variables</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="5.intro_to_modules.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Introduction to modules, layers, and models</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

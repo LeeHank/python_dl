@@ -1,0 +1,1478 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4. Introduction to modules, layers, and models &#8212; My sample book</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6. Basic training loops" href="6.basic_training_loops.html" />
+    <link rel="prev" title="3. Introduction to gradients and automatic differentiation" href="3.autodiff.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  basics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1.tensor.html">
+   1. Introduction to Tensors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2.variable.html">
+   2. Introduction to Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3.autodiff.html">
+   3. Introduction to gradients and automatic differentiation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   4. Introduction to modules, layers, and models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="6.basic_training_loops.html">
+   6. Basic training loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="7.keras_sequential_model.html">
+   7. The Sequential model
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/old/5.intro_to_modules.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fold/5.intro_to_modules.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/old/5.intro_to_modules.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   4. Introduction to modules, layers, and models
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setup">
+     4.1. Setup
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tf-module-defining-models-and-layers-in-tensorflow">
+     4.2.
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       tf.Module
+      </span>
+     </code>
+     : Defining models and layers in TensorFlow
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#toy-example">
+       4.2.1. toy example
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#layer">
+       4.2.2. 自訂 layer
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#model">
+       4.2.3. 自訂 model
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#waiting-to-create-variables">
+       4.2.4. Waiting to create variables
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#save-load">
+       4.2.5. Save &amp; load
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#checkpoints-save-load-weights">
+         4.2.5.1. checkpoints (save &amp; load weights)
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#savedmodel">
+         4.2.5.2.
+         <code class="docutils literal notranslate">
+          <span class="pre">
+           SavedModel
+          </span>
+         </code>
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#keras-models-and-layers">
+     4.3. Keras models and layers
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#keras-layers">
+       4.3.1. Keras layers
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-build-step">
+       4.3.2. The
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         build
+        </span>
+       </code>
+       step
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#keras-models">
+       4.3.3. Keras models
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#functional-api">
+       4.3.4. functional API
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#saving-keras-models">
+     4.4. Saving Keras models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-s-next">
+   5. What’s next
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     5.1. 待完成內容：
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduction to modules, layers, and models</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   4. Introduction to modules, layers, and models
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setup">
+     4.1. Setup
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tf-module-defining-models-and-layers-in-tensorflow">
+     4.2.
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       tf.Module
+      </span>
+     </code>
+     : Defining models and layers in TensorFlow
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#toy-example">
+       4.2.1. toy example
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#layer">
+       4.2.2. 自訂 layer
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#model">
+       4.2.3. 自訂 model
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#waiting-to-create-variables">
+       4.2.4. Waiting to create variables
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#save-load">
+       4.2.5. Save &amp; load
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#checkpoints-save-load-weights">
+         4.2.5.1. checkpoints (save &amp; load weights)
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#savedmodel">
+         4.2.5.2.
+         <code class="docutils literal notranslate">
+          <span class="pre">
+           SavedModel
+          </span>
+         </code>
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#keras-models-and-layers">
+     4.3. Keras models and layers
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#keras-layers">
+       4.3.1. Keras layers
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-build-step">
+       4.3.2. The
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         build
+        </span>
+       </code>
+       step
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#keras-models">
+       4.3.3. Keras models
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#functional-api">
+       4.3.4. functional API
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#saving-keras-models">
+     4.4. Saving Keras models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-s-next">
+   5. What’s next
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     5.1. 待完成內容：
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="introduction-to-modules-layers-and-models">
+<h1><span class="section-number">4. </span>Introduction to modules, layers, and models<a class="headerlink" href="#introduction-to-modules-layers-and-models" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>在用 tensorflow 做 machine learning的時候，會需要去 define, save, and restore a model.</p></li>
+<li><p>在 tf 中， model 可被定義為：</p>
+<ul>
+<li><p>A function that computes something on tensors (a <strong>forward pass</strong>)</p></li>
+<li><p>Some variables that can be updated in response to training</p></li>
+</ul>
+</li>
+<li><p>在這份文件中，將 go below the surface of Keras to see how TensorFlow models are defined.</p></li>
+<li><p>This looks at how TensorFlow collects variables and models, as well as how they are saved and restored.</p></li>
+</ul>
+<div class="section" id="setup">
+<h2><span class="section-number">4.1. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="o">%</span><span class="k">load_ext</span> tensorboard
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tf-module-defining-models-and-layers-in-tensorflow">
+<h2><span class="section-number">4.2. </span><code class="docutils literal notranslate"><span class="pre">tf.Module</span></code>: Defining models and layers in TensorFlow<a class="headerlink" href="#tf-module-defining-models-and-layers-in-tensorflow" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>大部分的 model 都是由 layers 所組成.</p></li>
+<li><p>Layers 其實就是 functions，而這個 function 是由可被重複使用的數學結構所定義，裡面有可訓練的變數。</p></li>
+<li><p>在 tensorflow 中，大部分 high-level 的 layers 和 models，都是built on the same foundational class: <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code>.</p></li>
+</ul>
+<div class="section" id="toy-example">
+<h3><span class="section-number">4.2.1. </span>toy example<a class="headerlink" href="#toy-example" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SimpleModule</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">a_variable</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;train_me&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">non_trainable_variable</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;do_not_train_me&quot;</span><span class="p">)</span>
+  <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">a_variable</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">non_trainable_variable</span>
+
+<span class="n">simple_module</span> <span class="o">=</span> <span class="n">SimpleModule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;simple&quot;</span><span class="p">)</span>
+
+<span class="n">simple_module</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">5.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(), dtype=float32, numpy=30.0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>來看一下，我們剛剛定義了一個 module (你可以叫他 module，也可以叫他 layer，都可以)，他最一開始就繼承了 <code class="docutils literal notranslate"><span class="pre">tf.Moudle</span></code> 這個 class</p></li>
+<li><p>可以看到，這個 class，有 <code class="docutils literal notranslate"><span class="pre">__call__</span></code> 這個 method，這就是一般 python callable 的定義方式，沒什麼特別</p></li>
+<li><p>再來看一下 <code class="docutils literal notranslate"><span class="pre">__init__</span></code> 裡面，定義了兩個會用的屬性，也就是兩個 <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code>。其中一個是 trainable (可微分)，另一個是不給 train (不可微分)</p></li>
+<li><p>然後，這個 module 要做的事情，就是，當你輸入 x 時，他會幫你乘上一個數，然後再加上一個數</p></li>
+<li><p>從結果來看，輸入 5 後，得到 32</p></li>
+<li><p>那，繼承 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> 這個 class 有什麼好處？好處就是，已經有寫好一些 method 和 attribute，會幫你省很多力氣。例如，他會自動幫你蒐集總共定義了多少個 tf.Variables，以及， trainable 的 variable 有哪些，</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># all variables</span>
+<span class="n">simple_module</span><span class="o">.</span><span class="n">variables</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;tf.Variable &#39;train_me:0&#39; shape=() dtype=float32, numpy=5.0&gt;,
+ &lt;tf.Variable &#39;do_not_train_me:0&#39; shape=() dtype=float32, numpy=5.0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，他用一個 tuple，把所有 variable 給蒐集起來。名稱分別是 <code class="docutils literal notranslate"><span class="pre">train_me</span></code> 和 <code class="docutils literal notranslate"><span class="pre">do_not_train_me</span></code>.</p></li>
+<li><p>另外，自動微分最常用的，就是抓出 trainable variables 來做微分。這他也幫你蒐集好了：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># trainable variable</span>
+<span class="n">simple_module</span><span class="o">.</span><span class="n">trainable_variables</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;tf.Variable &#39;train_me:0&#39; shape=() dtype=float32, numpy=5.0&gt;,)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="layer">
+<h3><span class="section-number">4.2.2. </span>自訂 layer<a class="headerlink" href="#layer" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>接著，我們可以來定義一個自己的 <code class="docutils literal notranslate"><span class="pre">Dense</span></code> (linear) layer:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Dense</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_features</span><span class="p">,</span> <span class="n">out_features</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="c1"># Dense layer 的第一個參數，是 weight 矩陣 `w`，起始值用 normal 來生，shape 是 in_features x out_features</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span>
+      <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">([</span><span class="n">in_features</span><span class="p">,</span> <span class="n">out_features</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="c1"># Dense layer 的第二個參數，是 bias 向量 `b`，起始值給 0 向量， shape 為 1 x out_features</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">out_features</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+  <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="c1"># 當我們 call Dense 的時候，就是輸入一個 x tensor (shape 為 1 x in_features)，然後去計算 x w + b，得到 shape 為 1 x out_features 的向量 </span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>可以想像， w 和 b 都是 trainable variable，之後就要靠自動微分來更新 w 和 b 的值</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dense_1</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">in_features</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">out_features</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">dense_1</span><span class="o">.</span><span class="n">trainable_variables</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;tf.Variable &#39;b:0&#39; shape=(6,) dtype=float32, numpy=array([0., 0., 0., 0., 0., 0.], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;w:0&#39; shape=(3, 6) dtype=float32, numpy=
+ array([[-0.2585963 , -0.72111183, -0.47151518,  1.1848954 ,  1.4632958 ,
+          1.9215399 ],
+        [ 1.2155559 , -0.9481618 , -0.17013389,  1.3932179 , -1.2731404 ,
+          0.14196219],
+        [-1.3073918 ,  0.33516636,  0.5894352 , -0.90030533,  0.88234293,
+          1.3543645 ]], dtype=float32)&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，初始化後的 dense_1，有兩個 trainable variable，而且起始 weight 也列出來給你看了</p></li>
+<li><p>可以用用看這個 dense 層的功能：輸入 1 x in_features 的 tensor，輸出 1 x out_features 的 tensor</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">]])</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">dense_1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">out</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(1, 6), dtype=float32, numpy=
+array([[0.       , 0.       , 1.0573964, 1.2296758, 1.6131986, 6.553627 ]],
+      dtype=float32)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到， output 是一個 1x6 的 tensor</p></li>
+</ul>
+</div>
+<div class="section" id="model">
+<h3><span class="section-number">4.2.3. </span>自訂 model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>那如果我們想自定一個 model (從 input 一個 tensor，到 output 一個結果出來。重點在定義中間的 forward propagation 過程)，就可以沿用剛剛的定義方式。</p></li>
+<li><p>假設，我想做一個 2 個 dense 的 NN (都是linear)，那我可以這樣定義：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SequentialModule</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="c1"># 在這邊定義好，我等等會用到的 layer 有哪些</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">dense_1</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">dense_2</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="c1"># forward logic</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dense_1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dense_2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># You have made a model!</span>
+<span class="n">my_model</span> <span class="o">=</span> <span class="n">SequentialModule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;the_model&quot;</span><span class="p">)</span>
+
+<span class="c1"># Call it, with random results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model results:&quot;</span><span class="p">,</span> <span class="n">my_model</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]])))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model results: tf.Tensor([[4.243844 0.      ]], shape=(1, 2), dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> instances will automatically collect, recursively, any <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code> or <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> instances assigned to it. This allows you to manage collections of <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code>s with a single model instance, and save and load whole models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Submodules:&quot;</span><span class="p">,</span> <span class="n">my_model</span><span class="o">.</span><span class="n">submodules</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Submodules: (&lt;__main__.Dense object at 0x14bae3df0&gt;, &lt;__main__.Dense object at 0x10d486550&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">my_model</span><span class="o">.</span><span class="n">variables</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Variable &#39;b:0&#39; shape=(3,) dtype=float32, numpy=array([0., 0., 0.], dtype=float32)&gt; 
+
+&lt;tf.Variable &#39;w:0&#39; shape=(3, 3) dtype=float32, numpy=
+array([[-2.247787 ,  1.3312311,  1.2570276],
+       [-1.1049702,  1.2348688,  1.1046218],
+       [-1.5440533, -0.994251 ,  1.4764204]], dtype=float32)&gt; 
+
+&lt;tf.Variable &#39;b:0&#39; shape=(2,) dtype=float32, numpy=array([0., 0.], dtype=float32)&gt; 
+
+&lt;tf.Variable &#39;w:0&#39; shape=(3, 2) dtype=float32, numpy=
+array([[ 0.64399236, -0.01036486],
+       [ 0.13026635, -0.6883245 ],
+       [-0.00606108,  2.0914354 ]], dtype=float32)&gt; 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="waiting-to-create-variables">
+<h3><span class="section-number">4.2.4. </span>Waiting to create variables<a class="headerlink" href="#waiting-to-create-variables" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>剛剛可以看到，我們定義的 dense ，要定義 input tensor 的 shape (i.e. in_features 是多少</p></li>
+<li><p>這有點麻煩，而且和 keras 內建的 <code class="docutils literal notranslate"><span class="pre">tf.keras.layers.Dense</span></code> 不同</p></li>
+<li><p>keras 的 Dense 只要知道 out_features 就好， in_features 他會直接去讀你丟給他的 input tensor 來決定</p></li>
+<li><p>所以，我們稍微改一下原本的 code，就可以做到這件事：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FlexibleDenseModule</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+  <span class="c1"># Note: No need for `in_features`</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_features</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">out_features</span> <span class="o">=</span> <span class="n">out_features</span>
+    <span class="c1"># 加入這行</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">is_built</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># 起始狀態時，是 False</span>
+    
+  <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="c1"># 第一次 call 時 (self.is_built 為 False 時)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_built</span><span class="p">:</span>
+      <span class="c1"># 在這裡才定義 w 和 b</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_features</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">out_features</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">is_built</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># 並修改狀態</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Used in a module</span>
+<span class="k">class</span> <span class="nc">MySequentialModule</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">dense_1</span> <span class="o">=</span> <span class="n">FlexibleDenseModule</span><span class="p">(</span><span class="n">out_features</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">dense_2</span> <span class="o">=</span> <span class="n">FlexibleDenseModule</span><span class="p">(</span><span class="n">out_features</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dense_1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dense_2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">my_model</span> <span class="o">=</span> <span class="n">MySequentialModule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;the_model&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model results:&quot;</span><span class="p">,</span> <span class="n">my_model</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]])))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model results: tf.Tensor([[0. 0.]], shape=(1, 2), dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="save-load">
+<h3><span class="section-number">4.2.5. </span>Save &amp; load<a class="headerlink" href="#save-load" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>剛剛不管是自己定義的 layer，或是 model，因為都繼承自 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code>，所以都可以追蹤到所有的 trainable variable 的 weights</p></li>
+<li><p>那在訓練過程中，我們當然就可以把這些 weights 給存下來，之後就可以從這個 weight 繼續 train 下去</p></li>
+<li><p>存檔的方式有兩種：</p>
+<ul>
+<li><p>checkpoint: 這就是只有存 weight，沒有存 module/layer structure。所以之後讀取時，要先建立一個一樣 module/layer structure 的 object 後，再把存好的 weight 塞回去</p></li>
+<li><p>SaveModel: 這是把 module/layer structure 以及 對應的 weight，全都存下來。之後只要 load 這個 model 就好，大師兄就全都回來了。</p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="checkpoints-save-load-weights">
+<h4><span class="section-number">4.2.5.1. </span>checkpoints (save &amp; load weights)<a class="headerlink" href="#checkpoints-save-load-weights" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>作法如下：</p>
+<ul>
+<li><p>先用 <code class="docutils literal notranslate"><span class="pre">checkpoint</span> <span class="pre">=</span> <span class="pre">tf.train.Checkpoint(model</span> <span class="pre">=</span> <span class="pre">my_model_obj)</span></code>，來建立一個 checkpoint 物件</p></li>
+<li><p>再用 <code class="docutils literal notranslate"><span class="pre">checkpoint.write('checkpoint_path')</span></code>，來把 checkpoint 檔存出來</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 先建立一個 checkpoint 物件，他追蹤的是我剛剛 train 到一半的 my_model</span>
+<span class="n">checkpoint</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Checkpoint</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">my_model</span><span class="p">)</span>
+<span class="n">checkpoint</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tensorflow.python.training.tracking.util.Checkpoint at 0x141a2b490&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 再把結果寫出來</span>
+<span class="n">chkp_path</span> <span class="o">=</span> <span class="s2">&quot;my_checkpoint&quot;</span>
+<span class="n">checkpoint</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chkp_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;my_checkpoint&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>看一下資料夾，寫出兩個檔案：</p>
+<ul>
+<li><p>data 本身 (i.e. my_checkpoint.data-00000-of-00001)。裡面包含 variable values and their attribute lookup paths</p></li>
+<li><p>index file for metadata (i.e. my_checkpoint.index)。功能是 keeps track of what is actually saved and the numbering of checkpoints</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls my_checkpoint*
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my_checkpoint.data-00000-of-00001 my_checkpoint.index
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can look inside a checkpoint to be sure the whole collection of variables is saved, sorted by the Python object that contains them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">list_variables</span><span class="p">(</span><span class="n">chkp_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;_CHECKPOINTABLE_OBJECT_GRAPH&#39;, []),
+ (&#39;model/dense_1/b/.ATTRIBUTES/VARIABLE_VALUE&#39;, [3]),
+ (&#39;model/dense_1/w/.ATTRIBUTES/VARIABLE_VALUE&#39;, [3, 3]),
+ (&#39;model/dense_2/b/.ATTRIBUTES/VARIABLE_VALUE&#39;, [2]),
+ (&#39;model/dense_2/w/.ATTRIBUTES/VARIABLE_VALUE&#39;, [3, 2])]
+</pre></div>
+</div>
+</div>
+</div>
+<p>During distributed (multi-machine) training they can be sharded,  which is why they are numbered (e.g., ‘00000-of-00001’).  In this case, though, there is only have one shard.</p>
+<ul class="simple">
+<li><p>如果之後要把 weight 給 load 進來，那做法是：</p>
+<ul>
+<li><p>先建立一個和之前一樣架構的 model/layer.</p></li>
+<li><p>建立 checkpoint 物件，去追蹤這個新建立好的 model/layer</p></li>
+<li><p>用這個新的 checkpoint 物件的 <code class="docutils literal notranslate"><span class="pre">restore('')</span></code> method，把剛剛的 weight 給 load 回來：</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_model</span> <span class="o">=</span> <span class="n">MySequentialModule</span><span class="p">()</span>
+<span class="n">new_checkpoint</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Checkpoint</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">new_model</span><span class="p">)</span>
+<span class="n">new_checkpoint</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="s2">&quot;my_checkpoint&quot;</span><span class="p">)</span>
+
+<span class="c1"># Should be the same result as above</span>
+<span class="n">new_model</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(1, 2), dtype=float32, numpy=array([[0., 0.]], dtype=float32)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="savedmodel">
+<h4><span class="section-number">4.2.5.2. </span><code class="docutils literal notranslate"><span class="pre">SavedModel</span></code><a class="headerlink" href="#savedmodel" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>另一種儲存的方式，是直接把 model 的 structure 和 weight 全都存起來</p></li>
+<li><p>作法是：</p>
+<ul>
+<li><p>用 <code class="docutils literal notranslate"><span class="pre">tf.saved_model.save(my_model_obj,</span> <span class="pre">&quot;a_folder_path_to_save_model&quot;)</span></code>.</p></li>
+<li><p>用 <code class="docutils literal notranslate"><span class="pre">new_model</span> <span class="pre">=</span> <span class="pre">tf.saved_model.load(&quot;a_folder_path_to_save_model&quot;)</span></code> 來讀檔</p></li>
+</ul>
+</li>
+<li><p>看一下範例：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">my_model</span><span class="p">,</span> <span class="s2">&quot;the_saved_model&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:tensorflow:Assets written to: the_saved_model/assets
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，檔案被存到 <code class="docutils literal notranslate"><span class="pre">the_saved_model</span></code> 這個資料夾中。</p></li>
+<li><p>看一下這個資料夾裡有什麼東西：</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">assets</span></code> 資料夾： 空的</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">variables</span></code> 資料夾</p>
+<ul>
+<li><p>variables.data-00000-of-00001: 這就是剛剛 checkpoint 的 data 檔</p></li>
+<li><p>variables.index: 這就是剛剛 checkpoint 的 index 檔</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">saved_model.pb</span></code> 檔案： a <a class="reference external" href="https://developers.google.com/protocol-buffers">protocol buffer</a> describing the functional <code class="docutils literal notranslate"><span class="pre">tf.Graph</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Inspect the SavedModel in the directory</span>
+<span class="o">!</span>ls -l the_saved_model
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total 24
+drwxr-sr-x 2 kbuilder kokoro  4096 Oct 26 01:29 assets
+-rw-rw-r-- 1 kbuilder kokoro 14702 Oct 26 01:29 saved_model.pb
+drwxr-sr-x 2 kbuilder kokoro  4096 Oct 26 01:29 variables
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>讀檔時，這樣讀：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;the_saved_model&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">new_model</span></code>, created from loading a saved model, is an internal TensorFlow user object without any of the class knowledge. It is not of type <code class="docutils literal notranslate"><span class="pre">SequentialModule</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">isinstance</span><span class="p">(</span><span class="n">new_model</span><span class="p">,</span> <span class="n">SequentialModule</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>This new model works on the already-defined input signatures. You can’t add more signatures to a model restored like this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">my_model</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_model</span><span class="p">([[[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]]]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tf.Tensor([[0. 0.]], shape=(1, 2), dtype=float32)
+tf.Tensor(
+[[[0. 0.]
+  [0. 0.]]], shape=(1, 2, 2), dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Thus, using <code class="docutils literal notranslate"><span class="pre">SavedModel</span></code>, you are able to save TensorFlow weights and graphs using <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code>, and then load them again.</p>
+</div>
+</div>
+</div>
+<div class="section" id="keras-models-and-layers">
+<h2><span class="section-number">4.3. </span>Keras models and layers<a class="headerlink" href="#keras-models-and-layers" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>剛剛教了用 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> 來建立 layer 和 model</p></li>
+<li><p>這邊開始，要來看 Keras 是怎麼用 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> 的</p></li>
+</ul>
+<div class="section" id="keras-layers">
+<h3><span class="section-number">4.3.1. </span>Keras layers<a class="headerlink" href="#keras-layers" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tf.keras.layers.Layer</span></code> 是 Keras 的 layer 的 base class，他繼承自 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code>.</p></li>
+<li><p>所以，我們剛剛是在 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> 的基礎下，建立自己的 layer。現在，可以在 <code class="docutils literal notranslate"><span class="pre">tf.keras.layers.Layer</span></code> 的基礎下，建立 layer。</p></li>
+<li><p>那這樣的好處是，就可以繼承更多 keras 的 layer 所擁有的 attribute, methods，使得，未來用 keras 的 fit, compile 等功能時，他去吃你定義的 dense，都能取得他預期要拿到的東西</p></li>
+<li><p>換句話說，如果你後續想用 keras 的 compile, fit 等功能，那你的 layer，必須繼承 keras layer 的 class，而不是 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code>.</p></li>
+<li><p>我們來看已下範例，寫法基本上和剛剛沒差別，只有 <code class="docutils literal notranslate"><span class="pre">__call__</span></code> 要改成 <code class="docutils literal notranslate"><span class="pre">call</span></code>，因為 keras 自己有定義 call method</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyDense</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>
+  <span class="c1"># Adding **kwargs to support base Keras layer arguments</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_features</span><span class="p">,</span> <span class="n">out_features</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="c1"># This will soon move to the build step; see below</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span>
+      <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">([</span><span class="n">in_features</span><span class="p">,</span> <span class="n">out_features</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">out_features</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">simple_layer</span> <span class="o">=</span> <span class="n">MyDense</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;simple&quot;</span><span class="p">,</span> <span class="n">in_features</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Keras layers have their own <code class="docutils literal notranslate"><span class="pre">__call__</span></code> that does some bookkeeping described in the next section and then calls <code class="docutils literal notranslate"><span class="pre">call()</span></code>. You should notice no change in functionality.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple_layer</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(1, 3), dtype=float32, numpy=array([[0.      , 0.      , 6.451925]], dtype=float32)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-build-step">
+<h3><span class="section-number">4.3.2. </span>The <code class="docutils literal notranslate"><span class="pre">build</span></code> step<a class="headerlink" href="#the-build-step" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>再來，是 keras 的 layer 寫法中，很重要的 <code class="docutils literal notranslate"><span class="pre">build</span></code> step.</p></li>
+<li><p>還記得前面用 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> 來寫 layer 時，為了不要每次都定義 input_feature，所以會先寫一個 <code class="docutils literal notranslate"><span class="pre">self.is_built</span> <span class="pre">=</span> <span class="pre">False</span></code> 來說明，目前還沒被 build。然後當 input tensor 進來後，才定義 w 和 b 的 shape，並把 <code class="docutils literal notranslate"><span class="pre">self.is_built</span></code> 改為 true，表示已經 build 完</p></li>
+<li><p>那，keras 這邊，就直接定義一個 method 叫 build，就是直接用來取 input_feature 用的</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">build</span></code> is called exactly once, and it is called with the shape of the input. It’s usually used to create variables (weights).</p></li>
+<li><p>我們來改寫一下剛剛的 layer</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FlexibleDense</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>
+  <span class="c1"># Note the added `**kwargs`, as Keras supports many arguments</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_features</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">out_features</span> <span class="o">=</span> <span class="n">out_features</span>
+
+  <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">):</span>  <span class="c1"># Create the state of the layer (weights)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span>
+      <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">([</span><span class="n">input_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_features</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">out_features</span><span class="p">]),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>  <span class="c1"># Defines the computation from inputs to outputs</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>上面的寫法，有幾個重點要注意：</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">__init__</span></code> 裡面，多了 <code class="docutils literal notranslate"><span class="pre">**kwargs**</span></code>，因為，繼承自 <code class="docutils literal notranslate"><span class="pre">tf.keras.layers.Layer</span></code> 時，他已經 support 很多其他的 input arguments 了.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">build(self,</span> <span class="pre">input_shape)</span></code> 這個 method中，input_shape 是 keras 會自動幫你讀出 input tensor 的 shape。所以下面就會用 input_shape[-1] 來當作 input_feature 數。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">build</span></code> 這個 method，你不會真的拿來用，他就是一個輔助 method，當你第一次把 input tensor 丟進去時，他會自己啟用</p></li>
+</ul>
+</li>
+<li><p>接著，我們實例化這個 class</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the instance of the layer</span>
+<span class="n">flexible_dense</span> <span class="o">=</span> <span class="n">FlexibleDense</span><span class="p">(</span><span class="n">out_features</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>目前為止，我們還沒丟 input tensor 進去，所以 build 方法還沒被啟用，這時候，我們的 layer，還沒追蹤到任何 variable:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flexible_dense</span><span class="o">.</span><span class="n">variables</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>一旦我丟一個 input tensor 進去後，就會啟用 build 方法，weight 就被 initialize 了：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call it, with predictably random results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model results:&quot;</span><span class="p">,</span> <span class="n">flexible_dense</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]])))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model results: tf.Tensor(
+[[-0.81454504 -4.95683     1.3514652 ]
+ [-1.2218176  -7.435245    2.027198  ]], shape=(2, 3), dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flexible_dense</span><span class="o">.</span><span class="n">variables</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tf.Variable &#39;flexible_dense_1/w:0&#39; shape=(3, 3) dtype=float32, numpy=
+ array([[-0.74692434, -1.0260396 ,  0.7583028 ],
+        [ 0.05714832, -0.89261234,  0.0625408 ],
+        [ 0.2825035 , -0.5597631 , -0.14511095]], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;flexible_dense_1/b:0&#39; shape=(3,) dtype=float32, numpy=array([0., 0., 0.], dtype=float32)&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>由於 <code class="docutils literal notranslate"><span class="pre">build</span></code> method 只會被 call 一次，所以如果之後 input 的 tensor，shape 和 起始話的時候不同，那就會報 error</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model results:&quot;</span><span class="p">,</span> <span class="n">flexible_dense</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]])))</span>
+<span class="k">except</span> <span class="n">tf</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">InvalidArgumentError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Failed: Matrix size-incompatible: In[0]: [1,4], In[1]: [3,3] [Op:MatMul]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="keras-models">
+<h3><span class="section-number">4.3.3. </span>Keras models<a class="headerlink" href="#keras-models" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>前面在定義 layer 和 model 時，都是繼承自 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> 這個 class</p></li>
+<li><p>但當我們要定義 custom keras layer 時，我們會繼承自 <code class="docutils literal notranslate"><span class="pre">tf.keras.layers.Layer</span></code>(此 class 繼承自 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code>)，這樣就能保有很多 keras layer 的好的特性</p></li>
+<li><p>同樣的，當我們要定義 custom keras model 時，我們也會繼承一個 keras 的 class，就是 <code class="docutils literal notranslate"><span class="pre">tf.keras.Model</span></code> (此 class 繼承自 <code class="docutils literal notranslate"><span class="pre">tf.keras.layers.Layer</span></code>)</p></li>
+<li><p>這樣做的好處是，我們定義好的 Model，可以輕易的被 used, nested, and saved in the same way as Keras layers.</p></li>
+<li><p>而且，還會有許多 extra functionality that makes them easy to train, evaluate, load, save, and even train on multiple machines.</p></li>
+<li><p>來寫吧：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MySequentialModel</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">dense_1</span> <span class="o">=</span> <span class="n">FlexibleDense</span><span class="p">(</span><span class="n">out_features</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">dense_2</span> <span class="o">=</span> <span class="n">FlexibleDense</span><span class="p">(</span><span class="n">out_features</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dense_1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dense_2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，比剛剛寫 layer 簡單，因為不用寫 <code class="docutils literal notranslate"><span class="pre">build</span></code> method。這部分在定義 custom layer 時已經做完了。只要單純的 <code class="docutils literal notranslate"><span class="pre">__init__</span></code> 和 <code class="docutils literal notranslate"><span class="pre">call</span></code> 就好</p></li>
+<li><p>實例化這個 model，一樣的，一開始找不到 weight，因位還沒有 tensor 被餵進來，還不知道 input shape，就不會 initialze weights</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># You have made a Keras model!</span>
+<span class="n">my_sequential_model</span> <span class="o">=</span> <span class="n">MySequentialModel</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;the_model&quot;</span><span class="p">)</span>
+<span class="n">my_sequential_model</span><span class="o">.</span><span class="n">variables</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>丟個 input tensor 進去，就可以看到結果，以及 variables 了</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call it on a tensor, with random results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model results:&quot;</span><span class="p">,</span> <span class="n">my_sequential_model</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]])))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model results: tf.Tensor([[-2.5422215  2.2206373]], shape=(1, 2), dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_sequential_model</span><span class="o">.</span><span class="n">variables</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tf.Variable &#39;my_sequential_model/flexible_dense_2/w:0&#39; shape=(3, 3) dtype=float32, numpy=
+ array([[-0.31155884,  0.35502377,  0.13043131],
+        [ 0.2252853 , -0.0766846 , -1.9106293 ],
+        [ 0.2285221 ,  1.0349969 ,  0.52284014]], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;my_sequential_model/flexible_dense_2/b:0&#39; shape=(3,) dtype=float32, numpy=array([0., 0., 0.], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;my_sequential_model/flexible_dense_3/w:0&#39; shape=(3, 2) dtype=float32, numpy=
+ array([[-0.8085942 ,  0.611606  ],
+        [-1.0512786 ,  0.78703386],
+        [-0.17862263,  0.00820879]], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;my_sequential_model/flexible_dense_3/b:0&#39; shape=(2,) dtype=float32, numpy=array([0., 0.], dtype=float32)&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_sequential_model</span><span class="o">.</span><span class="n">submodules</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;__main__.FlexibleDense at 0x142e349a0&gt;,
+ &lt;__main__.FlexibleDense at 0x13692cfa0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_sequential_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;my_sequential_model&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+flexible_dense_2 (FlexibleDe multiple                  12        
+_________________________________________________________________
+flexible_dense_3 (FlexibleDe multiple                  8         
+=================================================================
+Total params: 20
+Trainable params: 20
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="functional-api">
+<h3><span class="section-number">4.3.4. </span>functional API<a class="headerlink" href="#functional-api" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>另外一種建立 model 的方式，是直接用 functional API，這不僅可以幫我們減少一些時間，也可以獲得一些額外的好處 (e.g. model.summary()時，可發現 output shape 都跑出來了)</p></li>
+<li><p>functional API 和剛剛 subclass 的寫法，最大差別在，你要先定義 input 的 shape (by <code class="docutils literal notranslate"><span class="pre">tf.keras.Input(shape</span> <span class="pre">=</span> <span class="pre">[3,])</span></code>)</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">input_shape</span></code> argument in this case does not have to be completely specified; you can leave some dimensions as <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p>Note: You do not need to specify <code class="docutils literal notranslate"><span class="pre">input_shape</span></code> or an <code class="docutils literal notranslate"><span class="pre">InputLayer</span></code> in a subclassed model; these arguments and layers will be ignored.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">FlexibleDense</span><span class="p">(</span><span class="mi">3</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">FlexibleDense</span><span class="p">(</span><span class="mi">2</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">my_functional_model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">my_functional_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;functional_1&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         [(None, 3)]               0         
+_________________________________________________________________
+flexible_dense_4 (FlexibleDe (None, 3)                 12        
+_________________________________________________________________
+flexible_dense_5 (FlexibleDe (None, 2)                 8         
+=================================================================
+Total params: 20
+Trainable params: 20
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_functional_model</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(1, 2), dtype=float32, numpy=array([[-0.3817817, -3.4696531]], dtype=float32)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="saving-keras-models">
+<h2><span class="section-number">4.4. </span>Saving Keras models<a class="headerlink" href="#saving-keras-models" title="Permalink to this headline">¶</a></h2>
+<p>Keras models can be checkpointed, and that will look the same as <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code>.</p>
+<p>Keras models can also be saved with <code class="docutils literal notranslate"><span class="pre">tf.saved_model.save()</span></code>, as they are modules.  However, Keras models have convenience methods and other functionality:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_sequential_model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;exname_of_file&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /Users/hanklee/.pyenv/versions/3.8.0/lib/python3.8/site-packages/tensorflow/python/training/tracking/tracking.py:111: Model.state_updates (from tensorflow.python.keras.engine.training) is deprecated and will be removed in a future version.
+Instructions for updating:
+This property should not be used in TensorFlow 2.0, as updates are applied automatically.
+WARNING:tensorflow:From /Users/hanklee/.pyenv/versions/3.8.0/lib/python3.8/site-packages/tensorflow/python/training/tracking/tracking.py:111: Layer.updates (from tensorflow.python.keras.engine.base_layer) is deprecated and will be removed in a future version.
+Instructions for updating:
+This property should not be used in TensorFlow 2.0, as updates are applied automatically.
+INFO:tensorflow:Assets written to: exname_of_file/assets
+</pre></div>
+</div>
+</div>
+</div>
+<p>Just as easily, they can be loaded back in:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reconstructed_model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;exname_of_file&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:No training configuration found in save file, so the model was *not* compiled. Compile it manually.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Keras <code class="docutils literal notranslate"><span class="pre">SavedModels</span></code> also save metric, loss, and optimizer states.</p>
+<p>This reconstructed model can be used and will produce the same result when called on the same data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reconstructed_model</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(1, 2), dtype=float32, numpy=array([[-2.5422215,  2.2206373]], dtype=float32)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>There is more to know about saving and serialization of Keras models, including providing configuration methods for custom layers for feature support. Check out the <a class="reference external" href="https://www.tensorflow.org/guide/keras/save_and_serialize">guide to saving and serialization</a>.</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="what-s-next">
+<h1><span class="section-number">5. </span>What’s next<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h1>
+<p>If you want to know more details about Keras, you can follow the existing Keras guides <span class="xref myst">here</span>.</p>
+<p>Another example of a high-level API built on <code class="docutils literal notranslate"><span class="pre">tf.module</span></code> is Sonnet from DeepMind, which is covered on <a class="reference external" href="https://github.com/deepmind/sonnet">their site</a>.</p>
+<div class="section" id="id1">
+<h2><span class="section-number">5.1. </span>待完成內容：<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Keras layers have a lot more extra features including:</p>
+<ul class="simple">
+<li><p>Optional losses</p></li>
+<li><p>Support for metrics</p></li>
+<li><p>Built-in support for an optional <code class="docutils literal notranslate"><span class="pre">training</span></code> argument to differentiate between training and inference use</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_config</span></code> and <code class="docutils literal notranslate"><span class="pre">from_config</span></code> methods that allow you to accurately store configurations to allow model cloning in Python</p></li>
+</ul>
+<p>Read about them in the <span class="xref myst">full guide</span> to custom layers and models.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./old"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="3.autodiff.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">3. </span>Introduction to gradients and automatic differentiation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="6.basic_training_loops.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Basic training loops</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
