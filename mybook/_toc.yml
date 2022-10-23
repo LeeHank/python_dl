@@ -13,11 +13,21 @@ parts:
       - file: old/5.intro_to_modules
       - file: old/6.basic_training_loops
       - file: old/7.keras_sequential_model
+      - file: tf_create_model
+      - file: hands_on_ml3/tf_customization
   # - caption: Computer Vision
   #   numbered: true
   #   chapters:
   #     - file: ch3_pandas/official_getting_started/getting_started
   #     - file: ch3_pandas/regex
-# build book
+# build book ------
 # cd mybook
 # jupyter-book build .
+# git add --all
+# git commit -m ""
+# git push
+
+# publish to github
+# pip install ghp-import
+# cd mybook
+# ghp-import -n -p -f _build/html
