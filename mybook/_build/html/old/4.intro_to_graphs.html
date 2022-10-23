@@ -1,0 +1,1511 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction to graphs and tf.function &#8212; My sample book</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1.tensor.html">
+   1. Introduction to Tensors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2.variable.html">
+   2. Introduction to Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3.autodiff.html">
+   3. Introduction to gradients and automatic differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5.intro_to_modules.html">
+   4. Introduction to modules, layers, and models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="6.basic_training_loops.html">
+   6. Basic training loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="7.keras_sequential_model.html">
+   7. The Sequential model
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/old/4.intro_to_graphs.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fold/4.intro_to_graphs.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/old/4.intro_to_graphs.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-are-graphs">
+     What are graphs?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-benefits-of-graphs">
+     The benefits of graphs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#taking-advantage-of-graphs">
+   Taking advantage of graphs
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#converting-python-functions-to-graphs">
+     Converting Python functions to graphs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#polymorphism-one-function-many-graphs">
+     Polymorphism: one
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Function
+      </span>
+     </code>
+     , many graphs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-tf-function">
+   Using
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     tf.function
+    </span>
+   </code>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#graph-execution-vs-eager-execution">
+     Graph execution vs. eager execution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#non-strict-execution">
+     Non-strict execution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tf-function-best-practices">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       tf.function
+      </span>
+     </code>
+     best practices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#seeing-the-speed-up">
+   Seeing the speed-up
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#performance-and-trade-offs">
+     Performance and trade-offs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#when-is-a-function-tracing">
+   When is a
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Function
+    </span>
+   </code>
+   tracing?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-steps">
+   Next steps
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduction to graphs and tf.function</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-are-graphs">
+     What are graphs?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-benefits-of-graphs">
+     The benefits of graphs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#taking-advantage-of-graphs">
+   Taking advantage of graphs
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#converting-python-functions-to-graphs">
+     Converting Python functions to graphs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#polymorphism-one-function-many-graphs">
+     Polymorphism: one
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Function
+      </span>
+     </code>
+     , many graphs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-tf-function">
+   Using
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     tf.function
+    </span>
+   </code>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#graph-execution-vs-eager-execution">
+     Graph execution vs. eager execution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#non-strict-execution">
+     Non-strict execution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tf-function-best-practices">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       tf.function
+      </span>
+     </code>
+     best practices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#seeing-the-speed-up">
+   Seeing the speed-up
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#performance-and-trade-offs">
+     Performance and trade-offs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#when-is-a-function-tracing">
+   When is a
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Function
+    </span>
+   </code>
+   tracing?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-steps">
+   Next steps
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="introduction-to-graphs-and-tf-function">
+<h1>Introduction to graphs and <code class="docutils literal notranslate"><span class="pre">tf.function</span></code><a class="headerlink" href="#introduction-to-graphs-and-tf-function" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This guide goes beneath the surface of TensorFlow and Keras to demonstrate how TensorFlow works. If you instead want to immediately get started with Keras, check out the <a class="reference external" href="https://www.tensorflow.org/guide/keras/">collection of Keras guides</a>.</p>
+<p>In this guide, you’ll learn how TensorFlow allows you to make simple changes to your code to get graphs, how graphs are stored and represented, and how you can use them to accelerate your models.</p>
+<p>Note: For those of you who are only familiar with TensorFlow 1.x, this guide demonstrates a very different view of graphs.</p>
+<p><strong>This is a big-picture overview that covers how <code class="docutils literal notranslate"><span class="pre">tf.function</span></code> allows you to switch from eager execution to graph execution.</strong> For a more complete specification of <code class="docutils literal notranslate"><span class="pre">tf.function</span></code>, go to the <span class="xref myst">Better performance with <code class="docutils literal notranslate"><span class="pre">tf.function</span></code></span> guide.</p>
+<div class="section" id="what-are-graphs">
+<h3>What are graphs?<a class="headerlink" href="#what-are-graphs" title="Permalink to this headline">¶</a></h3>
+<p>In the previous three guides, you ran TensorFlow <strong>eagerly</strong>. This means TensorFlow operations are executed by Python, operation by operation, and returning results back to Python.</p>
+<p>While eager execution has several unique advantages, graph execution enables portability outside Python and tends to offer better performance. <strong>Graph execution</strong> means that tensor computations are executed as a <em>TensorFlow graph</em>, sometimes referred to as a <code class="docutils literal notranslate"><span class="pre">tf.Graph</span></code> or simply a “graph.”</p>
+<p><strong>Graphs are data structures that contain a set of <code class="docutils literal notranslate"><span class="pre">tf.Operation</span></code> objects, which represent units of computation; and <code class="docutils literal notranslate"><span class="pre">tf.Tensor</span></code> objects, which represent the units of data that flow between operations.</strong> They are defined in a <code class="docutils literal notranslate"><span class="pre">tf.Graph</span></code> context. Since these graphs are data structures, they can be saved, run, and restored all without the original Python code.</p>
+<p>This is what a TensorFlow graph representing a two-layer neural network looks like when visualized in TensorBoard:</p>
+<img alt="A simple TensorFlow graph" src="https://github.com/tensorflow/docs/blob/master/site/en/guide/images/intro_to_graphs/two-layer-network.png?raw=1"></div>
+<div class="section" id="the-benefits-of-graphs">
+<h3>The benefits of graphs<a class="headerlink" href="#the-benefits-of-graphs" title="Permalink to this headline">¶</a></h3>
+<p>With a graph, you have a great deal of flexibility.  You can use your TensorFlow graph in environments that don’t have a Python interpreter, like mobile applications, embedded devices, and backend servers. TensorFlow uses graphs as the format for <span class="xref myst">saved models</span> when it exports them from Python.</p>
+<p>Graphs are also easily optimized, allowing the compiler to do transformations like:</p>
+<ul class="simple">
+<li><p>Statically infer the value of tensors by folding constant nodes in your computation <em>(“constant folding”)</em>.</p></li>
+<li><p>Separate sub-parts of a computation that are independent and split them between threads or devices.</p></li>
+<li><p>Simplify arithmetic operations by eliminating common subexpressions.</p></li>
+</ul>
+<p>There is an entire optimization system, <span class="xref myst">Grappler</span>, to perform this and other speedups.</p>
+<p>In short, graphs are extremely useful and let your TensorFlow run <strong>fast</strong>, run <strong>in parallel</strong>, and run efficiently <strong>on multiple devices</strong>.</p>
+<p>However, you still want to define your machine learning models (or other computations) in Python for convenience, and then automatically construct graphs when you need them.</p>
+</div>
+</div>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>Import some necessary libraries:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">timeit</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="taking-advantage-of-graphs">
+<h2>Taking advantage of graphs<a class="headerlink" href="#taking-advantage-of-graphs" title="Permalink to this headline">¶</a></h2>
+<p>You create and run a graph in TensorFlow by using <code class="docutils literal notranslate"><span class="pre">tf.function</span></code>, either as a direct call or as a decorator. <code class="docutils literal notranslate"><span class="pre">tf.function</span></code> takes a regular function as input and returns a <code class="docutils literal notranslate"><span class="pre">Function</span></code>. <strong>A <code class="docutils literal notranslate"><span class="pre">Function</span></code> is a Python callable that builds TensorFlow graphs from the Python function. You use a <code class="docutils literal notranslate"><span class="pre">Function</span></code> in the same way as its Python equivalent.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a Python function.</span>
+<span class="k">def</span> <span class="nf">a_regular_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span>
+  <span class="k">return</span> <span class="n">x</span>
+
+<span class="c1"># `a_function_that_uses_a_graph` is a TensorFlow `Function`.</span>
+<span class="n">a_function_that_uses_a_graph</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">a_regular_function</span><span class="p">)</span>
+
+<span class="c1"># Make some tensors.</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]])</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">]])</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">4.0</span><span class="p">)</span>
+
+<span class="n">orig_value</span> <span class="o">=</span> <span class="n">a_regular_function</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">b1</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="c1"># Call a `Function` like a Python function.</span>
+<span class="n">tf_function_value</span> <span class="o">=</span> <span class="n">a_function_that_uses_a_graph</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">b1</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">orig_value</span> <span class="o">==</span> <span class="n">tf_function_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>On the outside, a <code class="docutils literal notranslate"><span class="pre">Function</span></code> looks like a regular function you write using TensorFlow operations. <a class="reference external" href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/eager/def_function.py">Underneath</a>, however, it is <em>very different</em>. A <code class="docutils literal notranslate"><span class="pre">Function</span></code> <strong>encapsulates several <code class="docutils literal notranslate"><span class="pre">tf.Graph</span></code>s behind one API</strong> (learn more in the <em>Polymorphism</em> section). That is how a <code class="docutils literal notranslate"><span class="pre">Function</span></code> is able to give you the benefits of graph execution, like speed and deployability (refer to <em>The benefits of graphs</em> above).</p>
+<p><code class="docutils literal notranslate"><span class="pre">tf.function</span></code> applies to a function <em>and all other functions it calls</em>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inner_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span>
+  <span class="k">return</span> <span class="n">x</span>
+
+<span class="c1"># Use the decorator to make `outer_function` a `Function`.</span>
+<span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">outer_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">]])</span>
+  <span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">4.0</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">inner_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># Note that the callable will create a graph that</span>
+<span class="c1"># includes `inner_function` as well as `outer_function`.</span>
+<span class="n">outer_function</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]]))</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[12.]], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you have used TensorFlow 1.x, you will notice that at no time did you need to define a <code class="docutils literal notranslate"><span class="pre">Placeholder</span></code> or <code class="docutils literal notranslate"><span class="pre">tf.Session</span></code>.</p>
+<div class="section" id="converting-python-functions-to-graphs">
+<h3>Converting Python functions to graphs<a class="headerlink" href="#converting-python-functions-to-graphs" title="Permalink to this headline">¶</a></h3>
+<p>Any function you write with TensorFlow will contain a mixture of built-in TF operations and Python logic, such as <code class="docutils literal notranslate"><span class="pre">if-then</span></code> clauses, loops, <code class="docutils literal notranslate"><span class="pre">break</span></code>, <code class="docutils literal notranslate"><span class="pre">return</span></code>, <code class="docutils literal notranslate"><span class="pre">continue</span></code>, and more. While TensorFlow operations are easily captured by a <code class="docutils literal notranslate"><span class="pre">tf.Graph</span></code>, Python-specific logic needs to undergo an extra step in order to become part of the graph. <code class="docutils literal notranslate"><span class="pre">tf.function</span></code> uses a library called AutoGraph (<code class="docutils literal notranslate"><span class="pre">tf.autograph</span></code>) to convert Python code into graph-generating code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simple_relu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">tf</span><span class="o">.</span><span class="n">greater</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+<span class="c1"># `tf_simple_relu` is a TensorFlow `Function` that wraps `simple_relu`.</span>
+<span class="n">tf_simple_relu</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">simple_relu</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First branch, with graph:&quot;</span><span class="p">,</span> <span class="n">tf_simple_relu</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Second branch, with graph:&quot;</span><span class="p">,</span> <span class="n">tf_simple_relu</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First branch, with graph: 1
+Second branch, with graph: 0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Though it is unlikely that you will need to view graphs directly, you can inspect the outputs to check the exact results. These are not easy to read, so no need to look too carefully!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is the graph-generating output of AutoGraph.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">autograph</span><span class="o">.</span><span class="n">to_code</span><span class="p">(</span><span class="n">simple_relu</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>def tf__simple_relu(x):
+    with ag__.FunctionScope(&#39;simple_relu&#39;, &#39;fscope&#39;, ag__.ConversionOptions(recursive=True, user_requested=True, optional_features=(), internal_convert_user_code=True)) as fscope:
+        do_return = False
+        retval_ = ag__.UndefinedReturnValue()
+
+        def get_state():
+            return (do_return, retval_)
+
+        def set_state(vars_):
+            nonlocal do_return, retval_
+            (do_return, retval_) = vars_
+
+        def if_body():
+            nonlocal do_return, retval_
+            try:
+                do_return = True
+                retval_ = ag__.ld(x)
+            except:
+                do_return = False
+                raise
+
+        def else_body():
+            nonlocal do_return, retval_
+            try:
+                do_return = True
+                retval_ = 0
+            except:
+                do_return = False
+                raise
+        ag__.if_stmt(ag__.converted_call(ag__.ld(tf).greater, (ag__.ld(x), 0), None, fscope), if_body, else_body, get_state, set_state, (&#39;do_return&#39;, &#39;retval_&#39;), 2)
+        return fscope.ret(retval_, do_return)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is the graph itself.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tf_simple_relu</span><span class="o">.</span><span class="n">get_concrete_function</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">as_graph_def</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>node {
+  name: &quot;x&quot;
+  op: &quot;Placeholder&quot;
+  attr {
+    key: &quot;_user_specified_name&quot;
+    value {
+      s: &quot;x&quot;
+    }
+  }
+  attr {
+    key: &quot;dtype&quot;
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: &quot;shape&quot;
+    value {
+      shape {
+      }
+    }
+  }
+}
+node {
+  name: &quot;Greater/y&quot;
+  op: &quot;Const&quot;
+  attr {
+    key: &quot;dtype&quot;
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: &quot;value&quot;
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: &quot;Greater&quot;
+  op: &quot;Greater&quot;
+  input: &quot;x&quot;
+  input: &quot;Greater/y&quot;
+  attr {
+    key: &quot;T&quot;
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: &quot;cond&quot;
+  op: &quot;StatelessIf&quot;
+  input: &quot;Greater&quot;
+  input: &quot;x&quot;
+  attr {
+    key: &quot;Tcond&quot;
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: &quot;Tin&quot;
+    value {
+      list {
+        type: DT_INT32
+      }
+    }
+  }
+  attr {
+    key: &quot;Tout&quot;
+    value {
+      list {
+        type: DT_BOOL
+        type: DT_INT32
+      }
+    }
+  }
+  attr {
+    key: &quot;_lower_using_switch_merge&quot;
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: &quot;_read_only_resource_inputs&quot;
+    value {
+      list {
+      }
+    }
+  }
+  attr {
+    key: &quot;else_branch&quot;
+    value {
+      func {
+        name: &quot;cond_false_34&quot;
+      }
+    }
+  }
+  attr {
+    key: &quot;output_shapes&quot;
+    value {
+      list {
+        shape {
+        }
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: &quot;then_branch&quot;
+    value {
+      func {
+        name: &quot;cond_true_33&quot;
+      }
+    }
+  }
+}
+node {
+  name: &quot;cond/Identity&quot;
+  op: &quot;Identity&quot;
+  input: &quot;cond&quot;
+  attr {
+    key: &quot;T&quot;
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: &quot;cond/Identity_1&quot;
+  op: &quot;Identity&quot;
+  input: &quot;cond:1&quot;
+  attr {
+    key: &quot;T&quot;
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: &quot;Identity&quot;
+  op: &quot;Identity&quot;
+  input: &quot;cond/Identity_1&quot;
+  attr {
+    key: &quot;T&quot;
+    value {
+      type: DT_INT32
+    }
+  }
+}
+library {
+  function {
+    signature {
+      name: &quot;cond_false_34&quot;
+      input_arg {
+        name: &quot;cond_placeholder&quot;
+        type: DT_INT32
+      }
+      output_arg {
+        name: &quot;cond_identity&quot;
+        type: DT_BOOL
+      }
+      output_arg {
+        name: &quot;cond_identity_1&quot;
+        type: DT_INT32
+      }
+    }
+    node_def {
+      name: &quot;cond/Const&quot;
+      op: &quot;Const&quot;
+      attr {
+        key: &quot;dtype&quot;
+        value {
+          type: DT_BOOL
+        }
+      }
+      attr {
+        key: &quot;value&quot;
+        value {
+          tensor {
+            dtype: DT_BOOL
+            tensor_shape {
+            }
+            bool_val: true
+          }
+        }
+      }
+    }
+    node_def {
+      name: &quot;cond/Const_1&quot;
+      op: &quot;Const&quot;
+      attr {
+        key: &quot;dtype&quot;
+        value {
+          type: DT_BOOL
+        }
+      }
+      attr {
+        key: &quot;value&quot;
+        value {
+          tensor {
+            dtype: DT_BOOL
+            tensor_shape {
+            }
+            bool_val: true
+          }
+        }
+      }
+    }
+    node_def {
+      name: &quot;cond/Const_2&quot;
+      op: &quot;Const&quot;
+      attr {
+        key: &quot;dtype&quot;
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: &quot;value&quot;
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: &quot;cond/Const_3&quot;
+      op: &quot;Const&quot;
+      attr {
+        key: &quot;dtype&quot;
+        value {
+          type: DT_BOOL
+        }
+      }
+      attr {
+        key: &quot;value&quot;
+        value {
+          tensor {
+            dtype: DT_BOOL
+            tensor_shape {
+            }
+            bool_val: true
+          }
+        }
+      }
+    }
+    node_def {
+      name: &quot;cond/Identity&quot;
+      op: &quot;Identity&quot;
+      input: &quot;cond/Const_3:output:0&quot;
+      attr {
+        key: &quot;T&quot;
+        value {
+          type: DT_BOOL
+        }
+      }
+    }
+    node_def {
+      name: &quot;cond/Const_4&quot;
+      op: &quot;Const&quot;
+      attr {
+        key: &quot;dtype&quot;
+        value {
+          type: DT_INT32
+        }
+      }
+      attr {
+        key: &quot;value&quot;
+        value {
+          tensor {
+            dtype: DT_INT32
+            tensor_shape {
+            }
+            int_val: 0
+          }
+        }
+      }
+    }
+    node_def {
+      name: &quot;cond/Identity_1&quot;
+      op: &quot;Identity&quot;
+      input: &quot;cond/Const_4:output:0&quot;
+      attr {
+        key: &quot;T&quot;
+        value {
+          type: DT_INT32
+        }
+      }
+    }
+    ret {
+      key: &quot;cond_identity&quot;
+      value: &quot;cond/Identity:output:0&quot;
+    }
+    ret {
+      key: &quot;cond_identity_1&quot;
+      value: &quot;cond/Identity_1:output:0&quot;
+    }
+    attr {
+      key: &quot;_construction_context&quot;
+      value {
+        s: &quot;kEagerRuntime&quot;
+      }
+    }
+    arg_attr {
+      key: 0
+      value {
+        attr {
+          key: &quot;_output_shapes&quot;
+          value {
+            list {
+              shape {
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  function {
+    signature {
+      name: &quot;cond_true_33&quot;
+      input_arg {
+        name: &quot;cond_identity_1_x&quot;
+        type: DT_INT32
+      }
+      output_arg {
+        name: &quot;cond_identity&quot;
+        type: DT_BOOL
+      }
+      output_arg {
+        name: &quot;cond_identity_1&quot;
+        type: DT_INT32
+      }
+    }
+    node_def {
+      name: &quot;cond/Const&quot;
+      op: &quot;Const&quot;
+      attr {
+        key: &quot;dtype&quot;
+        value {
+          type: DT_BOOL
+        }
+      }
+      attr {
+        key: &quot;value&quot;
+        value {
+          tensor {
+            dtype: DT_BOOL
+            tensor_shape {
+            }
+            bool_val: true
+          }
+        }
+      }
+    }
+    node_def {
+      name: &quot;cond/Identity&quot;
+      op: &quot;Identity&quot;
+      input: &quot;cond/Const:output:0&quot;
+      attr {
+        key: &quot;T&quot;
+        value {
+          type: DT_BOOL
+        }
+      }
+    }
+    node_def {
+      name: &quot;cond/Identity_1&quot;
+      op: &quot;Identity&quot;
+      input: &quot;cond_identity_1_x&quot;
+      attr {
+        key: &quot;T&quot;
+        value {
+          type: DT_INT32
+        }
+      }
+    }
+    ret {
+      key: &quot;cond_identity&quot;
+      value: &quot;cond/Identity:output:0&quot;
+    }
+    ret {
+      key: &quot;cond_identity_1&quot;
+      value: &quot;cond/Identity_1:output:0&quot;
+    }
+    attr {
+      key: &quot;_construction_context&quot;
+      value {
+        s: &quot;kEagerRuntime&quot;
+      }
+    }
+    arg_attr {
+      key: 0
+      value {
+        attr {
+          key: &quot;_output_shapes&quot;
+          value {
+            list {
+              shape {
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+versions {
+  producer: 1087
+  min_consumer: 12
+}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Most of the time, <code class="docutils literal notranslate"><span class="pre">tf.function</span></code> will work without  special considerations. However, there are some caveats, and the <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">tf.function</span></code> guide</span> can help here, as well as the <a class="reference external" href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/autograph/g3doc/reference/index.md">complete AutoGraph reference</a>.</p>
+</div>
+<div class="section" id="polymorphism-one-function-many-graphs">
+<h3>Polymorphism: one <code class="docutils literal notranslate"><span class="pre">Function</span></code>, many graphs<a class="headerlink" href="#polymorphism-one-function-many-graphs" title="Permalink to this headline">¶</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">tf.Graph</span></code> is specialized to a specific type of inputs (for example, tensors with a specific <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/dtypes/DType"><code class="docutils literal notranslate"><span class="pre">dtype</span></code></a> or objects with the same <a class="reference external" href="https://docs.python.org/3/library/functions.html#id%5D"><code class="docutils literal notranslate"><span class="pre">id()</span></code></a>).</p>
+<p>Each time you invoke a <code class="docutils literal notranslate"><span class="pre">Function</span></code> with a set of arguments that can’t be handled by any of its existing graphs (such as arguments with new <code class="docutils literal notranslate"><span class="pre">dtypes</span></code> or incompatible shapes), <code class="docutils literal notranslate"><span class="pre">Function</span></code> creates a new <code class="docutils literal notranslate"><span class="pre">tf.Graph</span></code> specialized to those new arguments. The type specification of a <code class="docutils literal notranslate"><span class="pre">tf.Graph</span></code>’s inputs is known as its <strong>input signature</strong> or just a <strong>signature</strong>. For more information regarding when a new <code class="docutils literal notranslate"><span class="pre">tf.Graph</span></code> is generated and how that can be controlled, go to the <em>Rules of tracing</em> section of the <span class="xref myst">Better performance with <code class="docutils literal notranslate"><span class="pre">tf.function</span></code></span> guide.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Function</span></code> stores the <code class="docutils literal notranslate"><span class="pre">tf.Graph</span></code> corresponding to that signature in a <code class="docutils literal notranslate"><span class="pre">ConcreteFunction</span></code>. <strong>A <code class="docutils literal notranslate"><span class="pre">ConcreteFunction</span></code> is a wrapper around a <code class="docutils literal notranslate"><span class="pre">tf.Graph</span></code>.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">my_relu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># `my_relu` creates new graphs as it observes more signatures.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_relu</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">5.5</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_relu</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_relu</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.</span><span class="p">])))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tf.Tensor(5.5, shape=(), dtype=float32)
+tf.Tensor([1. 0.], shape=(2,), dtype=float32)
+tf.Tensor([3. 0.], shape=(2,), dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>If the <code class="docutils literal notranslate"><span class="pre">Function</span></code> has already been called with that signature, <code class="docutils literal notranslate"><span class="pre">Function</span></code> does not create a new <code class="docutils literal notranslate"><span class="pre">tf.Graph</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># These two calls do *not* create new graphs.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_relu</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">)))</span> <span class="c1"># Signature matches `tf.constant(5.5)`.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_relu</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])))</span> <span class="c1"># Signature matches `tf.constant([3., -3.])`.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tf.Tensor(0.0, shape=(), dtype=float32)
+tf.Tensor([0. 1.], shape=(2,), dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because it’s backed by multiple graphs, a <code class="docutils literal notranslate"><span class="pre">Function</span></code> is <strong>polymorphic</strong>. That enables it to support more input types than a single <code class="docutils literal notranslate"><span class="pre">tf.Graph</span></code> could represent, and to optimize each <code class="docutils literal notranslate"><span class="pre">tf.Graph</span></code> for better performance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># There are three `ConcreteFunction`s (one for each graph) in `my_relu`.</span>
+<span class="c1"># The `ConcreteFunction` also knows the return type and shape!</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_relu</span><span class="o">.</span><span class="n">pretty_printed_concrete_signatures</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>my_relu(x)
+  Args:
+    x: float32 Tensor, shape=()
+  Returns:
+    float32 Tensor, shape=()
+
+my_relu(x=[1, -1])
+  Returns:
+    float32 Tensor, shape=(2,)
+
+my_relu(x)
+  Args:
+    x: float32 Tensor, shape=(2,)
+  Returns:
+    float32 Tensor, shape=(2,)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-tf-function">
+<h2>Using <code class="docutils literal notranslate"><span class="pre">tf.function</span></code><a class="headerlink" href="#using-tf-function" title="Permalink to this headline">¶</a></h2>
+<p>So far, you’ve learned how to convert a Python function into a graph simply by using <code class="docutils literal notranslate"><span class="pre">tf.function</span></code> as a decorator or wrapper. But in practice, getting <code class="docutils literal notranslate"><span class="pre">tf.function</span></code> to work correctly can be tricky! In the following sections, you’ll learn how you can make your code work as expected with <code class="docutils literal notranslate"><span class="pre">tf.function</span></code>.</p>
+<div class="section" id="graph-execution-vs-eager-execution">
+<h3>Graph execution vs. eager execution<a class="headerlink" href="#graph-execution-vs-eager-execution" title="Permalink to this headline">¶</a></h3>
+<p>The code in a <code class="docutils literal notranslate"><span class="pre">Function</span></code> can be executed both eagerly and as a graph. By default, <code class="docutils literal notranslate"><span class="pre">Function</span></code> executes its code as a graph:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">get_MSE</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+  <span class="n">sq_diff</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">sq_diff</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_true</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">([</span><span class="mi">5</span><span class="p">],</span> <span class="n">maxval</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">([</span><span class="mi">5</span><span class="p">],</span> <span class="n">maxval</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tf.Tensor([2 2 7 7 7], shape=(5,), dtype=int32)
+tf.Tensor([7 7 6 1 7], shape=(5,), dtype=int32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_MSE</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(), dtype=int32, numpy=17&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>To verify that your <code class="docutils literal notranslate"><span class="pre">Function</span></code>’s graph is doing the same computation as its equivalent Python function, you can make it execute eagerly with <code class="docutils literal notranslate"><span class="pre">tf.config.run_functions_eagerly(True)</span></code>. This is a switch that <strong>turns off <code class="docutils literal notranslate"><span class="pre">Function</span></code>’s ability to create and run graphs</strong>, instead of executing the code normally.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">run_functions_eagerly</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_MSE</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(), dtype=int32, numpy=17&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Don&#39;t forget to set it back when you are done.</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">run_functions_eagerly</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, <code class="docutils literal notranslate"><span class="pre">Function</span></code> can behave differently under graph and eager execution. The Python <a class="reference external" href="https://docs.python.org/3/library/functions.html#print"><code class="docutils literal notranslate"><span class="pre">print</span></code></a> function is one example of how these two modes differ. Let’s check out what happens when you insert a <code class="docutils literal notranslate"><span class="pre">print</span></code> statement to your function and call it repeatedly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">get_MSE</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calculating MSE!&quot;</span><span class="p">)</span>
+  <span class="n">sq_diff</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">sq_diff</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Observe what is printed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">error</span> <span class="o">=</span> <span class="n">get_MSE</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">get_MSE</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">get_MSE</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculating MSE!
+</pre></div>
+</div>
+</div>
+</div>
+<p>Is the output surprising? <strong><code class="docutils literal notranslate"><span class="pre">get_MSE</span></code> only printed once even though it was called <em>three</em> times.</strong></p>
+<p>To explain, the <code class="docutils literal notranslate"><span class="pre">print</span></code> statement is executed when <code class="docutils literal notranslate"><span class="pre">Function</span></code> runs the original code in order to create the graph in a process known as “tracing” (refer to the <em>Tracing</em> section of the <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">tf.function</span></code> guide</span>. <strong>Tracing captures the TensorFlow operations into a graph, and <code class="docutils literal notranslate"><span class="pre">print</span></code> is not captured in the graph.</strong>  That graph is then executed for all three calls <strong>without ever running the Python code again</strong>.</p>
+<p>As a sanity check, let’s turn off graph execution to compare:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now, globally set everything to run eagerly to force eager execution.</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">run_functions_eagerly</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Observe what is printed below.</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">get_MSE</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">get_MSE</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">get_MSE</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculating MSE!
+Calculating MSE!
+Calculating MSE!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">run_functions_eagerly</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">print</span></code> is a <em>Python side effect</em>, and there are other differences that you should be aware of when converting a function into a <code class="docutils literal notranslate"><span class="pre">Function</span></code>. Learn more in the <em>Limitations</em> section of the <span class="xref myst">Better performance with <code class="docutils literal notranslate"><span class="pre">tf.function</span></code></span> guide.</p>
+<p>Note: If you would like to print values in both eager and graph execution, use <code class="docutils literal notranslate"><span class="pre">tf.print</span></code> instead.</p>
+</div>
+<div class="section" id="non-strict-execution">
+<h3>Non-strict execution<a class="headerlink" href="#non-strict-execution" title="Permalink to this headline">¶</a></h3>
+<p><a id="non-strict"></a></p>
+<p>Graph execution only executes the operations necessary to produce the observable effects, which includes:</p>
+<ul class="simple">
+<li><p>The return value of the function</p></li>
+<li><p>Documented well-known side-effects such as:</p>
+<ul>
+<li><p>Input/output operations, like <code class="docutils literal notranslate"><span class="pre">tf.print</span></code></p></li>
+<li><p>Debugging operations, such as the assert functions in <code class="docutils literal notranslate"><span class="pre">tf.debugging</span></code></p></li>
+<li><p>Mutations of <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>This behavior is usually known as “Non-strict execution”, and differs from eager execution, which steps through all of the program operations, needed or not.</p>
+<p>In particular, runtime error checking does not count as an observable effect. If an operation is skipped because it is unnecessary, it cannot raise any runtime errors.</p>
+<p>In the following example, the “unnecessary” operation <code class="docutils literal notranslate"><span class="pre">tf.gather</span></code> is skipped during graph execution, so the runtime error <code class="docutils literal notranslate"><span class="pre">InvalidArgumentError</span></code> is not raised as it would be in eager execution. Do not rely on an error being raised while executing a graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">unused_return_eager</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="c1"># Get index 1 will fail when `len(x) == 1`</span>
+  <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># unused </span>
+  <span class="k">return</span> <span class="n">x</span>
+
+<span class="k">try</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">unused_return_eager</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mf">0.0</span><span class="p">])))</span>
+<span class="k">except</span> <span class="n">tf</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">InvalidArgumentError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+  <span class="c1"># All operations are run during eager execution so an error is raised.</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tf.Tensor([0.], shape=(1,), dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">unused_return_graph</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># unused</span>
+  <span class="k">return</span> <span class="n">x</span>
+
+<span class="c1"># Only needed operations are run during graph execution. The error is not raised.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unused_return_graph</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mf">0.0</span><span class="p">])))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tf.Tensor([0.], shape=(1,), dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tf-function-best-practices">
+<h3><code class="docutils literal notranslate"><span class="pre">tf.function</span></code> best practices<a class="headerlink" href="#tf-function-best-practices" title="Permalink to this headline">¶</a></h3>
+<p>It may take some time to get used to the behavior of <code class="docutils literal notranslate"><span class="pre">Function</span></code>.  To get started quickly, first-time users should play around with decorating toy functions with <code class="docutils literal notranslate"><span class="pre">&#64;tf.function</span></code> to get experience with going from eager to graph execution.</p>
+<p><em>Designing for <code class="docutils literal notranslate"><span class="pre">tf.function</span></code></em> may be your best bet for writing graph-compatible TensorFlow programs. Here are some tips:</p>
+<ul class="simple">
+<li><p>Toggle between eager and graph execution early and often with <code class="docutils literal notranslate"><span class="pre">tf.config.run_functions_eagerly</span></code> to pinpoint if/ when the two modes diverge.</p></li>
+<li><p>Create <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code>s
+outside the Python function and modify them on the inside. The same goes for objects that use <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code>, like <code class="docutils literal notranslate"><span class="pre">tf.keras.layers</span></code>, <code class="docutils literal notranslate"><span class="pre">tf.keras.Model</span></code>s and <code class="docutils literal notranslate"><span class="pre">tf.keras.optimizers</span></code>.</p></li>
+<li><p>Avoid writing functions that depend on outer Python variables, excluding <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code>s and Keras objects. Learn more in <em>Depending on Python global and free variables</em> of the <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">tf.function</span></code> guide</span>.</p></li>
+<li><p>Prefer to write functions which take tensors and other TensorFlow types as input. You can pass in other object types but be careful! Learn more in <em>Depending on Python objects</em> of the <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">tf.function</span></code> guide</span>.</p></li>
+<li><p>Include as much computation as possible under a <code class="docutils literal notranslate"><span class="pre">tf.function</span></code> to maximize the performance gain. For example, decorate a whole training step or the entire training loop.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="seeing-the-speed-up">
+<h2>Seeing the speed-up<a class="headerlink" href="#seeing-the-speed-up" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">tf.function</span></code> usually improves the performance of your code, but the amount of speed-up depends on the kind of computation you run. Small computations can be dominated by the overhead of calling a graph. You can measure the difference in performance like so:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">minval</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxval</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Eager execution:&quot;</span><span class="p">,</span> <span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">power</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eager execution: 2.406025535000026
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">power_as_graph</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph execution:&quot;</span><span class="p">,</span> <span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">power_as_graph</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Graph execution: 0.6840851299999713
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">tf.function</span></code> is commonly used to speed up training loops, and you can learn more about it in the <em>Speeding-up your training step with <code class="docutils literal notranslate"><span class="pre">tf.function</span></code></em> section of the <a class="reference external" href="https://www.tensorflow.org/guide/keras/writing_a_training_loop_from_scratch">Writing a training loop from scratch</a> with Keras guide.</p>
+<p>Note: You can also try <code class="docutils literal notranslate"><span class="pre">tf.function(jit_compile=True)</span></code> for a more significant performance boost, especially if your code is heavy on TensorFlow control flow and uses many small tensors. Learn more in the <em>Explicit compilation with <code class="docutils literal notranslate"><span class="pre">tf.function(jit_compile=True)</span></code></em> section of the <a class="reference external" href="https://www.tensorflow.org/xla">XLA overview</a>.</p>
+<div class="section" id="performance-and-trade-offs">
+<h3>Performance and trade-offs<a class="headerlink" href="#performance-and-trade-offs" title="Permalink to this headline">¶</a></h3>
+<p>Graphs can speed up your code, but the process of creating them has some overhead. For some functions, the creation of the graph takes more time than the execution of the graph. <strong>This investment is usually quickly paid back with the performance boost of subsequent executions, but it’s important to be aware that the first few  steps of any large model training can be slower due to tracing.</strong></p>
+<p>No matter how large your model, you want to avoid tracing frequently. The <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">tf.function</span></code> guide</span> discusses how to set input specifications and use tensor arguments to avoid retracing in the <em>Controlling retracing</em> section. If you find you are getting unusually poor performance, it’s a good idea to check if you are retracing accidentally.</p>
+</div>
+</div>
+<div class="section" id="when-is-a-function-tracing">
+<h2>When is a <code class="docutils literal notranslate"><span class="pre">Function</span></code> tracing?<a class="headerlink" href="#when-is-a-function-tracing" title="Permalink to this headline">¶</a></h2>
+<p>To figure out when your <code class="docutils literal notranslate"><span class="pre">Function</span></code> is tracing, add a <code class="docutils literal notranslate"><span class="pre">print</span></code> statement to its code. As a rule of thumb, <code class="docutils literal notranslate"><span class="pre">Function</span></code> will execute the <code class="docutils literal notranslate"><span class="pre">print</span></code> statement every time it traces.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">a_function_with_python_side_effect</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tracing!&quot;</span><span class="p">)</span> <span class="c1"># An eager-only side effect.</span>
+  <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># This is traced the first time.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_function_with_python_side_effect</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+<span class="c1"># The second time through, you won&#39;t see the side effect.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_function_with_python_side_effect</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tracing!
+tf.Tensor(6, shape=(), dtype=int32)
+tf.Tensor(11, shape=(), dtype=int32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This retraces each time the Python argument changes,</span>
+<span class="c1"># as a Python argument could be an epoch count or other</span>
+<span class="c1"># hyperparameter.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_function_with_python_side_effect</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_function_with_python_side_effect</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tracing!
+tf.Tensor(6, shape=(), dtype=int32)
+Tracing!
+tf.Tensor(11, shape=(), dtype=int32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>New Python arguments always trigger the creation of a new graph, hence the extra tracing.</p>
+</div>
+<div class="section" id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>You can learn more about <code class="docutils literal notranslate"><span class="pre">tf.function</span></code> on the API reference page and by following the <span class="xref myst">Better performance with <code class="docutils literal notranslate"><span class="pre">tf.function</span></code></span> guide.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./old"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

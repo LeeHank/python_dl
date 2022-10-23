@@ -1,0 +1,23 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+  - caption: basics
+    numbered: true
+    chapters:
+      - file: old/1.tensor
+      - file: old/2.variable
+      - file: old/3.autodiff
+      - file: old/5.intro_to_modules
+      - file: old/6.basic_training_loops
+      - file: old/7.keras_sequential_model
+  # - caption: Computer Vision
+  #   numbered: true
+  #   chapters:
+  #     - file: ch3_pandas/official_getting_started/getting_started
+  #     - file: ch3_pandas/regex
+# build book
+# cd mybook
+# jupyter-book build .

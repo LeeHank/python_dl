@@ -1,0 +1,830 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6. Basic training loops &#8212; My sample book</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. The Sequential model" href="7.keras_sequential_model.html" />
+    <link rel="prev" title="4. Introduction to modules, layers, and models" href="5.intro_to_modules.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  basics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1.tensor.html">
+   1. Introduction to Tensors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2.variable.html">
+   2. Introduction to Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3.autodiff.html">
+   3. Introduction to gradients and automatic differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5.intro_to_modules.html">
+   4. Introduction to modules, layers, and models
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   6. Basic training loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="7.keras_sequential_model.html">
+   7. The Sequential model
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/old/6.basic_training_loops.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fold/6.basic_training_loops.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/old/6.basic_training_loops.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   6.1. Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-machine-learning-problems">
+   6.2. Solving machine learning problems
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   6.3. Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-the-model">
+   6.4. Define the model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-a-loss-function">
+     6.4.1. Define a loss function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-a-training-loop">
+     6.4.2. Define a training loop
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-same-solution-but-with-keras">
+   6.5. The same solution, but with Keras
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-steps">
+   6.6. Next steps
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Basic training loops</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   6.1. Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-machine-learning-problems">
+   6.2. Solving machine learning problems
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   6.3. Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-the-model">
+   6.4. Define the model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-a-loss-function">
+     6.4.1. Define a loss function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-a-training-loop">
+     6.4.2. Define a training loop
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-same-solution-but-with-keras">
+   6.5. The same solution, but with Keras
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-steps">
+   6.6. Next steps
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="basic-training-loops">
+<h1><span class="section-number">6. </span>Basic training loops<a class="headerlink" href="#basic-training-loops" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>在前面幾章中，已經學了 <code class="docutils literal notranslate"><span class="pre">tensors</span></code>, <code class="docutils literal notranslate"><span class="pre">variables</span></code>, <code class="docutils literal notranslate"><span class="pre">gradient</span> <span class="pre">tape</span></code>, 以及 <code class="docutils literal notranslate"><span class="pre">modules</span></code>，這一章就是要將這些拼圖拼在一塊，開始 train models</p></li>
+<li><p>tensorflow 也 include <code class="docutils literal notranslate"><span class="pre">tf.Keras</span></code> API，所以也會講如何用這個高階 API 來簡化工作</p></li>
+</ul>
+<div class="section" id="setup">
+<h2><span class="section-number">6.1. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.prop_cycle&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">by_key</span><span class="p">()[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="solving-machine-learning-problems">
+<h2><span class="section-number">6.2. </span>Solving machine learning problems<a class="headerlink" href="#solving-machine-learning-problems" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>解一個 ML problem，通常包含以下步驟：</p>
+<ul>
+<li><p>取得資料</p></li>
+<li><p>定義 model</p></li>
+<li><p>定義 loss</p></li>
+<li><p>掃過 training data (做 forward propagation)，計算 loss</p></li>
+<li><p>計算 gradient (做 backward propagation)，用 <em>optimizer</em> 來更新 weights，使得 model 更 fit the data</p></li>
+<li><p>最終，評估結果</p></li>
+</ul>
+</li>
+<li><p>為了方便解說，這份文件將 develop a simple linear model, <span class="math notranslate nohighlight">\(f(x) = x * W + b\)</span>, which has two variables: <span class="math notranslate nohighlight">\(W\)</span> (weights) and <span class="math notranslate nohighlight">\(b\)</span> (bias).</p></li>
+<li><p>This is the most basic of machine learning problems:  Given <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, try to find the slope and offset of a line via  <a class="reference external" href="https://en.wikipedia.org/wiki/Linear_regression#Simple_and_multiple_linear_regression">simple linear regression</a>.</p></li>
+</ul>
+</div>
+<div class="section" id="data">
+<h2><span class="section-number">6.3. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The actual line</span>
+<span class="n">TRUE_W</span> <span class="o">=</span> <span class="mf">3.0</span>
+<span class="n">TRUE_B</span> <span class="o">=</span> <span class="mf">2.0</span>
+
+<span class="n">NUM_EXAMPLES</span> <span class="o">=</span> <span class="mi">201</span>
+
+<span class="c1"># A vector of random x values</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">NUM_EXAMPLES</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">TRUE_W</span> <span class="o">+</span> <span class="n">TRUE_B</span>
+
+<span class="c1"># Generate some noise</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="n">NUM_EXAMPLES</span><span class="p">])</span>
+
+<span class="c1"># Calculate y</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">noise</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot all the data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6.basic_training_loops_8_0.png" src="../_images/6.basic_training_loops_8_0.png" />
+</div>
+</div>
+<p>Tensors are usually gathered together in <em>batches</em>, or groups of inputs and outputs stacked together.  Batching can confer some training benefits and works well with accelerators and vectorized computation.  Given how small this dataset is, you can treat the entire dataset as a single batch.</p>
+</div>
+<div class="section" id="define-the-model">
+<h2><span class="section-number">6.4. </span>Define the model<a class="headerlink" href="#define-the-model" title="Permalink to this headline">¶</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code> to represent all weights in a model.  A <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code> stores a value and provides this in tensor form as needed.  See the <span class="xref myst">variable guide</span> for more details.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> to encapsulate the variables and the computation.  You could use any Python object, but this way it can be easily saved.</p>
+<p>Here, you define both <em>w</em> and <em>b</em> as variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyModel</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="c1"># Initialize the weights to `5.0` and the bias to `0.0`</span>
+    <span class="c1"># In practice, these should be randomly initialized</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">MyModel</span><span class="p">()</span>
+
+<span class="c1"># List the variables tf.modules&#39;s built-in variable aggregation.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variables:&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span>
+
+<span class="c1"># Verify the model works</span>
+<span class="k">assert</span> <span class="n">model</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="o">==</span> <span class="mf">15.0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables: (&lt;tf.Variable &#39;Variable:0&#39; shape=() dtype=float32, numpy=0.0&gt;, &lt;tf.Variable &#39;Variable:0&#39; shape=() dtype=float32, numpy=5.0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The initial variables are set here in a fixed way, but Keras comes with any of a number of <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/initializers">initializers</a> you could use, with or without the rest of Keras.</p>
+<div class="section" id="define-a-loss-function">
+<h3><span class="section-number">6.4.1. </span>Define a loss function<a class="headerlink" href="#define-a-loss-function" title="Permalink to this headline">¶</a></h3>
+<p>A loss function measures how well the output of a model for a given input matches the target output. The goal is to minimize this difference during training. Define the standard L2 loss, also known as the “mean squared” error:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This computes a single loss value for an entire batch</span>
+<span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">target_y</span><span class="p">,</span> <span class="n">predicted_y</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">target_y</span> <span class="o">-</span> <span class="n">predicted_y</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>注意，target_y, predicted_y 都是 vector</p></li>
+</ul>
+<p>Before training the model, you can visualize the loss value by plotting the model’s predictions in red and the training data in blue:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ground truth&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current loss: </span><span class="si">{</span><span class="n">loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># print(&quot;Current loss: %1.6f&quot; % loss(y, model(x)).numpy())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6.basic_training_loops_17_0.png" src="../_images/6.basic_training_loops_17_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Current loss: 9.759627342224121
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-a-training-loop">
+<h3><span class="section-number">6.4.2. </span>Define a training loop<a class="headerlink" href="#define-a-training-loop" title="Permalink to this headline">¶</a></h3>
+<p>The training loop consists of repeatedly doing three tasks in order:</p>
+<ul class="simple">
+<li><p>Sending a batch of inputs through the model to generate outputs</p></li>
+<li><p>Calculating the loss by comparing the outputs to the output (or label)</p></li>
+<li><p>Using gradient tape to find the gradients</p></li>
+<li><p>Optimizing the variables with those gradients</p></li>
+</ul>
+<p>For this example, you can train the model using <a class="reference external" href="https://en.wikipedia.org/wiki/Gradient_descent">gradient descent</a>.</p>
+<p>There are many variants of the gradient descent scheme that are captured in <code class="docutils literal notranslate"><span class="pre">tf.keras.optimizers</span></code>. But in the spirit of building from first principles, here you will implement the basic math yourself with the help of <code class="docutils literal notranslate"><span class="pre">tf.GradientTape</span></code> for automatic differentiation and <code class="docutils literal notranslate"><span class="pre">tf.assign_sub</span></code> for decrementing a value (which combines <code class="docutils literal notranslate"><span class="pre">tf.assign</span></code> and <code class="docutils literal notranslate"><span class="pre">tf.sub</span></code>):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Given a callable model, inputs, outputs, and a learning rate...</span>
+<span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">):</span>
+
+  <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">t</span><span class="p">:</span>
+    <span class="c1"># Trainable variables are automatically tracked by GradientTape</span>
+    <span class="n">current_loss</span> <span class="o">=</span> <span class="n">loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+  <span class="c1"># Use GradientTape to calculate the gradients with respect to W and b</span>
+  <span class="n">dw</span><span class="p">,</span> <span class="n">db</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">current_loss</span><span class="p">,</span> <span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">w</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">b</span><span class="p">])</span>
+
+  <span class="c1"># Subtract the gradient scaled by the learning rate</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">w</span><span class="o">.</span><span class="n">assign_sub</span><span class="p">(</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">dw</span><span class="p">)</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">assign_sub</span><span class="p">(</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">db</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For a look at training, you can send the same batch of <em>x</em> and <em>y</em> through the training loop, and see how <code class="docutils literal notranslate"><span class="pre">W</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> evolve.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">MyModel</span><span class="p">()</span>
+
+<span class="c1"># Collect the history of W-values and b-values to plot later</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">biases</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Define a training loop</span>
+<span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">loss</span><span class="p">):</span>
+  <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;W = </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">w</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="si">:</span><span class="s2">1.2f</span><span class="si">}</span><span class="s2">, b = </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="si">:</span><span class="s2">1.2f</span><span class="si">}</span><span class="s2">, loss=</span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">2.5f</span><span class="si">}</span><span class="s2">&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">training_loop</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+
+  <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="n">epochs</span><span class="p">:</span>
+    <span class="c1"># Update the model with the single giant batch</span>
+    <span class="n">train</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="c1"># Track this before I update</span>
+    <span class="n">weights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">w</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+    <span class="n">biases</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+    <span class="n">current_loss</span> <span class="o">=</span> <span class="n">loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    &quot;</span><span class="p">,</span> <span class="n">report</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">current_loss</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Do the training</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">current_loss</span> <span class="o">=</span> <span class="n">loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    &quot;</span><span class="p">,</span> <span class="n">report</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">current_loss</span><span class="p">))</span>
+
+<span class="n">training_loop</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Starting:
+     W = 5.00, b = 0.00, loss=9.75963
+Epoch  0:
+     W = 4.48, b = 0.39, loss=6.05377
+Epoch  1:
+     W = 4.10, b = 0.71, loss=3.92840
+Epoch  2:
+     W = 3.83, b = 0.96, loss=2.69969
+Epoch  3:
+     W = 3.63, b = 1.16, loss=1.98354
+Epoch  4:
+     W = 3.48, b = 1.32, loss=1.56270
+Epoch  5:
+     W = 3.37, b = 1.45, loss=1.31337
+Epoch  6:
+     W = 3.29, b = 1.55, loss=1.16449
+Epoch  7:
+     W = 3.23, b = 1.63, loss=1.07491
+Epoch  8:
+     W = 3.19, b = 1.70, loss=1.02062
+Epoch  9:
+     W = 3.16, b = 1.75, loss=0.98750
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plot the evolution of the weights over time:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Weights&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="p">[</span><span class="n">TRUE_W</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">epochs</span><span class="p">),</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span>
+         <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;True weight&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">biases</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;bias&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="p">[</span><span class="n">TRUE_B</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">epochs</span><span class="p">),</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s2">&quot;True bias&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6.basic_training_loops_25_0.png" src="../_images/6.basic_training_loops_25_0.png" />
+</div>
+</div>
+<p>Visualize how the trained model performs</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ground truth&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Current loss: </span><span class="si">%1.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">loss</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6.basic_training_loops_27_0.png" src="../_images/6.basic_training_loops_27_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Current loss: 0.987504
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-same-solution-but-with-keras">
+<h2><span class="section-number">6.5. </span>The same solution, but with Keras<a class="headerlink" href="#the-same-solution-but-with-keras" title="Permalink to this headline">¶</a></h2>
+<p>It’s useful to contrast the code above with the equivalent in Keras.</p>
+<p>Defining the model looks exactly the same if you subclass <code class="docutils literal notranslate"><span class="pre">tf.keras.Model</span></code>.  Remember that Keras models inherit ultimately from module.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyModelKeras</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="c1"># Initialize the weights to `5.0` and the bias to `0.0`</span>
+    <span class="c1"># In practice, these should be randomly initialized</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
+
+<span class="n">keras_model</span> <span class="o">=</span> <span class="n">MyModelKeras</span><span class="p">()</span>
+
+<span class="c1"># Reuse the training loop with a Keras model</span>
+<span class="n">training_loop</span><span class="p">(</span><span class="n">keras_model</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># You can also save a checkpoint using Keras&#39;s built-in support</span>
+<span class="n">keras_model</span><span class="o">.</span><span class="n">save_weights</span><span class="p">(</span><span class="s2">&quot;keras_checkpoint&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch  0:
+     W = 4.48, b = 0.39, loss=6.05377
+Epoch  1:
+     W = 4.10, b = 0.71, loss=3.92840
+Epoch  2:
+     W = 3.83, b = 0.96, loss=2.69969
+Epoch  3:
+     W = 3.63, b = 1.16, loss=1.98354
+Epoch  4:
+     W = 3.48, b = 1.32, loss=1.56270
+Epoch  5:
+     W = 3.37, b = 1.45, loss=1.31337
+Epoch  6:
+     W = 3.29, b = 1.55, loss=1.16449
+Epoch  7:
+     W = 3.23, b = 1.63, loss=1.07491
+Epoch  8:
+     W = 3.19, b = 1.70, loss=1.02062
+Epoch  9:
+     W = 3.16, b = 1.75, loss=0.98750
+</pre></div>
+</div>
+</div>
+</div>
+<p>Rather than write new training loops each time you create a model, you can use the built-in features of Keras as a shortcut.  This can be useful when you do not want to write or debug Python training loops.</p>
+<p>If you do, you will need to use <code class="docutils literal notranslate"><span class="pre">model.compile()</span></code> to set the parameters, and <code class="docutils literal notranslate"><span class="pre">model.fit()</span></code> to train.  It can be less code to use Keras implementations of L2 loss and gradient descent, again as a shortcut.  Keras losses and optimizers can be used outside of these convenience functions, too, and the previous example could have used them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">keras_model</span> <span class="o">=</span> <span class="n">MyModelKeras</span><span class="p">()</span>
+
+<span class="c1"># compile sets the training parameters</span>
+<span class="n">keras_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="c1"># By default, fit() uses tf.function().  You can</span>
+    <span class="c1"># turn that off for debugging, but it is on now.</span>
+    <span class="n">run_eagerly</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+
+    <span class="c1"># Using a built-in optimizer, configuring as an object</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
+
+    <span class="c1"># Keras comes with built-in MSE error</span>
+    <span class="c1"># However, you could use the loss function</span>
+    <span class="c1"># defined above</span>
+    <span class="n">loss</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Keras <code class="docutils literal notranslate"><span class="pre">fit</span></code> expects batched data or a complete dataset as a NumPy array.  NumPy arrays are chopped into batches and default to a batch size of 32.</p>
+<p>In this case, to match the behavior of the hand-written loop, you should pass <code class="docutils literal notranslate"><span class="pre">x</span></code> in as a single batch of size 1000.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">keras_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>201
+Epoch 1/10
+1/1 [==============================] - 0s 3ms/step - loss: 9.7596
+Epoch 2/10
+1/1 [==============================] - 0s 2ms/step - loss: 6.0538
+Epoch 3/10
+1/1 [==============================] - 0s 9ms/step - loss: 3.9284
+Epoch 4/10
+1/1 [==============================] - 0s 4ms/step - loss: 2.6997
+Epoch 5/10
+1/1 [==============================] - 0s 1ms/step - loss: 1.9835
+Epoch 6/10
+1/1 [==============================] - 0s 10ms/step - loss: 1.5627
+Epoch 7/10
+1/1 [==============================] - 0s 2ms/step - loss: 1.3134
+Epoch 8/10
+1/1 [==============================] - 0s 3ms/step - loss: 1.1645
+Epoch 9/10
+1/1 [==============================] - 0s 3ms/step - loss: 1.0749
+Epoch 10/10
+1/1 [==============================] - 0s 1ms/step - loss: 1.0206
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tensorflow.python.keras.callbacks.History at 0x14c89b190&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that Keras prints out the loss after training, not before, so the first loss appears lower, but otherwise this shows essentially the same training performance.</p>
+</div>
+<div class="section" id="next-steps">
+<h2><span class="section-number">6.6. </span>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>In this guide, you have seen how to use the core classes of tensors, variables, modules, and gradient tape to build and train a model, and further how those ideas map to Keras.</p>
+<p>This is, however, an extremely simple problem. For a more practical introduction, see <span class="xref myst">Custom training walkthrough</span>.</p>
+<p>For more on using built-in Keras training loops, see <a class="reference external" href="https://www.tensorflow.org/guide/keras/train_and_evaluate">this guide</a>.  For more on training loops and Keras, see <a class="reference external" href="https://www.tensorflow.org/guide/keras/writing_a_training_loop_from_scratch">this guide</a>.  For writing custom distributed training loops, see <a class="reference external" href="distributed_training.ipynb#using_tfdistributestrategy_with_basic_training_loops_loops">this guide</a>.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./old"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="5.intro_to_modules.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">4. </span>Introduction to modules, layers, and models</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="7.keras_sequential_model.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>The Sequential model</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
