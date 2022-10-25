@@ -32,7 +32,7 @@ import numpy as np
 
 # ### Data
 
-# In[4]:
+# In[8]:
 
 
 from sklearn.datasets import fetch_california_housing
@@ -42,7 +42,7 @@ from sklearn.preprocessing import StandardScaler
 
 # * 拿 california housing 的資料來當範例
 
-# In[5]:
+# In[113]:
 
 
 housing = fetch_california_housing()
@@ -59,13 +59,13 @@ X_test_scaled = scaler.transform(X_test)
 
 # * features 有 8 個，y 是 numeric，所以是回歸問題
 
-# In[5]:
+# In[10]:
 
 
 X_train_scaled.shape
 
 
-# In[6]:
+# In[11]:
 
 
 y_train
@@ -82,7 +82,7 @@ y_train
 #   * abs diff >= 1 時，改成用線性的 loss (i.e. abs diff - 0.5). 
 # * 那在定義的時候，就是定義一個 function 如下： (特別注意，都要用 tf 的 function 來定義，這樣之後才能順利轉成 graph)
 
-# In[6]:
+# In[112]:
 
 
 def huber_fn(y_true, y_pred):
@@ -124,7 +124,7 @@ plt.show()
 
 # * 現在，來 build 一個 model，用這個我們自訂的 loss
 
-# In[17]:
+# In[111]:
 
 
 input_shape = X_train.shape[1:]
@@ -268,24 +268,36 @@ model.fit(X_train_scaled, y_train, epochs=2,
 
 # ## 自訂 activation, initialze, regularize functions
 
-# In[92]:
+# ### 不帶參數版本
+
+# * 自己把這些函數寫一寫，只要記得兩個原則：  
+#   * 用 tf 的 function 來寫 (e.g. 不要用 np.sqrt(), 要用 tf.sqrt())  
+#   * input 都是 tensor (tf 版的 n-dim array)  
+
+# In[4]:
 
 
+# 自訂 activaton function
 def my_softplus(z):
     return tf.math.log(1.0 + tf.exp(z))
 
+# 自訂 initializer
 def my_glorot_initializer(shape, dtype=tf.float32):
     stddev = tf.sqrt(2. / (shape[0] + shape[1]))
     return tf.random.normal(shape, stddev=stddev, dtype=dtype)
 
+# 自訂 l1-regularize method
 def my_l1_regularizer(weights):
     return tf.reduce_sum(tf.abs(0.01 * weights))
 
+# 自訂約束函數，來確保全中都是正的
 def my_positive_weights(weights):  # return value is just tf.nn.relu(weights)
     return tf.where(weights < 0., tf.zeros_like(weights), weights)
 
 
-# In[93]:
+# * 使用時，就是放到 layer 裡面
+
+# In[5]:
 
 
 layer = tf.keras.layers.Dense(1, activation=my_softplus,
@@ -294,11 +306,12 @@ layer = tf.keras.layers.Dense(1, activation=my_softplus,
                               kernel_constraint=my_positive_weights)
 
 
-# In[94]:
+# * training 時就照 train，照 save
+
+# In[12]:
 
 
-# extra code – show that building, training, saving, loading, and training again
-#              works fine with a model containing many custom parts
+input_shape = X_train.shape[1:]
 
 tf.random.set_seed(42)
 model = tf.keras.Sequential([
@@ -313,6 +326,13 @@ model.compile(loss="mse", optimizer="nadam", metrics=["mae"])
 model.fit(X_train_scaled, y_train, epochs=2,
           validation_data=(X_valid_scaled, y_valid))
 model.save("my_model_with_many_custom_parts")
+
+
+# * 之後，要 load model時，就像之前一樣，加入 custom_objects 來讀：
+
+# In[13]:
+
+
 model = tf.keras.models.load_model(
     "my_model_with_many_custom_parts",
     custom_objects={
@@ -322,11 +342,20 @@ model = tf.keras.models.load_model(
        "my_softplus": my_softplus,
     }
 )
+
 model.fit(X_train_scaled, y_train, epochs=2,
           validation_data=(X_valid_scaled, y_valid))
 
 
-# In[95]:
+# ### 帶參數的版本
+
+# * 如果這些客製化的函數，是帶有額外參數的，那就要用 class 的寫法，且要繼承適當的 class，例如：  
+#   * `tf.keras.regularizers.Regularizer`. 
+#   * `tf.keras.constraints.Constraint`. 
+#   * `tf.keras.initializers.Initializer`. 
+# * 底下以 regularizer 來舉例
+
+# In[14]:
 
 
 class MyL1Regularizer(tf.keras.regularizers.Regularizer):
@@ -340,11 +369,10 @@ class MyL1Regularizer(tf.keras.regularizers.Regularizer):
         return {"factor": self.factor}
 
 
-# In[96]:
+# * fit 的時候 as usual
 
+# In[15]:
 
-# extra code – again, show that everything works fine, this time using our
-#              custom regularizer class
 
 tf.random.set_seed(42)
 model = tf.keras.Sequential([
@@ -359,6 +387,13 @@ model.compile(loss="mse", optimizer="nadam", metrics=["mae"])
 model.fit(X_train_scaled, y_train, epochs=2,
           validation_data=(X_valid_scaled, y_valid))
 model.save("my_model_with_many_custom_parts")
+
+
+# * load 的時候，只要把 class 塞進去就好，他會自己 call `get_config`，取回當初使用的 factor
+
+# In[16]:
+
+
 model = tf.keras.models.load_model(
     "my_model_with_many_custom_parts",
     custom_objects={
@@ -374,272 +409,321 @@ model.fit(X_train_scaled, y_train, epochs=2,
 
 # ## 自訂 metrics
 
-# In[97]:
-
-
-# extra code – once again, lets' create a basic Keras model
-tf.random.set_seed(42)
-model = tf.keras.Sequential([
-    tf.keras.layers.Dense(30, activation="relu", kernel_initializer="he_normal",
-                          input_shape=input_shape),
-    tf.keras.layers.Dense(1),
-])
-
-
-# In[98]:
-
-
-model.compile(loss="mse", optimizer="nadam", metrics=[create_huber(2.0)])
-
-
-# In[99]:
-
-
-# extra code – train the model with our custom metric
-model.fit(X_train_scaled, y_train, epochs=2)
-
-
-# **Note**: if you use the same function as the loss and a metric, you may be surprised to see slightly different results. This is in part because the operations are not computed exactly in the same order, so there might be tiny floating point errors. More importantly, if you use sample weights or class weights, then the equations are a bit different:
-# * the `fit()` method keeps track of the mean of all batch losses seen so far since the start of the epoch. Each batch loss is the sum of the weighted instance losses divided by the _batch size_ (not the sum of weights, so the batch loss is _not_ the weighted mean of the losses).
-# * the metric since the start of the epoch is equal to the sum of weighted instance losses divided by sum of all weights seen so far. In other words, it is the weighted mean of all the instance losses. Not the same thing.
-
-# ### Streaming metrics
-
-# In[100]:
-
-
-precision = tf.keras.metrics.Precision()
-precision([0, 1, 1, 1, 0, 1, 0, 1], [1, 1, 0, 1, 0, 1, 0, 1])
-
-
-# In[101]:
-
-
-precision([0, 1, 0, 0, 1, 0, 1, 1], [1, 0, 1, 1, 0, 0, 0, 0])
-
-
-# In[102]:
-
-
-precision.result()
-
-
-# In[103]:
-
-
-precision.variables
-
-
-# In[104]:
-
-
-precision.reset_states()
-
-
-# Creating a streaming metric:
-
-# In[105]:
-
-
-class HuberMetric(tf.keras.metrics.Metric):
-    def __init__(self, threshold=1.0, **kwargs):
-        super().__init__(**kwargs)  # handles base args (e.g., dtype)
-        self.threshold = threshold
-        self.huber_fn = create_huber(threshold)
-        self.total = self.add_weight("total", initializer="zeros")
-        self.count = self.add_weight("count", initializer="zeros")
-
-    def update_state(self, y_true, y_pred, sample_weight=None):
-        sample_metrics = self.huber_fn(y_true, y_pred)
-        self.total.assign_add(tf.reduce_sum(sample_metrics))
-        self.count.assign_add(tf.cast(tf.size(y_true), tf.float32))
-
-    def result(self):
-        return self.total / self.count
-
-    def get_config(self):
-        base_config = super().get_config()
-        return {**base_config, "threshold": self.threshold}
-
-
-# **Extra material** – the rest of this section tests the `HuberMetric` class and shows another implementation subclassing `tf.keras.metrics.Mean`.
-
-# In[106]:
-
-
-m = HuberMetric(2.)
-
-# total = 2 * |10 - 2| - 2²/2 = 14
-# count = 1
-# result = 14 / 1 = 14
-m(tf.constant([[2.]]), tf.constant([[10.]]))
-
-
-# In[107]:
-
-
-# total = total + (|1 - 0|² / 2) + (2 * |9.25 - 5| - 2² / 2) = 14 + 7 = 21
-# count = count + 2 = 3
-# result = total / count = 21 / 3 = 7
-m(tf.constant([[0.], [5.]]), tf.constant([[1.], [9.25]]))
-
-
-# In[108]:
-
-
-m.result()
-
-
-# In[109]:
-
-
-m.variables
-
-
-# In[110]:
-
-
-m.reset_states()
-m.variables
-
-
-# Let's check that the `HuberMetric` class works well:
-
-# In[111]:
-
-
-tf.random.set_seed(42)
-model = tf.keras.Sequential([
-    tf.keras.layers.Dense(30, activation="relu", kernel_initializer="he_normal",
-                          input_shape=input_shape),
-    tf.keras.layers.Dense(1),
-])
-
-
-# In[112]:
-
-
-model.compile(loss=create_huber(2.0), optimizer="nadam",
-              metrics=[HuberMetric(2.0)])
-
-
-# In[113]:
-
-
-model.fit(X_train_scaled, y_train, epochs=2)
-
-
-# In[114]:
-
-
-model.save("my_model_with_a_custom_metric")
-
-
-# In[115]:
-
-
-model = tf.keras.models.load_model(
-    "my_model_with_a_custom_metric",
-    custom_objects={
-        "huber_fn": create_huber(2.0),
-        "HuberMetric": HuberMetric
-    }
-)
-
-
-# In[116]:
-
-
-model.fit(X_train_scaled, y_train, epochs=2)
-
-
-# `model.metrics` contains the model's loss followed by the model's metric(s), so the `HuberMetric` is `model.metrics[-1]`:
-
-# In[117]:
-
-
-model.metrics[-1].threshold
-
-
-# Looks like it works fine! More simply, we could have created the class like this:
-
-# In[118]:
-
-
-class HuberMetric(tf.keras.metrics.Mean):
-    def __init__(self, threshold=1.0, name='HuberMetric', dtype=None):
-        self.threshold = threshold
-        self.huber_fn = create_huber(threshold)
-        super().__init__(name=name, dtype=dtype)
-
-    def update_state(self, y_true, y_pred, sample_weight=None):
-        metric = self.huber_fn(y_true, y_pred)
-        super(HuberMetric, self).update_state(metric, sample_weight)
-
-    def get_config(self):
-        base_config = super().get_config()
-        return {**base_config, "threshold": self.threshold}        
-
-
-# This class handles shapes better, and it also supports sample weights.
-
-# In[119]:
-
-
-tf.random.set_seed(42)
-model = tf.keras.Sequential([
-    tf.keras.layers.Dense(30, activation="relu", kernel_initializer="he_normal",
-                          input_shape=input_shape),
-    tf.keras.layers.Dense(1),
-])
-
-
-# In[120]:
-
-
-model.compile(loss=tf.keras.losses.Huber(2.0), optimizer="nadam",
-              weighted_metrics=[HuberMetric(2.0)])
-
-
-# In[121]:
-
-
-np.random.seed(42)
-sample_weight = np.random.rand(len(y_train))
-history = model.fit(X_train_scaled, y_train, epochs=2,
-                    sample_weight=sample_weight)
-
-
-# In[122]:
-
-
-(history.history["loss"][0],
- history.history["HuberMetric"][0] * sample_weight.mean())
-
-
-# In[123]:
-
-
-model.save("my_model_with_a_custom_metric_v2")
-
+# ### from scratch
+
+# * 直接講 best practice，就是要去繼承 `tf.keras.metrics.Metric` 這個 class，並且，除了 init 以外，還要定義 3 個 method，以及 get_config:
+#   * `__init__`: 這個建構子裡面，要放最終去計算 metric 所需的元件。舉例來說，要算 accuracy，那你需要 (正確分類數 / 總數)。那最一開始就會 initialize 這兩個 tf.variable，並 initialize 為 0  
+#   * `update_state()`，這是每一個 batch 跑完時，要更新目前的 state。舉例來說，如果你最終要算 accuracy，那每個 batch 結束時，就是把正確分類數，加到剛剛的正確分類variable裡面; 把batch總數，加到剛剛的總數 variable 裡、。
+#   * `result()`： 計算 metric 的邏輯放在這裡。以 accuracy，這邊就會用剛剛訂的 正確分類數 variable，和總數 variable 去做 正確分類/總數 的計算。  
+#   * `reset_state()`: 整個 epoch 結束後，我們會把所有剛剛計算的東西歸0，因為下一個 epoch 全部重來。
+#   * `get_config()`: 方便存檔後，load進來，還保有 init 時定義的參數資訊
+# * 現在，先來寫個自己的 accuracy，並和現有的 accuracy metric 比較，看寫得對不對
+
+# #### my_accuracy
 
 # In[124]:
 
 
-model = tf.keras.models.load_model("my_model_with_a_custom_metric_v2",
-                                   custom_objects={"HuberMetric": HuberMetric})
+class MyAccuracy(tf.keras.metrics.Metric):
+    def __init__(self, name="my_accuracy", dtype="float32", threshold=0.5, **kwargs):
+        super().__init__(name=name, dtype=dtype, **kwargs)
+        self.threshold = 0.5
+        self.true_decision = self.add_weight(
+            name = "true_decision", dtype = dtype, initializer = "zeros"
+        )
+        self.total_number = self.add_weight(
+            name = "total_number", dtype = dtype, initializer = "zeros"
+        )
+    def update_state(self, y_true, y_pred, sample_weight=None):
+        y_pred = tf.math.greater_equal(y_pred, self.threshold) # 此時為 tf.bool 的 type, 例如 [True, False, ..., True]
+        y_pred = tf.cast(y_pred, tf.int64) # 轉成 [1, 0, ..., 1]
+        
+        true_decision = tf.cast(tf.math.equal(y_true, y_pred), self.dtype)
+        total_number = tf.cast(tf.size(y_true), self.dtype)
+
+        self.true_decision.assign_add(tf.reduce_sum(true_decision))
+        self.total_number.assign_add(total_number)
+
+    def result(self):
+        if self.total_number == 0:
+            accuracy = tf.cast(0, tf.float32)
+        else:
+            accuracy = self.true_decision / self.total_number
+        return accuracy
+
+    def reset_state(self):
+        self.true_decision.assign(0)
+        self.total_number.assign(0)
+        
+    def get_config(self):
+        base_config = super().get_config()
+        return {**base_config, "threshold": self.threshold} 
 
 
-# In[125]:
+# * 來測試一下：
+
+# In[130]:
 
 
-model.fit(X_train_scaled, y_train, epochs=2)
+official_accuracy = tf.keras.metrics.BinaryAccuracy()
+my_accuracy = MyAccuracy()
+
+# 起始後，目前的結果
+print("----- initialize result -----")
+print(official_accuracy.result())
+print(my_accuracy.result())
+
+# 第一批資料做完後的結果 (3/5)
+official_accuracy.update_state([[1, 0, 1, 1, 0]], [[0.8, 0.3, 0.6, 0.4, 0.6]])
+my_accuracy.update_state([[1, 0, 1, 1, 0]], [[0.8, 0.3, 0.6, 0.4, 0.6]])
+print("----- end of first batch -----")
+print(official_accuracy.result())
+print(my_accuracy.result())
+
+# 第二批資料做完後的結果 (2/5 加到原本的 state，變成 (3+2)/(5+5) = 0.5)
+official_accuracy.update_state([[1, 1, 1, 0, 0]], [[0.8, 0.3, 0.4, 0.2, 0.6]])
+my_accuracy.update_state([[1, 1, 1, 0, 0]], [[0.8, 0.3, 0.4, 0.2, 0.6]])
+print("----- end of second batch -----")
+print(official_accuracy.result())
+print(my_accuracy.result())
+
+
+# * 讚啦！ 那就實際來使用這個 metric 吧：
+
+# In[120]:
+
+
+# data
+
+# x_train 是 tabular data, n = 12, p = 1 (僅 1 個 feature)
+x_train = np.array([
+    [1],
+    [2],
+    [3],
+    [4],
+    [5],
+    [6],
+    [7],
+    [8],
+    [9],
+    [10],
+    [11],
+    [12]
+])
+y_train = np.array([
+    [0], 
+    [0], 
+    [1], 
+    [0], 
+    [1], 
+    [1], 
+    [0], 
+    [1], 
+    [1], 
+    [1], 
+    [1], 
+    [1]
+])
+ds = tf.data.Dataset.from_tensor_slices(
+    (x_train, y_train)
+).shuffle(12).batch(3)
 
 
 # In[126]:
 
 
-model.metrics[-1].threshold
+# Instantiate a metric object
+my_accuracy = MyAccuracy()
+
+# Prepare our layer, loss, and optimizer.
+model = tf.keras.Sequential(
+    [
+        tf.keras.layers.Dense(3, activation="relu"),
+        tf.keras.layers.Dense(1, activation = "sigmoid"),
+    ]
+)
+loss_fn = tf.keras.losses.BinaryCrossentropy()
+optimizer = tf.keras.optimizers.Adam(learning_rate=1e-3)
+
+for epoch in range(2):
+    # Iterate over the batches of a dataset.
+    for step, (x, y) in enumerate(ds):
+        with tf.GradientTape() as tape:
+            logits = model(x)
+            # Compute the loss value for this batch.
+            loss_value = loss_fn(y, logits)
+
+        # Update the state of the `accuracy` metric.
+        my_accuracy.update_state(y, logits)
+
+        # Update the weights of the model to minimize the loss value.
+        gradients = tape.gradient(loss_value, model.trainable_weights)
+        optimizer.apply_gradients(zip(gradients, model.trainable_weights))
+
+        # Logging the current accuracy value so far.
+        print("Epoch:", epoch, "Step:", step)
+        print("Total running accuracy so far: %.3f" % my_accuracy.result())
+            
+
+    # Reset the metric's state at the end of an epoch
+    my_accuracy.reset_state()
+
+
+# * 或是，更簡單一點，直接用 fit
+
+# In[132]:
+
+
+# Instantiate a metric object
+my_accuracy = MyAccuracy()
+official_accuracy = tf.keras.metrics.BinaryAccuracy()
+
+# Prepare our layer, loss, and optimizer.
+model = tf.keras.Sequential(
+    [
+        tf.keras.layers.Dense(3, activation="relu"),
+        tf.keras.layers.Dense(1, activation = "sigmoid"),
+    ]
+)
+loss_fn = tf.keras.losses.BinaryCrossentropy()
+optimizer = tf.keras.optimizers.Adam(learning_rate=1e-3)
+
+model.compile(
+    loss = loss_fn,
+    optimizer = optimizer,
+    metrics = [my_accuracy, official_accuracy]
+)
+
+model.fit(ds, epochs = 2)
+
+
+# #### f1_score
+
+# * 接著，來實做一下 F1 score (取自: https://keras.io/getting_started/intro_to_keras_for_researchers/#keeping-track-of-training-metrics)
+
+# In[151]:
+
+
+class F1Score(tf.keras.metrics.Metric):
+    def __init__(self, name="f1_score", dtype="float32", threshold=0.5, **kwargs):
+        super().__init__(name=name, dtype=dtype, **kwargs)
+        self.threshold = 0.5
+        self.true_positives = self.add_weight(
+            name="tp", dtype=dtype, initializer="zeros"
+        )
+        self.false_positives = self.add_weight(
+            name="fp", dtype=dtype, initializer="zeros"
+        )
+        self.false_negatives = self.add_weight(
+            name="fn", dtype=dtype, initializer="zeros"
+        )
+
+    def update_state(self, y_true, y_pred, sample_weight=None):
+        y_pred = tf.math.greater_equal(y_pred, self.threshold)
+        y_true = tf.cast(y_true, tf.bool)
+        y_pred = tf.cast(y_pred, tf.bool)
+
+        true_positives = tf.cast(y_true & y_pred, self.dtype)
+        false_positives = tf.cast(~y_true & y_pred, self.dtype)
+        false_negatives = tf.cast(y_true & ~y_pred, self.dtype)
+
+        if sample_weight is not None:
+            sample_weight = tf.cast(sample_weight, self.dtype)
+            true_positives *= sample_weight
+            false_positives *= sample_weight
+            false_negatives *= sample_weight
+
+        self.true_positives.assign_add(tf.reduce_sum(true_positives))
+        self.false_positives.assign_add(tf.reduce_sum(false_positives))
+        self.false_negatives.assign_add(tf.reduce_sum(false_negatives))
+
+    def result(self):
+        precision = self.true_positives / (self.true_positives + self.false_positives)
+        recall = self.true_positives / (self.true_positives + self.false_negatives)
+        return precision * recall * 2.0 / (precision + recall)
+
+    def reset_state(self):
+        self.true_positives.assign(0)
+        self.false_positives.assign(0)
+        self.false_negatives.assign(0)
+    
+    def get_config(self):
+        base_config = super().get_config()
+        return {**base_config, "threshold": self.threshold} 
+
+
+# In[152]:
+
+
+# Instantiate a metric object
+my_accuracy = MyAccuracy()
+official_accuracy = tf.keras.metrics.BinaryAccuracy()
+official_precision = tf.keras.metrics.Precision(name = "precision")
+official_recall = tf.keras.metrics.Recall(name = "recall")
+
+my_f1_score = F1Score()
+
+# Prepare our layer, loss, and optimizer.
+model = tf.keras.Sequential(
+    [
+        tf.keras.layers.Dense(3, activation="relu"),
+        tf.keras.layers.Dense(1, activation = "sigmoid"),
+    ]
+)
+loss_fn = tf.keras.losses.BinaryCrossentropy()
+optimizer = tf.keras.optimizers.Adam(learning_rate=1e-3)
+
+model.compile(
+    loss = loss_fn,
+    optimizer = optimizer,
+    metrics = [my_accuracy, official_accuracy, my_f1_score, official_precision, official_recall]
+)
+
+model.fit(ds, epochs = 2)
+
+
+# * 存檔時，就照樣存：
+
+# In[153]:
+
+
+model.save("my_model_with_a_custom_metric")
+
+
+# * 讀檔時，跟之前一樣，
+
+# In[156]:
+
+
+model = tf.keras.models.load_model("my_model_with_a_custom_metric",
+                                   custom_objects={"MyAccuracy": MyAccuracy, "F1Score": F1Score})
+
+
+# * 可以看到，之前存好的 metric 都在
+
+# In[157]:
+
+
+model.metrics
+
+
+# `model.metrics` contains the model's loss followed by the model's metric(s), so the `HuberMetric` is `model.metrics[-1]`:
+
+# * 參數也都記得：
+
+# In[162]:
+
+
+print(model.metrics[1].threshold)
+print(model.metrics[3].threshold)
+
+
+# * 可以繼續 train
+
+# In[163]:
+
+
+model.fit(ds, epochs = 2)
 
 
 # ## 自訂 Layers
@@ -934,6 +1018,14 @@ y_pred = model.predict(X_test_scaled)
 
 
 # ## 自訂 callback
+
+# * 整理自： https://keras.io/guides/writing_your_own_callbacks/
+
+# In[ ]:
+
+
+
+
 
 # ## 自訂 fit
 
