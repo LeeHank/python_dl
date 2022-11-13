@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>9. Customization &#8212; My sample book</title>
+    <title>10. Customization &#8212; My sample book</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -51,7 +51,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="8. 三種搭建神經網路的方式" href="../tf_create_model.html" />
+    <link rel="prev" title="9. 三種搭建神經網路的方式" href="../tf_create_model.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -97,48 +97,60 @@
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  basics
+  Cheat Sheet
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch/pytorch_cheatsheet.html">
+   1. Pytorch Cheatsheet
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tensorflow basics
  </span>
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../old/1.tensor.html">
-   1. Introduction to Tensors
+   2. Introduction to Tensors
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../old/2.variable.html">
-   2. Introduction to Variables
+   3. Introduction to Variables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../old/3.autodiff.html">
-   3. Introduction to gradients and automatic differentiation
+   4. Introduction to gradients and automatic differentiation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../old/5.intro_to_modules.html">
-   4. Introduction to modules, layers, and models
+   5. Introduction to modules, layers, and models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../old/6.basic_training_loops.html">
-   6. Basic training loops
+   7. Basic training loops
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../old/7.keras_sequential_model.html">
-   7. The Sequential model
+   8. The Sequential model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../tf_create_model.html">
-   8. 三種搭建神經網路的方式
+   9. 三種搭建神經網路的方式
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   9. Customization
+   10. Customization
   </a>
  </li>
 </ul>
@@ -247,73 +259,78 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#setup">
-   9.1. Setup
+   10.1. Setup
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#environment">
-     9.1.1. Environment
+     10.1.1. Environment
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#data">
-     9.1.2. Data
+     10.1.2. Data
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#loss-function">
-   9.2. 自訂 loss function
+   10.2. 自訂 loss function
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id1">
-     9.2.1. 不帶參數的 loss function
+     10.2.1. 不帶參數的 loss function
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id2">
-     9.2.2. 帶參數的 loss function
+     10.2.2. 帶參數的 loss function
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#activation-initialze-regularize-functions">
-   9.3. 自訂 activation, initialze, regularize functions
+   10.3. 自訂 activation, initialze, regularize functions
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id3">
-     9.3.1. 不帶參數版本
+     10.3.1. 不帶參數版本
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id4">
-     9.3.2. 帶參數的版本
+     10.3.2. 帶參數的版本
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#metrics">
-   9.4. 自訂 metrics
+   10.4. 自訂 metrics
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#from-scratch">
-     9.4.1. from scratch
+    <a class="reference internal nav-link" href="#id5">
+     10.4.1. 簡單的寫法
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#subclass">
+     10.4.2. subclass 寫法
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#my-accuracy">
-       9.4.1.1. my_accuracy
+       10.4.2.1. my_accuracy
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#f1-score">
-       9.4.1.2. f1_score
+       10.4.2.2. f1_score
       </a>
      </li>
     </ul>
@@ -322,84 +339,84 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#layers">
-   9.5. 自訂 Layers
+   10.5. 自訂 Layers
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#models">
-   9.6. 自訂 Models
+   10.6. 自訂 Models
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#losses-and-metrics-based-on-model-internals">
-   9.7. Losses and Metrics Based on Model Internals
+   10.7. Losses and Metrics Based on Model Internals
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#callback">
-   9.8. 自訂 callback
+   10.8. 自訂 callback
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#fit">
-   9.9. 自訂 fit
+   10.9. 自訂 fit
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#computing-gradients-using-autodiff">
-   9.10. Computing Gradients Using Autodiff
+   10.10. Computing Gradients Using Autodiff
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#training-loops">
-   9.11. 自訂 Training Loops
+   10.11. 自訂 Training Loops
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#tensorboard">
-   9.12. 自訂 tensorboard 要記錄的東西
+   10.12. 自訂 tensorboard 要記錄的東西
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#tensorflow-functions">
-   9.13. TensorFlow Functions
+   10.13. TensorFlow Functions
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#tf-functions-and-concrete-functions">
-     9.13.1. TF Functions and Concrete Functions
+     10.13.1. TF Functions and Concrete Functions
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exploring-function-definitions-and-graphs">
-     9.13.2. Exploring Function Definitions and Graphs
+     10.13.2. Exploring Function Definitions and Graphs
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#how-tf-functions-trace-python-functions-to-extract-their-computation-graphs">
-     9.13.3. How TF Functions Trace Python Functions to Extract Their Computation Graphs
+     10.13.3. How TF Functions Trace Python Functions to Extract Their Computation Graphs
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#using-autograph-to-capture-control-flow">
-     9.13.4. Using Autograph To Capture Control Flow
+     10.13.4. Using Autograph To Capture Control Flow
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#handling-variables-and-other-resources-in-tf-functions">
-     9.13.5. Handling Variables and Other Resources in TF Functions
+     10.13.5. Handling Variables and Other Resources in TF Functions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#using-tf-functions-with-tf-keras-or-not">
-   9.14. Using TF Functions with tf.keras (or Not)
+   10.14. Using TF Functions with tf.keras (or Not)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#extra-material-custom-optimizers">
-   9.15. Extra Material – Custom Optimizers
+   10.15. Extra Material – Custom Optimizers
   </a>
  </li>
 </ul>
@@ -424,73 +441,78 @@
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#setup">
-   9.1. Setup
+   10.1. Setup
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#environment">
-     9.1.1. Environment
+     10.1.1. Environment
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#data">
-     9.1.2. Data
+     10.1.2. Data
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#loss-function">
-   9.2. 自訂 loss function
+   10.2. 自訂 loss function
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id1">
-     9.2.1. 不帶參數的 loss function
+     10.2.1. 不帶參數的 loss function
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id2">
-     9.2.2. 帶參數的 loss function
+     10.2.2. 帶參數的 loss function
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#activation-initialze-regularize-functions">
-   9.3. 自訂 activation, initialze, regularize functions
+   10.3. 自訂 activation, initialze, regularize functions
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id3">
-     9.3.1. 不帶參數版本
+     10.3.1. 不帶參數版本
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id4">
-     9.3.2. 帶參數的版本
+     10.3.2. 帶參數的版本
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#metrics">
-   9.4. 自訂 metrics
+   10.4. 自訂 metrics
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#from-scratch">
-     9.4.1. from scratch
+    <a class="reference internal nav-link" href="#id5">
+     10.4.1. 簡單的寫法
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#subclass">
+     10.4.2. subclass 寫法
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#my-accuracy">
-       9.4.1.1. my_accuracy
+       10.4.2.1. my_accuracy
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#f1-score">
-       9.4.1.2. f1_score
+       10.4.2.2. f1_score
       </a>
      </li>
     </ul>
@@ -499,84 +521,84 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#layers">
-   9.5. 自訂 Layers
+   10.5. 自訂 Layers
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#models">
-   9.6. 自訂 Models
+   10.6. 自訂 Models
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#losses-and-metrics-based-on-model-internals">
-   9.7. Losses and Metrics Based on Model Internals
+   10.7. Losses and Metrics Based on Model Internals
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#callback">
-   9.8. 自訂 callback
+   10.8. 自訂 callback
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#fit">
-   9.9. 自訂 fit
+   10.9. 自訂 fit
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#computing-gradients-using-autodiff">
-   9.10. Computing Gradients Using Autodiff
+   10.10. Computing Gradients Using Autodiff
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#training-loops">
-   9.11. 自訂 Training Loops
+   10.11. 自訂 Training Loops
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#tensorboard">
-   9.12. 自訂 tensorboard 要記錄的東西
+   10.12. 自訂 tensorboard 要記錄的東西
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#tensorflow-functions">
-   9.13. TensorFlow Functions
+   10.13. TensorFlow Functions
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#tf-functions-and-concrete-functions">
-     9.13.1. TF Functions and Concrete Functions
+     10.13.1. TF Functions and Concrete Functions
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exploring-function-definitions-and-graphs">
-     9.13.2. Exploring Function Definitions and Graphs
+     10.13.2. Exploring Function Definitions and Graphs
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#how-tf-functions-trace-python-functions-to-extract-their-computation-graphs">
-     9.13.3. How TF Functions Trace Python Functions to Extract Their Computation Graphs
+     10.13.3. How TF Functions Trace Python Functions to Extract Their Computation Graphs
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#using-autograph-to-capture-control-flow">
-     9.13.4. Using Autograph To Capture Control Flow
+     10.13.4. Using Autograph To Capture Control Flow
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#handling-variables-and-other-resources-in-tf-functions">
-     9.13.5. Handling Variables and Other Resources in TF Functions
+     10.13.5. Handling Variables and Other Resources in TF Functions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#using-tf-functions-with-tf-keras-or-not">
-   9.14. Using TF Functions with tf.keras (or Not)
+   10.14. Using TF Functions with tf.keras (or Not)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#extra-material-custom-optimizers">
-   9.15. Extra Material – Custom Optimizers
+   10.15. Extra Material – Custom Optimizers
   </a>
  </li>
 </ul>
@@ -589,7 +611,7 @@
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="customization">
-<h1><span class="section-number">9. </span>Customization<a class="headerlink" href="#customization" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">10. </span>Customization<a class="headerlink" href="#customization" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>整理來源：</p>
 <ul>
@@ -601,9 +623,9 @@
 </li>
 </ul>
 <div class="section" id="setup">
-<h2><span class="section-number">9.1. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.1. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="environment">
-<h3><span class="section-number">9.1.1. </span>Environment<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">10.1.1. </span>Environment<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
@@ -625,7 +647,7 @@
 </div>
 </div>
 <div class="section" id="data">
-<h3><span class="section-number">9.1.2. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">10.1.2. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_california_housing</span>
@@ -690,9 +712,9 @@
 </div>
 </div>
 <div class="section" id="loss-function">
-<h2><span class="section-number">9.2. </span>自訂 loss function<a class="headerlink" href="#loss-function" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.2. </span>自訂 loss function<a class="headerlink" href="#loss-function" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id1">
-<h3><span class="section-number">9.2.1. </span>不帶參數的 loss function<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">10.2.1. </span>不帶參數的 loss function<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>對於回歸問題，最常用的 loss 是 mse</p></li>
 <li><p>但 mse 對 outlier 敏感，所以，我今天想用一個自訂的 loss，叫 <code class="docutils literal notranslate"><span class="pre">huber</span> <span class="pre">loss</span></code></p></li>
@@ -839,7 +861,7 @@ Epoch 2/2
 </div>
 </div>
 <div class="section" id="id2">
-<h3><span class="section-number">9.2.2. </span>帶參數的 loss function<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">10.2.2. </span>帶參數的 loss function<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>那如果我今天的 loss function 帶有參數，例如，剛剛的 huber func，我不希望是定死的 abs diff &lt; 1，而是 abs diff &lt; threshold</p></li>
 <li><p>那這時，就必須用 class 的寫法，且繼承自 <code class="docutils literal notranslate"><span class="pre">tf.keras.losses.Loss</span></code>.</p></li>
@@ -987,9 +1009,9 @@ Epoch 2/2
 </div>
 </div>
 <div class="section" id="activation-initialze-regularize-functions">
-<h2><span class="section-number">9.3. </span>自訂 activation, initialze, regularize functions<a class="headerlink" href="#activation-initialze-regularize-functions" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.3. </span>自訂 activation, initialze, regularize functions<a class="headerlink" href="#activation-initialze-regularize-functions" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id3">
-<h3><span class="section-number">9.3.1. </span>不帶參數版本<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">10.3.1. </span>不帶參數版本<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>自己把這些函數寫一寫，只要記得兩個原則：</p>
 <ul>
@@ -1106,7 +1128,7 @@ Epoch 2/2
 </div>
 </div>
 <div class="section" id="id4">
-<h3><span class="section-number">9.3.2. </span>帶參數的版本<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">10.3.2. </span>帶參數的版本<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>如果這些客製化的函數，是帶有額外參數的，那就要用 class 的寫法，且要繼承適當的 class，例如：</p>
 <ul>
@@ -1197,9 +1219,20 @@ Epoch 2/2
 </div>
 </div>
 <div class="section" id="metrics">
-<h2><span class="section-number">9.4. </span>自訂 metrics<a class="headerlink" href="#metrics" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="from-scratch">
-<h3><span class="section-number">9.4.1. </span>from scratch<a class="headerlink" href="#from-scratch" title="Permalink to this headline">¶</a></h3>
+<h2><span class="section-number">10.4. </span>自訂 metrics<a class="headerlink" href="#metrics" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>有兩種自訂 metrics 的方法：</p>
+<ul>
+<li><p>直接定義 metric function: 這只能用在 <code class="docutils literal notranslate"><span class="pre">model.compile()</span></code> 這種情境，不能用在 custom training loop 裡。</p></li>
+<li><p>繼承 <code class="docutils literal notranslate"><span class="pre">tf.keras.metrics.Metric</span></code> 的 class 寫法，這可以用在 <code class="docutils literal notranslate"><span class="pre">model.compile()</span></code> 裡，也可以用在 custom training loop 裡</p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="id5">
+<h3><span class="section-number">10.4.1. </span>簡單的寫法<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="subclass">
+<h3><span class="section-number">10.4.2. </span>subclass 寫法<a class="headerlink" href="#subclass" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>直接講 best practice，就是要去繼承 <code class="docutils literal notranslate"><span class="pre">tf.keras.metrics.Metric</span></code> 這個 class，並且，除了 init 以外，還要定義 3 個 method，以及 get_config:</p>
 <ul>
@@ -1213,7 +1246,7 @@ Epoch 2/2
 <li><p>現在，先來寫個自己的 accuracy，並和現有的 accuracy metric 比較，看寫得對不對</p></li>
 </ul>
 <div class="section" id="my-accuracy">
-<h4><span class="section-number">9.4.1.1. </span>my_accuracy<a class="headerlink" href="#my-accuracy" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">10.4.2.1. </span>my_accuracy<a class="headerlink" href="#my-accuracy" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyAccuracy</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">Metric</span><span class="p">):</span>
@@ -1444,7 +1477,7 @@ Epoch 2/2
 </div>
 </div>
 <div class="section" id="f1-score">
-<h4><span class="section-number">9.4.1.2. </span>f1_score<a class="headerlink" href="#f1-score" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">10.4.2.2. </span>f1_score<a class="headerlink" href="#f1-score" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>接著，來實做一下 F1 score (取自: <a class="reference external" href="https://keras.io/getting_started/intro_to_keras_for_researchers/#keeping-track-of-training-metrics">https://keras.io/getting_started/intro_to_keras_for_researchers/#keeping-track-of-training-metrics</a>)</p></li>
 </ul>
@@ -1631,7 +1664,7 @@ Epoch 2/2
 </div>
 </div>
 <div class="section" id="layers">
-<h2><span class="section-number">9.5. </span>自訂 Layers<a class="headerlink" href="#layers" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.5. </span>自訂 Layers<a class="headerlink" href="#layers" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>也參考官網這篇：<a class="reference external" href="https://www.tensorflow.org/guide/keras/custom_layers_and_models">https://www.tensorflow.org/guide/keras/custom_layers_and_models</a></p></li>
 </ul>
@@ -1887,7 +1920,7 @@ Epoch 2/2
 </div>
 </div>
 <div class="section" id="models">
-<h2><span class="section-number">9.6. </span>自訂 Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.6. </span>自訂 Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ResidualBlock</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>
@@ -2000,7 +2033,7 @@ Epoch 2/2
 </div>
 </div>
 <div class="section" id="losses-and-metrics-based-on-model-internals">
-<h2><span class="section-number">9.7. </span>Losses and Metrics Based on Model Internals<a class="headerlink" href="#losses-and-metrics-based-on-model-internals" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.7. </span>Losses and Metrics Based on Model Internals<a class="headerlink" href="#losses-and-metrics-based-on-model-internals" title="Permalink to this headline">¶</a></h2>
 <p><strong>Warning</strong>: due to an issue introduced in TF 2.2 (<a class="reference external" href="https://github.com/tensorflow/tensorflow/issues/46858">#46858</a>), <code class="docutils literal notranslate"><span class="pre">super().build()</span></code> fails. We can work around this issue by setting <code class="docutils literal notranslate"><span class="pre">self.built</span> <span class="pre">=</span> <span class="pre">True</span></code> instead.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2062,16 +2095,16 @@ Epoch 5/5
 </div>
 </div>
 <div class="section" id="callback">
-<h2><span class="section-number">9.8. </span>自訂 callback<a class="headerlink" href="#callback" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.8. </span>自訂 callback<a class="headerlink" href="#callback" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>整理自： <a class="reference external" href="https://keras.io/guides/writing_your_own_callbacks/">https://keras.io/guides/writing_your_own_callbacks/</a></p></li>
 </ul>
 </div>
 <div class="section" id="fit">
-<h2><span class="section-number">9.9. </span>自訂 fit<a class="headerlink" href="#fit" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.9. </span>自訂 fit<a class="headerlink" href="#fit" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="computing-gradients-using-autodiff">
-<h2><span class="section-number">9.10. </span>Computing Gradients Using Autodiff<a class="headerlink" href="#computing-gradients-using-autodiff" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.10. </span>Computing Gradients Using Autodiff<a class="headerlink" href="#computing-gradients-using-autodiff" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">):</span>
@@ -2424,7 +2457,7 @@ Epoch 5/5
 </div>
 </div>
 <div class="section" id="training-loops">
-<h2><span class="section-number">9.11. </span>自訂 Training Loops<a class="headerlink" href="#training-loops" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.11. </span>自訂 Training Loops<a class="headerlink" href="#training-loops" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># extra code – to ensure reproducibility</span>
@@ -2578,10 +2611,10 @@ Epoch 5/5
 </div>
 </div>
 <div class="section" id="tensorboard">
-<h2><span class="section-number">9.12. </span>自訂 tensorboard 要記錄的東西<a class="headerlink" href="#tensorboard" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.12. </span>自訂 tensorboard 要記錄的東西<a class="headerlink" href="#tensorboard" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="tensorflow-functions">
-<h2><span class="section-number">9.13. </span>TensorFlow Functions<a class="headerlink" href="#tensorflow-functions" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.13. </span>TensorFlow Functions<a class="headerlink" href="#tensorflow-functions" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cube</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -2662,7 +2695,7 @@ Epoch 5/5
 </div>
 <p><strong>Note:</strong> the rest of the code in this section is in appendix D.</p>
 <div class="section" id="tf-functions-and-concrete-functions">
-<h3><span class="section-number">9.13.1. </span>TF Functions and Concrete Functions<a class="headerlink" href="#tf-functions-and-concrete-functions" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">10.13.1. </span>TF Functions and Concrete Functions<a class="headerlink" href="#tf-functions-and-concrete-functions" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">concrete_function</span> <span class="o">=</span> <span class="n">tf_cube</span><span class="o">.</span><span class="n">get_concrete_function</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">2.0</span><span class="p">))</span>
@@ -2702,7 +2735,7 @@ Epoch 5/5
 </div>
 </div>
 <div class="section" id="exploring-function-definitions-and-graphs">
-<h3><span class="section-number">9.13.2. </span>Exploring Function Definitions and Graphs<a class="headerlink" href="#exploring-function-definitions-and-graphs" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">10.13.2. </span>Exploring Function Definitions and Graphs<a class="headerlink" href="#exploring-function-definitions-and-graphs" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">concrete_function</span><span class="o">.</span><span class="n">graph</span>
@@ -2803,7 +2836,7 @@ output_arg {
 </div>
 </div>
 <div class="section" id="how-tf-functions-trace-python-functions-to-extract-their-computation-graphs">
-<h3><span class="section-number">9.13.3. </span>How TF Functions Trace Python Functions to Extract Their Computation Graphs<a class="headerlink" href="#how-tf-functions-trace-python-functions-to-extract-their-computation-graphs" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">10.13.3. </span>How TF Functions Trace Python Functions to Extract Their Computation Graphs<a class="headerlink" href="#how-tf-functions-trace-python-functions-to-extract-their-computation-graphs" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
@@ -2957,7 +2990,7 @@ WARNING:tensorflow:5 out of the last 5 calls to &lt;function tf_cube at 0x7f8431
 </div>
 </div>
 <div class="section" id="using-autograph-to-capture-control-flow">
-<h3><span class="section-number">9.13.4. </span>Using Autograph To Capture Control Flow<a class="headerlink" href="#using-autograph-to-capture-control-flow" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">10.13.4. </span>Using Autograph To Capture Control Flow<a class="headerlink" href="#using-autograph-to-capture-control-flow" title="Permalink to this headline">¶</a></h3>
 <p>A “static” <code class="docutils literal notranslate"><span class="pre">for</span></code> loop using <code class="docutils literal notranslate"><span class="pre">range()</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3101,7 +3134,7 @@ WARNING:tensorflow:5 out of the last 5 calls to &lt;function tf_cube at 0x7f8431
 </div>
 </div>
 <div class="section" id="handling-variables-and-other-resources-in-tf-functions">
-<h3><span class="section-number">9.13.5. </span>Handling Variables and Other Resources in TF Functions<a class="headerlink" href="#handling-variables-and-other-resources-in-tf-functions" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">10.13.5. </span>Handling Variables and Other Resources in TF Functions<a class="headerlink" href="#handling-variables-and-other-resources-in-tf-functions" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">counter</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -3297,7 +3330,7 @@ type: DT_RESOURCE
 </div>
 </div>
 <div class="section" id="using-tf-functions-with-tf-keras-or-not">
-<h2><span class="section-number">9.14. </span>Using TF Functions with tf.keras (or Not)<a class="headerlink" href="#using-tf-functions-with-tf-keras-or-not" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.14. </span>Using TF Functions with tf.keras (or Not)<a class="headerlink" href="#using-tf-functions-with-tf-keras-or-not" title="Permalink to this headline">¶</a></h2>
 <p>By default, tf.keras will automatically convert your custom code into TF Functions, no need to use
 <code class="docutils literal notranslate"><span class="pre">tf.function()</span></code>:</p>
 <div class="cell docutils container">
@@ -3574,7 +3607,7 @@ Tracing metric my_mae()
 </div>
 </div>
 <div class="section" id="extra-material-custom-optimizers">
-<h2><span class="section-number">9.15. </span>Extra Material – Custom Optimizers<a class="headerlink" href="#extra-material-custom-optimizers" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">10.15. </span>Extra Material – Custom Optimizers<a class="headerlink" href="#extra-material-custom-optimizers" title="Permalink to this headline">¶</a></h2>
 <p>Defining custom optimizers is not very common, but in case you are one of the happy few who gets to write one, here is an example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3685,7 +3718,7 @@ Epoch 5/5
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">8. </span>三種搭建神經網路的方式</p>
+            <p class="prev-next-title"><span class="section-number">9. </span>三種搭建神經網路的方式</p>
         </div>
     </a>
 </div>

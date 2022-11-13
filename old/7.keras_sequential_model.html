@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>7. The Sequential model &#8212; My sample book</title>
+    <title>8. The Sequential model &#8212; My sample book</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -51,7 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="6. Basic training loops" href="6.basic_training_loops.html" />
+    <link rel="next" title="9. 三種搭建神經網路的方式" href="../tf_create_model.html" />
+    <link rel="prev" title="7. Basic training loops" href="6.basic_training_loops.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -97,38 +98,60 @@
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  basics
+  Cheat Sheet
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch/pytorch_cheatsheet.html">
+   1. Pytorch Cheatsheet
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tensorflow basics
  </span>
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="1.tensor.html">
-   1. Introduction to Tensors
+   2. Introduction to Tensors
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="2.variable.html">
-   2. Introduction to Variables
+   3. Introduction to Variables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="3.autodiff.html">
-   3. Introduction to gradients and automatic differentiation
+   4. Introduction to gradients and automatic differentiation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="5.intro_to_modules.html">
-   4. Introduction to modules, layers, and models
+   5. Introduction to modules, layers, and models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="6.basic_training_loops.html">
-   6. Basic training loops
+   7. Basic training loops
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   7. The Sequential model
+   8. The Sequential model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tf_create_model.html">
+   9. 三種搭建神經網路的方式
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../hands_on_ml3/tf_customization.html">
+   10. Customization
   </a>
  </li>
 </ul>
@@ -237,27 +260,27 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#setup">
-   7.1. Setup
+   8.1. Setup
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#when-to-use-a-sequential-model">
-   7.2. When to use a Sequential model
+   8.2. When to use a Sequential model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#creating-a-sequential-model">
-   7.3. Creating a Sequential model
+   8.3. Creating a Sequential model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#specifying-the-input-shape-in-advance">
-   7.4. Specifying the input shape in advance
+   8.4. Specifying the input shape in advance
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-common-debugging-workflow-add-summary">
-   7.5. A common debugging workflow:
+   8.5. A common debugging workflow:
    <code class="docutils literal notranslate">
     <span class="pre">
      add()
@@ -273,17 +296,17 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-to-do-once-you-have-a-model">
-   7.6. What to do once you have a model
+   8.6. What to do once you have a model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#feature-extraction-with-a-sequential-model">
-   7.7. Feature extraction with a Sequential model
+   8.7. Feature extraction with a Sequential model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#transfer-learning-with-a-sequential-model">
-   7.8. Transfer learning with a Sequential model
+   8.8. Transfer learning with a Sequential model
   </a>
  </li>
 </ul>
@@ -308,27 +331,27 @@
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#setup">
-   7.1. Setup
+   8.1. Setup
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#when-to-use-a-sequential-model">
-   7.2. When to use a Sequential model
+   8.2. When to use a Sequential model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#creating-a-sequential-model">
-   7.3. Creating a Sequential model
+   8.3. Creating a Sequential model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#specifying-the-input-shape-in-advance">
-   7.4. Specifying the input shape in advance
+   8.4. Specifying the input shape in advance
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-common-debugging-workflow-add-summary">
-   7.5. A common debugging workflow:
+   8.5. A common debugging workflow:
    <code class="docutils literal notranslate">
     <span class="pre">
      add()
@@ -344,17 +367,17 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-to-do-once-you-have-a-model">
-   7.6. What to do once you have a model
+   8.6. What to do once you have a model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#feature-extraction-with-a-sequential-model">
-   7.7. Feature extraction with a Sequential model
+   8.7. Feature extraction with a Sequential model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#transfer-learning-with-a-sequential-model">
-   7.8. Transfer learning with a Sequential model
+   8.8. Transfer learning with a Sequential model
   </a>
  </li>
 </ul>
@@ -367,9 +390,9 @@
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="the-sequential-model">
-<h1><span class="section-number">7. </span>The Sequential model<a class="headerlink" href="#the-sequential-model" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">8. </span>The Sequential model<a class="headerlink" href="#the-sequential-model" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="setup">
-<h2><span class="section-number">7.1. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
@@ -381,7 +404,7 @@
 </div>
 </div>
 <div class="section" id="when-to-use-a-sequential-model">
-<h2><span class="section-number">7.2. </span>When to use a Sequential model<a class="headerlink" href="#when-to-use-a-sequential-model" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.2. </span>When to use a Sequential model<a class="headerlink" href="#when-to-use-a-sequential-model" title="Permalink to this headline">¶</a></h2>
 <p>A <code class="docutils literal notranslate"><span class="pre">Sequential</span></code> model is appropriate for <strong>a plain stack of layers</strong>
 where each layer has <strong>exactly one input tensor and one output tensor</strong>.</p>
 <p>Schematically, the following <code class="docutils literal notranslate"><span class="pre">Sequential</span></code> model:</p>
@@ -427,7 +450,7 @@ model)</p></li>
 </ul>
 </div>
 <div class="section" id="creating-a-sequential-model">
-<h2><span class="section-number">7.3. </span>Creating a Sequential model<a class="headerlink" href="#creating-a-sequential-model" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.3. </span>Creating a Sequential model<a class="headerlink" href="#creating-a-sequential-model" title="Permalink to this headline">¶</a></h2>
 <p>You can create a Sequential model by passing a list of layers to the Sequential
 constructor:</p>
 <div class="cell docutils container">
@@ -501,7 +524,7 @@ with semantically meaningful names.</p>
 </div>
 </div>
 <div class="section" id="specifying-the-input-shape-in-advance">
-<h2><span class="section-number">7.4. </span>Specifying the input shape in advance<a class="headerlink" href="#specifying-the-input-shape-in-advance" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.4. </span>Specifying the input shape in advance<a class="headerlink" href="#specifying-the-input-shape-in-advance" title="Permalink to this headline">¶</a></h2>
 <p>Generally, all layers in Keras need to know the shape of their inputs
 in order to be able to create their weights. So when you create a layer like
 this, initially, it has no weights:</p>
@@ -677,7 +700,7 @@ _________________________________________________________________
 </ul>
 </div>
 <div class="section" id="a-common-debugging-workflow-add-summary">
-<h2><span class="section-number">7.5. </span>A common debugging workflow: <code class="docutils literal notranslate"><span class="pre">add()</span></code> + <code class="docutils literal notranslate"><span class="pre">summary()</span></code><a class="headerlink" href="#a-common-debugging-workflow-add-summary" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.5. </span>A common debugging workflow: <code class="docutils literal notranslate"><span class="pre">add()</span></code> + <code class="docutils literal notranslate"><span class="pre">summary()</span></code><a class="headerlink" href="#a-common-debugging-workflow-add-summary" title="Permalink to this headline">¶</a></h2>
 <p>When building a new Sequential architecture, it’s useful to incrementally stack
 layers with <code class="docutils literal notranslate"><span class="pre">add()</span></code> and frequently print model summaries. For instance, this
 enables you to monitor how a stack of <code class="docutils literal notranslate"><span class="pre">Conv2D</span></code> and <code class="docutils literal notranslate"><span class="pre">MaxPooling2D</span></code> layers is
@@ -811,7 +834,7 @@ _________________________________________________________________
 <p>Very practical, right?</p>
 </div>
 <div class="section" id="what-to-do-once-you-have-a-model">
-<h2><span class="section-number">7.6. </span>What to do once you have a model<a class="headerlink" href="#what-to-do-once-you-have-a-model" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.6. </span>What to do once you have a model<a class="headerlink" href="#what-to-do-once-you-have-a-model" title="Permalink to this headline">¶</a></h2>
 <p>Once your model architecture is ready, you will want to:</p>
 <ul class="simple">
 <li><p>Train your model, evaluate it, and run inference. See our
@@ -823,7 +846,7 @@ _________________________________________________________________
 </ul>
 </div>
 <div class="section" id="feature-extraction-with-a-sequential-model">
-<h2><span class="section-number">7.7. </span>Feature extraction with a Sequential model<a class="headerlink" href="#feature-extraction-with-a-sequential-model" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.7. </span>Feature extraction with a Sequential model<a class="headerlink" href="#feature-extraction-with-a-sequential-model" title="Permalink to this headline">¶</a></h2>
 <p>Once a Sequential model has been built, it behaves like a <a class="reference external" href="https://www.tensorflow.org/guide/keras/functional/">Functional API
 model</a>. This means that every layer has an <code class="docutils literal notranslate"><span class="pre">input</span></code>
 and <code class="docutils literal notranslate"><span class="pre">output</span></code> attribute. These attributes can be used to do neat things, like
@@ -888,7 +911,7 @@ Sequential model:</p>
 </div>
 </div>
 <div class="section" id="transfer-learning-with-a-sequential-model">
-<h2><span class="section-number">7.8. </span>Transfer learning with a Sequential model<a class="headerlink" href="#transfer-learning-with-a-sequential-model" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.8. </span>Transfer learning with a Sequential model<a class="headerlink" href="#transfer-learning-with-a-sequential-model" title="Permalink to this headline">¶</a></h2>
 <p>Transfer learning consists of freezing the bottom layers in a model and only training
 the top layers. If you aren’t familiar with it, make sure to read our <a class="reference external" href="https://www.tensorflow.org/guide/keras/transfer_learning/">guide
 to transfer learning</a>.</p>
@@ -979,8 +1002,15 @@ these two patterns.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">6. </span>Basic training loops</p>
+            <p class="prev-next-title"><span class="section-number">7. </span>Basic training loops</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="../tf_create_model.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>三種搭建神經網路的方式</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>4. Introduction to modules, layers, and models &#8212; My sample book</title>
+    <title>5. Introduction to modules, layers, and models &#8212; My sample book</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -51,8 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="6. Basic training loops" href="6.basic_training_loops.html" />
-    <link rel="prev" title="3. Introduction to gradients and automatic differentiation" href="3.autodiff.html" />
+    <link rel="next" title="7. Basic training loops" href="6.basic_training_loops.html" />
+    <link rel="prev" title="4. Introduction to gradients and automatic differentiation" href="3.autodiff.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -98,38 +98,60 @@
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  basics
+  Cheat Sheet
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch/pytorch_cheatsheet.html">
+   1. Pytorch Cheatsheet
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tensorflow basics
  </span>
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="1.tensor.html">
-   1. Introduction to Tensors
+   2. Introduction to Tensors
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="2.variable.html">
-   2. Introduction to Variables
+   3. Introduction to Variables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="3.autodiff.html">
-   3. Introduction to gradients and automatic differentiation
+   4. Introduction to gradients and automatic differentiation
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   4. Introduction to modules, layers, and models
+   5. Introduction to modules, layers, and models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="6.basic_training_loops.html">
-   6. Basic training loops
+   7. Basic training loops
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="7.keras_sequential_model.html">
-   7. The Sequential model
+   8. The Sequential model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tf_create_model.html">
+   9. 三種搭建神經網路的方式
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../hands_on_ml3/tf_customization.html">
+   10. Customization
   </a>
  </li>
 </ul>
@@ -238,17 +260,17 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   4. Introduction to modules, layers, and models
+   5. Introduction to modules, layers, and models
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#setup">
-     4.1. Setup
+     5.1. Setup
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#tf-module-defining-models-and-layers-in-tensorflow">
-     4.2.
+     5.2.
      <code class="docutils literal notranslate">
       <span class="pre">
        tf.Module
@@ -259,37 +281,37 @@
     <ul class="nav section-nav flex-column">
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#toy-example">
-       4.2.1. toy example
+       5.2.1. toy example
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#layer">
-       4.2.2. 自訂 layer
+       5.2.2. 自訂 layer
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#model">
-       4.2.3. 自訂 model
+       5.2.3. 自訂 model
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#waiting-to-create-variables">
-       4.2.4. Waiting to create variables
+       5.2.4. Waiting to create variables
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#save-load">
-       4.2.5. Save &amp; load
+       5.2.5. Save &amp; load
       </a>
       <ul class="nav section-nav flex-column">
        <li class="toc-h4 nav-item toc-entry">
         <a class="reference internal nav-link" href="#checkpoints-save-load-weights">
-         4.2.5.1. checkpoints (save &amp; load weights)
+         5.2.5.1. checkpoints (save &amp; load weights)
         </a>
        </li>
        <li class="toc-h4 nav-item toc-entry">
         <a class="reference internal nav-link" href="#savedmodel">
-         4.2.5.2.
+         5.2.5.2.
          <code class="docutils literal notranslate">
           <span class="pre">
            SavedModel
@@ -303,17 +325,17 @@
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#keras-models-and-layers">
-     4.3. Keras models and layers
+     5.3. Keras models and layers
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#keras-layers">
-       4.3.1. Keras layers
+       5.3.1. Keras layers
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#the-build-step">
-       4.3.2. The
+       5.3.2. The
        <code class="docutils literal notranslate">
         <span class="pre">
          build
@@ -324,31 +346,31 @@
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#keras-models">
-       4.3.3. Keras models
+       5.3.3. Keras models
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#functional-api">
-       4.3.4. functional API
+       5.3.4. functional API
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#saving-keras-models">
-     4.4. Saving Keras models
+     5.4. Saving Keras models
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-s-next">
-   5. What’s next
+   6. What’s next
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id1">
-     5.1. 待完成內容：
+     6.1. 待完成內容：
     </a>
    </li>
   </ul>
@@ -375,17 +397,17 @@
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   4. Introduction to modules, layers, and models
+   5. Introduction to modules, layers, and models
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#setup">
-     4.1. Setup
+     5.1. Setup
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#tf-module-defining-models-and-layers-in-tensorflow">
-     4.2.
+     5.2.
      <code class="docutils literal notranslate">
       <span class="pre">
        tf.Module
@@ -396,37 +418,37 @@
     <ul class="nav section-nav flex-column">
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#toy-example">
-       4.2.1. toy example
+       5.2.1. toy example
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#layer">
-       4.2.2. 自訂 layer
+       5.2.2. 自訂 layer
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#model">
-       4.2.3. 自訂 model
+       5.2.3. 自訂 model
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#waiting-to-create-variables">
-       4.2.4. Waiting to create variables
+       5.2.4. Waiting to create variables
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#save-load">
-       4.2.5. Save &amp; load
+       5.2.5. Save &amp; load
       </a>
       <ul class="nav section-nav flex-column">
        <li class="toc-h4 nav-item toc-entry">
         <a class="reference internal nav-link" href="#checkpoints-save-load-weights">
-         4.2.5.1. checkpoints (save &amp; load weights)
+         5.2.5.1. checkpoints (save &amp; load weights)
         </a>
        </li>
        <li class="toc-h4 nav-item toc-entry">
         <a class="reference internal nav-link" href="#savedmodel">
-         4.2.5.2.
+         5.2.5.2.
          <code class="docutils literal notranslate">
           <span class="pre">
            SavedModel
@@ -440,17 +462,17 @@
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#keras-models-and-layers">
-     4.3. Keras models and layers
+     5.3. Keras models and layers
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#keras-layers">
-       4.3.1. Keras layers
+       5.3.1. Keras layers
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#the-build-step">
-       4.3.2. The
+       5.3.2. The
        <code class="docutils literal notranslate">
         <span class="pre">
          build
@@ -461,31 +483,31 @@
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#keras-models">
-       4.3.3. Keras models
+       5.3.3. Keras models
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#functional-api">
-       4.3.4. functional API
+       5.3.4. functional API
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#saving-keras-models">
-     4.4. Saving Keras models
+     5.4. Saving Keras models
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-s-next">
-   5. What’s next
+   6. What’s next
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id1">
-     5.1. 待完成內容：
+     6.1. 待完成內容：
     </a>
    </li>
   </ul>
@@ -500,7 +522,7 @@
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="introduction-to-modules-layers-and-models">
-<h1><span class="section-number">4. </span>Introduction to modules, layers, and models<a class="headerlink" href="#introduction-to-modules-layers-and-models" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">5. </span>Introduction to modules, layers, and models<a class="headerlink" href="#introduction-to-modules-layers-and-models" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>在用 tensorflow 做 machine learning的時候，會需要去 define, save, and restore a model.</p></li>
 <li><p>在 tf 中， model 可被定義為：</p>
@@ -513,7 +535,7 @@
 <li><p>This looks at how TensorFlow collects variables and models, as well as how they are saved and restored.</p></li>
 </ul>
 <div class="section" id="setup">
-<h2><span class="section-number">4.1. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.1. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
@@ -526,14 +548,14 @@
 </div>
 </div>
 <div class="section" id="tf-module-defining-models-and-layers-in-tensorflow">
-<h2><span class="section-number">4.2. </span><code class="docutils literal notranslate"><span class="pre">tf.Module</span></code>: Defining models and layers in TensorFlow<a class="headerlink" href="#tf-module-defining-models-and-layers-in-tensorflow" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.2. </span><code class="docutils literal notranslate"><span class="pre">tf.Module</span></code>: Defining models and layers in TensorFlow<a class="headerlink" href="#tf-module-defining-models-and-layers-in-tensorflow" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>大部分的 model 都是由 layers 所組成.</p></li>
 <li><p>Layers 其實就是 functions，而這個 function 是由可被重複使用的數學結構所定義，裡面有可訓練的變數。</p></li>
 <li><p>在 tensorflow 中，大部分 high-level 的 layers 和 models，都是built on the same foundational class: <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code>.</p></li>
 </ul>
 <div class="section" id="toy-example">
-<h3><span class="section-number">4.2.1. </span>toy example<a class="headerlink" href="#toy-example" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">5.2.1. </span>toy example<a class="headerlink" href="#toy-example" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SimpleModule</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -597,7 +619,7 @@
 </div>
 </div>
 <div class="section" id="layer">
-<h3><span class="section-number">4.2.2. </span>自訂 layer<a class="headerlink" href="#layer" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">5.2.2. </span>自訂 layer<a class="headerlink" href="#layer" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>接著，我們可以來定義一個自己的 <code class="docutils literal notranslate"><span class="pre">Dense</span></code> (linear) layer:</p></li>
 </ul>
@@ -667,7 +689,7 @@ array([[0.       , 0.       , 1.0573964, 1.2296758, 1.6131986, 6.553627 ]],
 </ul>
 </div>
 <div class="section" id="model">
-<h3><span class="section-number">4.2.3. </span>自訂 model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">5.2.3. </span>自訂 model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>那如果我們想自定一個 model (從 input 一個 tensor，到 output 一個結果出來。重點在定義中間的 forward propagation 過程)，就可以沿用剛剛的定義方式。</p></li>
 <li><p>假設，我想做一個 2 個 dense 的 NN (都是linear)，那我可以這樣定義：</p></li>
@@ -741,7 +763,7 @@ array([[ 0.64399236, -0.01036486],
 </div>
 </div>
 <div class="section" id="waiting-to-create-variables">
-<h3><span class="section-number">4.2.4. </span>Waiting to create variables<a class="headerlink" href="#waiting-to-create-variables" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">5.2.4. </span>Waiting to create variables<a class="headerlink" href="#waiting-to-create-variables" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>剛剛可以看到，我們定義的 dense ，要定義 input tensor 的 shape (i.e. in_features 是多少</p></li>
 <li><p>這有點麻煩，而且和 keras 內建的 <code class="docutils literal notranslate"><span class="pre">tf.keras.layers.Dense</span></code> 不同</p></li>
@@ -800,7 +822,7 @@ array([[ 0.64399236, -0.01036486],
 </div>
 </div>
 <div class="section" id="save-load">
-<h3><span class="section-number">4.2.5. </span>Save &amp; load<a class="headerlink" href="#save-load" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">5.2.5. </span>Save &amp; load<a class="headerlink" href="#save-load" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>剛剛不管是自己定義的 layer，或是 model，因為都繼承自 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code>，所以都可以追蹤到所有的 trainable variable 的 weights</p></li>
 <li><p>那在訓練過程中，我們當然就可以把這些 weights 給存下來，之後就可以從這個 weight 繼續 train 下去</p></li>
@@ -812,7 +834,7 @@ array([[ 0.64399236, -0.01036486],
 </li>
 </ul>
 <div class="section" id="checkpoints-save-load-weights">
-<h4><span class="section-number">4.2.5.1. </span>checkpoints (save &amp; load weights)<a class="headerlink" href="#checkpoints-save-load-weights" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">5.2.5.1. </span>checkpoints (save &amp; load weights)<a class="headerlink" href="#checkpoints-save-load-weights" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>作法如下：</p>
 <ul>
@@ -915,7 +937,7 @@ array([[ 0.64399236, -0.01036486],
 </div>
 </div>
 <div class="section" id="savedmodel">
-<h4><span class="section-number">4.2.5.2. </span><code class="docutils literal notranslate"><span class="pre">SavedModel</span></code><a class="headerlink" href="#savedmodel" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">5.2.5.2. </span><code class="docutils literal notranslate"><span class="pre">SavedModel</span></code><a class="headerlink" href="#savedmodel" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>另一種儲存的方式，是直接把 model 的 structure 和 weight 全都存起來</p></li>
 <li><p>作法是：</p>
@@ -1014,13 +1036,13 @@ tf.Tensor(
 </div>
 </div>
 <div class="section" id="keras-models-and-layers">
-<h2><span class="section-number">4.3. </span>Keras models and layers<a class="headerlink" href="#keras-models-and-layers" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.3. </span>Keras models and layers<a class="headerlink" href="#keras-models-and-layers" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>剛剛教了用 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> 來建立 layer 和 model</p></li>
 <li><p>這邊開始，要來看 Keras 是怎麼用 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> 的</p></li>
 </ul>
 <div class="section" id="keras-layers">
-<h3><span class="section-number">4.3.1. </span>Keras layers<a class="headerlink" href="#keras-layers" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">5.3.1. </span>Keras layers<a class="headerlink" href="#keras-layers" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">tf.keras.layers.Layer</span></code> 是 Keras 的 layer 的 base class，他繼承自 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code>.</p></li>
 <li><p>所以，我們剛剛是在 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> 的基礎下，建立自己的 layer。現在，可以在 <code class="docutils literal notranslate"><span class="pre">tf.keras.layers.Layer</span></code> 的基礎下，建立 layer。</p></li>
@@ -1063,7 +1085,7 @@ tf.Tensor(
 </div>
 </div>
 <div class="section" id="the-build-step">
-<h3><span class="section-number">4.3.2. </span>The <code class="docutils literal notranslate"><span class="pre">build</span></code> step<a class="headerlink" href="#the-build-step" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">5.3.2. </span>The <code class="docutils literal notranslate"><span class="pre">build</span></code> step<a class="headerlink" href="#the-build-step" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>再來，是 keras 的 layer 寫法中，很重要的 <code class="docutils literal notranslate"><span class="pre">build</span></code> step.</p></li>
 <li><p>還記得前面用 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> 來寫 layer 時，為了不要每次都定義 input_feature，所以會先寫一個 <code class="docutils literal notranslate"><span class="pre">self.is_built</span> <span class="pre">=</span> <span class="pre">False</span></code> 來說明，目前還沒被 build。然後當 input tensor 進來後，才定義 w 和 b 的 shape，並把 <code class="docutils literal notranslate"><span class="pre">self.is_built</span></code> 改為 true，表示已經 build 完</p></li>
@@ -1177,7 +1199,7 @@ tf.Tensor(
 </div>
 </div>
 <div class="section" id="keras-models">
-<h3><span class="section-number">4.3.3. </span>Keras models<a class="headerlink" href="#keras-models" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">5.3.3. </span>Keras models<a class="headerlink" href="#keras-models" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>前面在定義 layer 和 model 時，都是繼承自 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> 這個 class</p></li>
 <li><p>但當我們要定義 custom keras layer 時，我們會繼承自 <code class="docutils literal notranslate"><span class="pre">tf.keras.layers.Layer</span></code>(此 class 繼承自 <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code>)，這樣就能保有很多 keras layer 的好的特性</p></li>
@@ -1294,7 +1316,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="section" id="functional-api">
-<h3><span class="section-number">4.3.4. </span>functional API<a class="headerlink" href="#functional-api" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">5.3.4. </span>functional API<a class="headerlink" href="#functional-api" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>另外一種建立 model 的方式，是直接用 functional API，這不僅可以幫我們減少一些時間，也可以獲得一些額外的好處 (e.g. model.summary()時，可發現 output shape 都跑出來了)</p></li>
 <li><p>functional API 和剛剛 subclass 的寫法，最大差別在，你要先定義 input 的 shape (by <code class="docutils literal notranslate"><span class="pre">tf.keras.Input(shape</span> <span class="pre">=</span> <span class="pre">[3,])</span></code>)</p></li>
@@ -1347,7 +1369,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="section" id="saving-keras-models">
-<h2><span class="section-number">4.4. </span>Saving Keras models<a class="headerlink" href="#saving-keras-models" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.4. </span>Saving Keras models<a class="headerlink" href="#saving-keras-models" title="Permalink to this headline">¶</a></h2>
 <p>Keras models can be checkpointed, and that will look the same as <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code>.</p>
 <p>Keras models can also be saved with <code class="docutils literal notranslate"><span class="pre">tf.saved_model.save()</span></code>, as they are modules.  However, Keras models have convenience methods and other functionality:</p>
 <div class="cell docutils container">
@@ -1399,11 +1421,11 @@ INFO:tensorflow:Assets written to: exname_of_file/assets
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="what-s-next">
-<h1><span class="section-number">5. </span>What’s next<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">6. </span>What’s next<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h1>
 <p>If you want to know more details about Keras, you can follow the existing Keras guides <span class="xref myst">here</span>.</p>
 <p>Another example of a high-level API built on <code class="docutils literal notranslate"><span class="pre">tf.module</span></code> is Sonnet from DeepMind, which is covered on <a class="reference external" href="https://github.com/deepmind/sonnet">their site</a>.</p>
 <div class="section" id="id1">
-<h2><span class="section-number">5.1. </span>待完成內容：<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.1. </span>待完成內容：<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Keras layers have a lot more extra features including:</p>
 <ul class="simple">
 <li><p>Optional losses</p></li>
@@ -1444,13 +1466,13 @@ INFO:tensorflow:Assets written to: exname_of_file/assets
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">3. </span>Introduction to gradients and automatic differentiation</p>
+            <p class="prev-next-title"><span class="section-number">4. </span>Introduction to gradients and automatic differentiation</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="6.basic_training_loops.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">6. </span>Basic training loops</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Basic training loops</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
