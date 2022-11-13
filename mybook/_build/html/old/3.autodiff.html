@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3. Introduction to gradients and automatic differentiation &#8212; My sample book</title>
+    <title>4. Introduction to gradients and automatic differentiation &#8212; My sample book</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -51,8 +51,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. Introduction to modules, layers, and models" href="5.intro_to_modules.html" />
-    <link rel="prev" title="2. Introduction to Variables" href="2.variable.html" />
+    <link rel="next" title="5. Introduction to modules, layers, and models" href="5.intro_to_modules.html" />
+    <link rel="prev" title="3. Introduction to Variables" href="2.variable.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -98,38 +98,60 @@
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  basics
+  Cheat Sheet
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch/pytorch_cheatsheet.html">
+   1. Pytorch Cheatsheet
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tensorflow basics
  </span>
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="1.tensor.html">
-   1. Introduction to Tensors
+   2. Introduction to Tensors
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="2.variable.html">
-   2. Introduction to Variables
+   3. Introduction to Variables
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   3. Introduction to gradients and automatic differentiation
+   4. Introduction to gradients and automatic differentiation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="5.intro_to_modules.html">
-   4. Introduction to modules, layers, and models
+   5. Introduction to modules, layers, and models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="6.basic_training_loops.html">
-   6. Basic training loops
+   7. Basic training loops
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="7.keras_sequential_model.html">
-   7. The Sequential model
+   8. The Sequential model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tf_create_model.html">
+   9. 三種搭建神經網路的方式
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../hands_on_ml3/tf_customization.html">
+   10. Customization
   </a>
  </li>
 </ul>
@@ -238,57 +260,57 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#automatic-differentiation-and-gradients">
-   3.1. Automatic Differentiation and Gradients
+   4.1. Automatic Differentiation and Gradients
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#setup">
-   3.2. Setup
+   4.2. Setup
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#computing-gradients">
-   3.3. Computing gradients
+   4.3. Computing gradients
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gradient-tapes">
-   3.4. Gradient tapes
+   4.4. Gradient tapes
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gradients-with-respect-to-a-model">
-   3.5. Gradients with respect to a model
+   4.5. Gradients with respect to a model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#controlling-what-the-tape-watches">
-   3.6. Controlling what the tape watches
+   4.6. Controlling what the tape watches
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#intermediate-results">
-   3.7. Intermediate results
+   4.7. Intermediate results
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#notes-on-performance">
-   3.8. Notes on performance
+   4.8. Notes on performance
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gradients-of-non-scalar-targets">
-   3.9. Gradients of non-scalar targets
+   4.9. Gradients of non-scalar targets
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#control-flow">
-   3.10. Control flow
+   4.10. Control flow
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#cases-where-gradient-returns-none">
-   3.11. Cases where
+   4.11. Cases where
    <code class="docutils literal notranslate">
     <span class="pre">
      gradient
@@ -304,34 +326,34 @@
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#replaced-a-variable-with-a-tensor">
-     3.11.1. 1. Replaced a variable with a tensor
+     4.11.1. 1. Replaced a variable with a tensor
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#did-calculations-outside-of-tensorflow">
-     3.11.2. 2. Did calculations outside of TensorFlow
+     4.11.2. 2. Did calculations outside of TensorFlow
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#took-gradients-through-an-integer-or-string">
-     3.11.3. 3. Took gradients through an integer or string
+     4.11.3. 3. Took gradients through an integer or string
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#took-gradients-through-a-stateful-object">
-     3.11.4. 4. Took gradients through a stateful object
+     4.11.4. 4. Took gradients through a stateful object
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#no-gradient-registered">
-   3.12. No gradient registered
+   4.12. No gradient registered
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#zeros-instead-of-none">
-   3.13. Zeros instead of None
+   4.13. Zeros instead of None
   </a>
  </li>
 </ul>
@@ -356,57 +378,57 @@
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#automatic-differentiation-and-gradients">
-   3.1. Automatic Differentiation and Gradients
+   4.1. Automatic Differentiation and Gradients
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#setup">
-   3.2. Setup
+   4.2. Setup
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#computing-gradients">
-   3.3. Computing gradients
+   4.3. Computing gradients
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gradient-tapes">
-   3.4. Gradient tapes
+   4.4. Gradient tapes
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gradients-with-respect-to-a-model">
-   3.5. Gradients with respect to a model
+   4.5. Gradients with respect to a model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#controlling-what-the-tape-watches">
-   3.6. Controlling what the tape watches
+   4.6. Controlling what the tape watches
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#intermediate-results">
-   3.7. Intermediate results
+   4.7. Intermediate results
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#notes-on-performance">
-   3.8. Notes on performance
+   4.8. Notes on performance
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gradients-of-non-scalar-targets">
-   3.9. Gradients of non-scalar targets
+   4.9. Gradients of non-scalar targets
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#control-flow">
-   3.10. Control flow
+   4.10. Control flow
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#cases-where-gradient-returns-none">
-   3.11. Cases where
+   4.11. Cases where
    <code class="docutils literal notranslate">
     <span class="pre">
      gradient
@@ -422,34 +444,34 @@
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#replaced-a-variable-with-a-tensor">
-     3.11.1. 1. Replaced a variable with a tensor
+     4.11.1. 1. Replaced a variable with a tensor
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#did-calculations-outside-of-tensorflow">
-     3.11.2. 2. Did calculations outside of TensorFlow
+     4.11.2. 2. Did calculations outside of TensorFlow
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#took-gradients-through-an-integer-or-string">
-     3.11.3. 3. Took gradients through an integer or string
+     4.11.3. 3. Took gradients through an integer or string
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#took-gradients-through-a-stateful-object">
-     3.11.4. 4. Took gradients through a stateful object
+     4.11.4. 4. Took gradients through a stateful object
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#no-gradient-registered">
-   3.12. No gradient registered
+   4.12. No gradient registered
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#zeros-instead-of-none">
-   3.13. Zeros instead of None
+   4.13. Zeros instead of None
   </a>
  </li>
 </ul>
@@ -462,9 +484,9 @@
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="introduction-to-gradients-and-automatic-differentiation">
-<h1><span class="section-number">3. </span>Introduction to gradients and automatic differentiation<a class="headerlink" href="#introduction-to-gradients-and-automatic-differentiation" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">4. </span>Introduction to gradients and automatic differentiation<a class="headerlink" href="#introduction-to-gradients-and-automatic-differentiation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="automatic-differentiation-and-gradients">
-<h2><span class="section-number">3.1. </span>Automatic Differentiation and Gradients<a class="headerlink" href="#automatic-differentiation-and-gradients" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.1. </span>Automatic Differentiation and Gradients<a class="headerlink" href="#automatic-differentiation-and-gradients" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation">Automatic differentiation</a>
 is useful for implementing machine learning algorithms such as
 <a class="reference external" href="https://en.wikipedia.org/wiki/Backpropagation">backpropagation</a> for training
@@ -472,7 +494,7 @@ neural networks.</p>
 <p>In this guide, you will explore ways to compute gradients with TensorFlow, especially in eager execution.</p>
 </div>
 <div class="section" id="setup">
-<h2><span class="section-number">3.2. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.2. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -485,14 +507,14 @@ neural networks.</p>
 </div>
 </div>
 <div class="section" id="computing-gradients">
-<h2><span class="section-number">3.3. </span>Computing gradients<a class="headerlink" href="#computing-gradients" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.3. </span>Computing gradients<a class="headerlink" href="#computing-gradients" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>To differentiate automatically, TensorFlow needs to remember what operations happen in what order during the <em>forward</em> pass.</p></li>
 <li><p>Then, during the <em>backward pass</em>, TensorFlow traverses this list of operations in reverse order to compute gradients.</p></li>
 </ul>
 </div>
 <div class="section" id="gradient-tapes">
-<h2><span class="section-number">3.4. </span>Gradient tapes<a class="headerlink" href="#gradient-tapes" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.4. </span>Gradient tapes<a class="headerlink" href="#gradient-tapes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>TensorFlow provides the <code class="docutils literal notranslate"><span class="pre">tf.GradientTape</span></code> API for automatic differentiation; that is, computing the gradient of a computation with respect to some inputs, usually <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code>s.</p></li>
 <li><p>TensorFlow “records” relevant operations executed inside the context of a <code class="docutils literal notranslate"><span class="pre">tf.GradientTape</span></code> onto a “tape”.</p></li>
@@ -586,7 +608,7 @@ neural networks.</p>
 </div>
 </div>
 <div class="section" id="gradients-with-respect-to-a-model">
-<h2><span class="section-number">3.5. </span>Gradients with respect to a model<a class="headerlink" href="#gradients-with-respect-to-a-model" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.5. </span>Gradients with respect to a model<a class="headerlink" href="#gradients-with-respect-to-a-model" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>It’s common to collect <code class="docutils literal notranslate"><span class="pre">tf.Variables</span></code> into a <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> or one of its subclasses (<code class="docutils literal notranslate"><span class="pre">layers.Layer</span></code>, <code class="docutils literal notranslate"><span class="pre">keras.Model</span></code>) for <span class="xref myst">checkpointing</span> and <span class="xref myst">exporting</span>.</p></li>
 <li><p>In most cases, you will want to calculate gradients with respect to a model’s trainable variables.</p></li>
@@ -654,7 +676,7 @@ dense/bias:0, shape: (2,)
 <p><a id="watches"></a></p>
 </div>
 <div class="section" id="controlling-what-the-tape-watches">
-<h2><span class="section-number">3.6. </span>Controlling what the tape watches<a class="headerlink" href="#controlling-what-the-tape-watches" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.6. </span>Controlling what the tape watches<a class="headerlink" href="#controlling-what-the-tape-watches" title="Permalink to this headline">¶</a></h2>
 <p>The default behavior is to record all operations after accessing a trainable <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code>. The reasons for this are:</p>
 <ul class="simple">
 <li><p>The tape needs to know which operations to record in the forward pass to calculate the gradients in the backwards pass.</p></li>
@@ -765,7 +787,7 @@ dy/dx1: 0.9999546
 </div>
 </div>
 <div class="section" id="intermediate-results">
-<h2><span class="section-number">3.7. </span>Intermediate results<a class="headerlink" href="#intermediate-results" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.7. </span>Intermediate results<a class="headerlink" href="#intermediate-results" title="Permalink to this headline">¶</a></h2>
 <p>You can also request gradients of the output with respect to intermediate values computed inside the <code class="docutils literal notranslate"><span class="pre">tf.GradientTape</span></code> context.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -823,7 +845,7 @@ dy/dx1: 0.9999546
 </div>
 </div>
 <div class="section" id="notes-on-performance">
-<h2><span class="section-number">3.8. </span>Notes on performance<a class="headerlink" href="#notes-on-performance" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.8. </span>Notes on performance<a class="headerlink" href="#notes-on-performance" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>There is a tiny overhead associated with doing operations inside a gradient tape context. For most eager execution this will not be a noticeable cost, but you should still use tape context around the areas only where it is required.</p></li>
 <li><p>Gradient tapes use memory to store intermediate results, including inputs and outputs, for use during the backwards pass.</p>
@@ -832,7 +854,7 @@ dy/dx1: 0.9999546
 </ul>
 </div>
 <div class="section" id="gradients-of-non-scalar-targets">
-<h2><span class="section-number">3.9. </span>Gradients of non-scalar targets<a class="headerlink" href="#gradients-of-non-scalar-targets" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.9. </span>Gradients of non-scalar targets<a class="headerlink" href="#gradients-of-non-scalar-targets" title="Permalink to this headline">¶</a></h2>
 <p>A gradient is fundamentally an operation on a scalar.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -924,7 +946,7 @@ dy/dx1: 0.9999546
 </div>
 </div>
 <div class="section" id="control-flow">
-<h2><span class="section-number">3.10. </span>Control flow<a class="headerlink" href="#control-flow" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.10. </span>Control flow<a class="headerlink" href="#control-flow" title="Permalink to this headline">¶</a></h2>
 <p>Because a gradient tape records operations as they are executed, Python control flow is naturally handled (for example, <code class="docutils literal notranslate"><span class="pre">if</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code> statements).</p>
 <p>Here a different variable is used on each branch of an <code class="docutils literal notranslate"><span class="pre">if</span></code>. The gradient only connects to the variable that was used:</p>
 <div class="cell docutils container">
@@ -973,7 +995,7 @@ None
 </div>
 </div>
 <div class="section" id="cases-where-gradient-returns-none">
-<h2><span class="section-number">3.11. </span>Cases where <code class="docutils literal notranslate"><span class="pre">gradient</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code><a class="headerlink" href="#cases-where-gradient-returns-none" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.11. </span>Cases where <code class="docutils literal notranslate"><span class="pre">gradient</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code><a class="headerlink" href="#cases-where-gradient-returns-none" title="Permalink to this headline">¶</a></h2>
 <p>When a target is not connected to a source, <code class="docutils literal notranslate"><span class="pre">gradient</span></code> will return <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -994,7 +1016,7 @@ None
 </div>
 <p>Here <code class="docutils literal notranslate"><span class="pre">z</span></code> is obviously not connected to <code class="docutils literal notranslate"><span class="pre">x</span></code>, but there are several less-obvious ways that a gradient can be disconnected.</p>
 <div class="section" id="replaced-a-variable-with-a-tensor">
-<h3><span class="section-number">3.11.1. </span>1. Replaced a variable with a tensor<a class="headerlink" href="#replaced-a-variable-with-a-tensor" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">4.11.1. </span>1. Replaced a variable with a tensor<a class="headerlink" href="#replaced-a-variable-with-a-tensor" title="Permalink to this headline">¶</a></h3>
 <p>In the section on <a class="reference external" href="#watches">“controlling what the tape watches”</a> you saw that the tape will automatically watch a <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code> but not a <code class="docutils literal notranslate"><span class="pre">tf.Tensor</span></code>.</p>
 <p>One common error is to inadvertently replace a <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code> with a <code class="docutils literal notranslate"><span class="pre">tf.Tensor</span></code>, instead of using <code class="docutils literal notranslate"><span class="pre">Variable.assign</span></code> to update the <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code>. Here is an example:</p>
 <div class="cell docutils container">
@@ -1019,7 +1041,7 @@ EagerTensor : None
 </div>
 </div>
 <div class="section" id="did-calculations-outside-of-tensorflow">
-<h3><span class="section-number">3.11.2. </span>2. Did calculations outside of TensorFlow<a class="headerlink" href="#did-calculations-outside-of-tensorflow" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">4.11.2. </span>2. Did calculations outside of TensorFlow<a class="headerlink" href="#did-calculations-outside-of-tensorflow" title="Permalink to this headline">¶</a></h3>
 <p>The tape can’t record the gradient path if the calculation exits TensorFlow.
 For example:</p>
 <div class="cell docutils container">
@@ -1049,7 +1071,7 @@ For example:</p>
 </div>
 </div>
 <div class="section" id="took-gradients-through-an-integer-or-string">
-<h3><span class="section-number">3.11.3. </span>3. Took gradients through an integer or string<a class="headerlink" href="#took-gradients-through-an-integer-or-string" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">4.11.3. </span>3. Took gradients through an integer or string<a class="headerlink" href="#took-gradients-through-an-integer-or-string" title="Permalink to this headline">¶</a></h3>
 <p>Integers and strings are not differentiable. If a calculation path uses these data types there will be no gradient.</p>
 <p>Nobody expects strings to be differentiable, but it’s easy to accidentally create an <code class="docutils literal notranslate"><span class="pre">int</span></code> constant or variable if you don’t specify the <code class="docutils literal notranslate"><span class="pre">dtype</span></code>.</p>
 <div class="cell docutils container">
@@ -1076,7 +1098,7 @@ None
 <p>TensorFlow doesn’t automatically cast between types, so, in practice, you’ll often get a type error instead of a missing gradient.</p>
 </div>
 <div class="section" id="took-gradients-through-a-stateful-object">
-<h3><span class="section-number">3.11.4. </span>4. Took gradients through a stateful object<a class="headerlink" href="#took-gradients-through-a-stateful-object" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">4.11.4. </span>4. Took gradients through a stateful object<a class="headerlink" href="#took-gradients-through-a-stateful-object" title="Permalink to this headline">¶</a></h3>
 <p>State stops gradients. When you read from a stateful object, the tape can only observe the current state, not the history that lead to it.</p>
 <p>A <code class="docutils literal notranslate"><span class="pre">tf.Tensor</span></code> is immutable. You can’t change a tensor once it’s created. It has a <em>value</em>, but no <em>state</em>. All the operations discussed so far are also stateless: the output of a <code class="docutils literal notranslate"><span class="pre">tf.matmul</span></code> only depends on its inputs.</p>
 <p>A <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code> has internal state—its value. When you use the variable, the state is read. It’s normal to calculate a gradient with respect to a variable, but the variable’s state blocks gradient calculations from going farther back. For example:</p>
@@ -1106,7 +1128,7 @@ None
 </div>
 </div>
 <div class="section" id="no-gradient-registered">
-<h2><span class="section-number">3.12. </span>No gradient registered<a class="headerlink" href="#no-gradient-registered" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.12. </span>No gradient registered<a class="headerlink" href="#no-gradient-registered" title="Permalink to this headline">¶</a></h2>
 <p>Some <code class="docutils literal notranslate"><span class="pre">tf.Operation</span></code>s are <strong>registered as being non-differentiable</strong> and will return <code class="docutils literal notranslate"><span class="pre">None</span></code>. Others have <strong>no gradient registered</strong>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">tf.raw_ops</span></code> page shows which low-level ops have gradients registered.</p>
 <p>If you attempt to take a gradient through a float op that has no gradient registered the tape will throw an error instead of silently returning <code class="docutils literal notranslate"><span class="pre">None</span></code>. This way you know something has gone wrong.</p>
@@ -1136,7 +1158,7 @@ None
 <p>If you need to differentiate through this op, you’ll either need to implement the gradient and register it (using <code class="docutils literal notranslate"><span class="pre">tf.RegisterGradient</span></code>) or re-implement the function using other ops.</p>
 </div>
 <div class="section" id="zeros-instead-of-none">
-<h2><span class="section-number">3.13. </span>Zeros instead of None<a class="headerlink" href="#zeros-instead-of-none" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">4.13. </span>Zeros instead of None<a class="headerlink" href="#zeros-instead-of-none" title="Permalink to this headline">¶</a></h2>
 <p>In some cases it would be convenient to get 0 instead of <code class="docutils literal notranslate"><span class="pre">None</span></code> for unconnected gradients.  You can decide what to return when you have unconnected gradients using the <code class="docutils literal notranslate"><span class="pre">unconnected_gradients</span></code> argument:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1187,13 +1209,13 @@ None
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">2. </span>Introduction to Variables</p>
+            <p class="prev-next-title"><span class="section-number">3. </span>Introduction to Variables</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="5.intro_to_modules.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Introduction to modules, layers, and models</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Introduction to modules, layers, and models</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

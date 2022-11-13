@@ -4,7 +4,11 @@
 format: jb-book
 root: intro
 parts:
-  - caption: basics
+  - caption: Cheat Sheet
+    numbered: true
+    chapters:
+      - file: pytorch/pytorch_cheatsheet
+  - caption: Tensorflow basics
     numbered: true
     chapters:
       - file: old/1.tensor
@@ -15,6 +19,10 @@ parts:
       - file: old/7.keras_sequential_model
       - file: tf_create_model
       - file: hands_on_ml3/tf_customization
+  - caption: Pytorch basics
+    numbered: true
+    chapters:
+      - file: pytorch/ch0_pytorch_tutorial/PyTorch_tutorial_newVersion
   # - caption: Computer Vision
   #   numbered: true
   #   chapters:

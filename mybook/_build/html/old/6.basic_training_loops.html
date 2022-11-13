@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>6. Basic training loops &#8212; My sample book</title>
+    <title>7. Basic training loops &#8212; My sample book</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -53,8 +53,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="7. The Sequential model" href="7.keras_sequential_model.html" />
-    <link rel="prev" title="4. Introduction to modules, layers, and models" href="5.intro_to_modules.html" />
+    <link rel="next" title="8. The Sequential model" href="7.keras_sequential_model.html" />
+    <link rel="prev" title="5. Introduction to modules, layers, and models" href="5.intro_to_modules.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -100,38 +100,60 @@
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  basics
+  Cheat Sheet
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch/pytorch_cheatsheet.html">
+   1. Pytorch Cheatsheet
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tensorflow basics
  </span>
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="1.tensor.html">
-   1. Introduction to Tensors
+   2. Introduction to Tensors
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="2.variable.html">
-   2. Introduction to Variables
+   3. Introduction to Variables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="3.autodiff.html">
-   3. Introduction to gradients and automatic differentiation
+   4. Introduction to gradients and automatic differentiation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="5.intro_to_modules.html">
-   4. Introduction to modules, layers, and models
+   5. Introduction to modules, layers, and models
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   6. Basic training loops
+   7. Basic training loops
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="7.keras_sequential_model.html">
-   7. The Sequential model
+   8. The Sequential model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tf_create_model.html">
+   9. 三種搭建神經網路的方式
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../hands_on_ml3/tf_customization.html">
+   10. Customization
   </a>
  </li>
 </ul>
@@ -240,44 +262,44 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#setup">
-   6.1. Setup
+   7.1. Setup
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#solving-machine-learning-problems">
-   6.2. Solving machine learning problems
+   7.2. Solving machine learning problems
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data">
-   6.3. Data
+   7.3. Data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#define-the-model">
-   6.4. Define the model
+   7.4. Define the model
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#define-a-loss-function">
-     6.4.1. Define a loss function
+     7.4.1. Define a loss function
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#define-a-training-loop">
-     6.4.2. Define a training loop
+     7.4.2. Define a training loop
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-same-solution-but-with-keras">
-   6.5. The same solution, but with Keras
+   7.5. The same solution, but with Keras
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#next-steps">
-   6.6. Next steps
+   7.6. Next steps
   </a>
  </li>
 </ul>
@@ -302,44 +324,44 @@
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#setup">
-   6.1. Setup
+   7.1. Setup
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#solving-machine-learning-problems">
-   6.2. Solving machine learning problems
+   7.2. Solving machine learning problems
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#data">
-   6.3. Data
+   7.3. Data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#define-the-model">
-   6.4. Define the model
+   7.4. Define the model
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#define-a-loss-function">
-     6.4.1. Define a loss function
+     7.4.1. Define a loss function
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#define-a-training-loop">
-     6.4.2. Define a training loop
+     7.4.2. Define a training loop
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-same-solution-but-with-keras">
-   6.5. The same solution, but with Keras
+   7.5. The same solution, but with Keras
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#next-steps">
-   6.6. Next steps
+   7.6. Next steps
   </a>
  </li>
 </ul>
@@ -352,13 +374,13 @@
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="basic-training-loops">
-<h1><span class="section-number">6. </span>Basic training loops<a class="headerlink" href="#basic-training-loops" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">7. </span>Basic training loops<a class="headerlink" href="#basic-training-loops" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>在前面幾章中，已經學了 <code class="docutils literal notranslate"><span class="pre">tensors</span></code>, <code class="docutils literal notranslate"><span class="pre">variables</span></code>, <code class="docutils literal notranslate"><span class="pre">gradient</span> <span class="pre">tape</span></code>, 以及 <code class="docutils literal notranslate"><span class="pre">modules</span></code>，這一章就是要將這些拼圖拼在一塊，開始 train models</p></li>
 <li><p>tensorflow 也 include <code class="docutils literal notranslate"><span class="pre">tf.Keras</span></code> API，所以也會講如何用這個高階 API 來簡化工作</p></li>
 </ul>
 <div class="section" id="setup">
-<h2><span class="section-number">6.1. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.1. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
@@ -372,7 +394,7 @@
 </div>
 </div>
 <div class="section" id="solving-machine-learning-problems">
-<h2><span class="section-number">6.2. </span>Solving machine learning problems<a class="headerlink" href="#solving-machine-learning-problems" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.2. </span>Solving machine learning problems<a class="headerlink" href="#solving-machine-learning-problems" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>解一個 ML problem，通常包含以下步驟：</p>
 <ul>
@@ -389,7 +411,7 @@
 </ul>
 </div>
 <div class="section" id="data">
-<h2><span class="section-number">6.3. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.3. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The actual line</span>
@@ -429,7 +451,7 @@
 <p>Tensors are usually gathered together in <em>batches</em>, or groups of inputs and outputs stacked together.  Batching can confer some training benefits and works well with accelerators and vectorized computation.  Given how small this dataset is, you can treat the entire dataset as a single batch.</p>
 </div>
 <div class="section" id="define-the-model">
-<h2><span class="section-number">6.4. </span>Define the model<a class="headerlink" href="#define-the-model" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.4. </span>Define the model<a class="headerlink" href="#define-the-model" title="Permalink to this headline">¶</a></h2>
 <p>Use <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code> to represent all weights in a model.  A <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code> stores a value and provides this in tensor form as needed.  See the <span class="xref myst">variable guide</span> for more details.</p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">tf.Module</span></code> to encapsulate the variables and the computation.  You could use any Python object, but this way it can be easily saved.</p>
 <p>Here, you define both <em>w</em> and <em>b</em> as variables.</p>
@@ -464,7 +486,7 @@
 </div>
 <p>The initial variables are set here in a fixed way, but Keras comes with any of a number of <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/initializers">initializers</a> you could use, with or without the rest of Keras.</p>
 <div class="section" id="define-a-loss-function">
-<h3><span class="section-number">6.4.1. </span>Define a loss function<a class="headerlink" href="#define-a-loss-function" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">7.4.1. </span>Define a loss function<a class="headerlink" href="#define-a-loss-function" title="Permalink to this headline">¶</a></h3>
 <p>A loss function measures how well the output of a model for a given input matches the target output. The goal is to minimize this difference during training. Define the standard L2 loss, also known as the “mean squared” error:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -501,7 +523,7 @@
 </div>
 </div>
 <div class="section" id="define-a-training-loop">
-<h3><span class="section-number">6.4.2. </span>Define a training loop<a class="headerlink" href="#define-a-training-loop" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">7.4.2. </span>Define a training loop<a class="headerlink" href="#define-a-training-loop" title="Permalink to this headline">¶</a></h3>
 <p>The training loop consists of repeatedly doing three tasks in order:</p>
 <ul class="simple">
 <li><p>Sending a batch of inputs through the model to generate outputs</p></li>
@@ -644,7 +666,7 @@ Epoch  9:
 </div>
 </div>
 <div class="section" id="the-same-solution-but-with-keras">
-<h2><span class="section-number">6.5. </span>The same solution, but with Keras<a class="headerlink" href="#the-same-solution-but-with-keras" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.5. </span>The same solution, but with Keras<a class="headerlink" href="#the-same-solution-but-with-keras" title="Permalink to this headline">¶</a></h2>
 <p>It’s useful to contrast the code above with the equivalent in Keras.</p>
 <p>Defining the model looks exactly the same if you subclass <code class="docutils literal notranslate"><span class="pre">tf.keras.Model</span></code>.  Remember that Keras models inherit ultimately from module.</p>
 <div class="cell docutils container">
@@ -760,7 +782,7 @@ Epoch 10/10
 <p>Note that Keras prints out the loss after training, not before, so the first loss appears lower, but otherwise this shows essentially the same training performance.</p>
 </div>
 <div class="section" id="next-steps">
-<h2><span class="section-number">6.6. </span>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.6. </span>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
 <p>In this guide, you have seen how to use the core classes of tensors, variables, modules, and gradient tape to build and train a model, and further how those ideas map to Keras.</p>
 <p>This is, however, an extremely simple problem. For a more practical introduction, see <span class="xref myst">Custom training walkthrough</span>.</p>
 <p>For more on using built-in Keras training loops, see <a class="reference external" href="https://www.tensorflow.org/guide/keras/train_and_evaluate">this guide</a>.  For more on training loops and Keras, see <a class="reference external" href="https://www.tensorflow.org/guide/keras/writing_a_training_loop_from_scratch">this guide</a>.  For writing custom distributed training loops, see <a class="reference external" href="distributed_training.ipynb#using_tfdistributestrategy_with_basic_training_loops_loops">this guide</a>.</p>
@@ -796,13 +818,13 @@ Epoch 10/10
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">4. </span>Introduction to modules, layers, and models</p>
+            <p class="prev-next-title"><span class="section-number">5. </span>Introduction to modules, layers, and models</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="7.keras_sequential_model.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">7. </span>The Sequential model</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>The Sequential model</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

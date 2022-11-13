@@ -409,7 +409,19 @@ model.fit(X_train_scaled, y_train, epochs=2,
 
 # ## 自訂 metrics
 
-# ### from scratch
+# * 有兩種自訂 metrics 的方法：
+#   * 直接定義 metric function: 這只能用在 `model.compile()` 這種情境，不能用在 custom training loop 裡。
+#   * 繼承 `tf.keras.metrics.Metric` 的 class 寫法，這可以用在 `model.compile()` 裡，也可以用在 custom training loop 裡
+
+# ### 簡單的寫法
+
+# In[ ]:
+
+
+
+
+
+# ### subclass 寫法
 
 # * 直接講 best practice，就是要去繼承 `tf.keras.metrics.Metric` 這個 class，並且，除了 init 以外，還要定義 3 個 method，以及 get_config:
 #   * `__init__`: 這個建構子裡面，要放最終去計算 metric 所需的元件。舉例來說，要算 accuracy，那你需要 (正確分類數 / 總數)。那最一開始就會 initialize 這兩個 tf.variable，並 initialize 為 0  
