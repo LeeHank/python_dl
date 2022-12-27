@@ -19,10 +19,15 @@ parts:
       - file: old/7.keras_sequential_model
       - file: tf_create_model
       - file: hands_on_ml3/tf_customization
-  - caption: Pytorch basics
+  - caption: Pytorch resource summarise  
     numbered: true
     chapters:
-      - file: pytorch/ch0_pytorch_tutorial/PyTorch_tutorial_newVersion
+      - file: pytorch/d2l/d2l_linear_regression
+      - file: pytorch/d2l/d2l_softmax_regression
+  #- caption: Pytorch basics
+  #  numbered: true
+  #  chapters:
+  #    - file: pytorch/ch0_pytorch_tutorial/PyTorch_tutorial_newVersion
   # - caption: Computer Vision
   #   numbered: true
   #   chapters:

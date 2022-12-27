@@ -1,0 +1,831 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How to add new built-in prototype datasets &#8212; My sample book</title>
+    
+  <link href="../../../../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../../_static/jquery.js"></script>
+    <script src="../../../../../../_static/underscore.js"></script>
+    <script src="../../../../../../_static/doctools.js"></script>
+    <script src="../../../../../../_static/togglebutton.js"></script>
+    <script src="../../../../../../_static/clipboard.min.js"></script>
+    <script src="../../../../../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../../../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../../../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Cheat Sheet
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../../pytorch/pytorch_cheatsheet.html">
+   1. Pytorch Cheatsheet
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tensorflow basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../../old/1.tensor.html">
+   2. Introduction to Tensors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../../old/2.variable.html">
+   3. Introduction to Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../../old/3.autodiff.html">
+   4. Introduction to gradients and automatic differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../../old/5.intro_to_modules.html">
+   5. Introduction to modules, layers, and models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../../old/6.basic_training_loops.html">
+   7. Basic training loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../../old/7.keras_sequential_model.html">
+   8. The Sequential model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../../tf_create_model.html">
+   9. 三種搭建神經網路的方式
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../../hands_on_ml3/tf_customization.html">
+   10. Customization
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Pytorch resource summarise
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../../pytorch/d2l/d2l_linear_regression.html">
+   11. Linear regression (d2l)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../../pytorch/d2l/d2l_softmax_regression.html">
+   12. Softmax regression (d2l)
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../../../../_sources/others/vision/torchvision/prototype/datasets/_builtin/README.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fothers/vision/torchvision/prototype/datasets/_builtin/README.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementation">
+   Implementation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#init-self-root-skip-integrity-check-false">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       __init__(self,
+      </span>
+      <span class="pre">
+       root,
+      </span>
+      <span class="pre">
+       *,
+      </span>
+      <span class="pre">
+       ...,
+      </span>
+      <span class="pre">
+       skip_integrity_check
+      </span>
+      <span class="pre">
+       =
+      </span>
+      <span class="pre">
+       False)
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#resources-self">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       _resources(self)
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#datapipe-self-resource-dps">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       _datapipe(self,
+      </span>
+      <span class="pre">
+       resource_dps)
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#len">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       __len__
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tests">
+   Tests
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#faq">
+   FAQ
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-do-i-start">
+     How do I start?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-do-i-handle-a-dataset-that-defines-many-categories">
+     How do I handle a dataset that defines many categories?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-if-a-resource-file-forms-an-i-o-bottleneck">
+     What if a resource file forms an I/O bottleneck?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-do-i-compute-the-number-of-samples">
+     How do I compute the number of samples?
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>How to add new built-in prototype datasets</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementation">
+   Implementation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#init-self-root-skip-integrity-check-false">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       __init__(self,
+      </span>
+      <span class="pre">
+       root,
+      </span>
+      <span class="pre">
+       *,
+      </span>
+      <span class="pre">
+       ...,
+      </span>
+      <span class="pre">
+       skip_integrity_check
+      </span>
+      <span class="pre">
+       =
+      </span>
+      <span class="pre">
+       False)
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#resources-self">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       _resources(self)
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#datapipe-self-resource-dps">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       _datapipe(self,
+      </span>
+      <span class="pre">
+       resource_dps)
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#len">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       __len__
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tests">
+   Tests
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#faq">
+   FAQ
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-do-i-start">
+     How do I start?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-do-i-handle-a-dataset-that-defines-many-categories">
+     How do I handle a dataset that defines many categories?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-if-a-resource-file-forms-an-i-o-bottleneck">
+     What if a resource file forms an I/O bottleneck?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-do-i-compute-the-number-of-samples">
+     How do I compute the number of samples?
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="how-to-add-new-built-in-prototype-datasets">
+<h1>How to add new built-in prototype datasets<a class="headerlink" href="#how-to-add-new-built-in-prototype-datasets" title="Permalink to this headline">¶</a></h1>
+<p>As the name implies, the datasets are still in a prototype state and thus subject to rapid change. This in turn means
+that this document will also change a lot.</p>
+<p>If you hit a blocker while adding a dataset, please have a look at another similar dataset to see how it is implemented
+there. If you can’t resolve it yourself, feel free to send a draft PR in order for us to help you out.</p>
+<p>Finally, <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">torchvision.prototype</span> <span class="pre">import</span> <span class="pre">datasets</span></code> is implied below.</p>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<p>Before we start with the actual implementation, you should create a module in <code class="docutils literal notranslate"><span class="pre">torchvision/prototype/datasets/_builtin</span></code>
+that hints at the dataset you are going to add. For example <code class="docutils literal notranslate"><span class="pre">caltech.py</span></code> for <code class="docutils literal notranslate"><span class="pre">caltech101</span></code> and <code class="docutils literal notranslate"><span class="pre">caltech256</span></code>. In that
+module create a class that inherits from <code class="docutils literal notranslate"><span class="pre">datasets.utils.Dataset</span></code> and overwrites four methods that will be discussed in
+detail below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">BinaryIO</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">torchdata.datapipes.iter</span> <span class="kn">import</span> <span class="n">IterDataPipe</span>
+<span class="kn">from</span> <span class="nn">torchvision.prototype.datasets.utils</span> <span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">OnlineResource</span>
+
+<span class="kn">from</span> <span class="nn">.._api</span> <span class="kn">import</span> <span class="n">register_dataset</span><span class="p">,</span> <span class="n">register_info</span>
+
+<span class="n">NAME</span> <span class="o">=</span> <span class="s2">&quot;my-dataset&quot;</span>
+
+<span class="nd">@register_info</span><span class="p">(</span><span class="n">NAME</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_info</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+  <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
+      <span class="o">...</span>
+  <span class="p">)</span>
+
+<span class="nd">@register_dataset</span><span class="p">(</span><span class="n">NAME</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">MyDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">skip_integrity_check</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="o">...</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">skip_integrity_check</span><span class="o">=</span><span class="n">skip_integrity_check</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_resources</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">OnlineResource</span><span class="p">]:</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">_datapipe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_dps</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">IterDataPipe</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">BinaryIO</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="n">IterDataPipe</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>In addition to the dataset, you also need to implement an <code class="docutils literal notranslate"><span class="pre">_info()</span></code> function that takes no arguments and returns a
+dictionary of static information. The most common use case is to provide human-readable categories.
+<a class="reference external" href="#how-do-i-handle-a-dataset-that-defines-many-categories">See below</a> how to handle cases with many categories.</p>
+<p>Finally, both the dataset class and the info function need to be registered on the API with the respective decorators.
+With that they are loadable through <code class="docutils literal notranslate"><span class="pre">datasets.load(&quot;my-dataset&quot;)</span></code> and <code class="docutils literal notranslate"><span class="pre">datasets.info(&quot;my-dataset&quot;)</span></code>, respectively.</p>
+<div class="section" id="init-self-root-skip-integrity-check-false">
+<h3><code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">root,</span> <span class="pre">*,</span> <span class="pre">...,</span> <span class="pre">skip_integrity_check</span> <span class="pre">=</span> <span class="pre">False)</span></code><a class="headerlink" href="#init-self-root-skip-integrity-check-false" title="Permalink to this headline">¶</a></h3>
+<p>Constructor of the dataset that will be called when the dataset is instantiated. In addition to the parameters of the
+base class, it can take arbitrary keyword-only parameters with defaults. The checking of these parameters as well as
+setting them as instance attributes has to happen before the call of <code class="docutils literal notranslate"><span class="pre">super().__init__(...)</span></code>, because that will invoke
+the other methods, which possibly depend on the parameters. All instance attributes must be private, i.e. prefixed with
+an underscore.</p>
+<p>If the implementation of the dataset depends on third-party packages, pass them as a collection of strings to the base
+class constructor, e.g. <code class="docutils literal notranslate"><span class="pre">super().__init__(...,</span> <span class="pre">dependencies=(&quot;scipy&quot;,))</span></code>. Their availability will be automatically
+checked if a user tries to load the dataset. Within the implementation of the dataset, import these packages lazily to
+avoid missing dependencies at import time.</p>
+</div>
+<div class="section" id="resources-self">
+<h3><code class="docutils literal notranslate"><span class="pre">_resources(self)</span></code><a class="headerlink" href="#resources-self" title="Permalink to this headline">¶</a></h3>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">List[datasets.utils.OnlineResource]</span></code> of all the files that need to be present locally before the dataset can be
+build. The download will happen automatically.</p>
+<p>Currently, the following <code class="docutils literal notranslate"><span class="pre">OnlineResource</span></code>’s are supported:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">HttpResource</span></code>: Used for files that are directly exposed through HTTP(s) and only requires the URL.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GDriveResource</span></code>: Used for files that are hosted on GDrive and requires the GDrive ID as well as the <code class="docutils literal notranslate"><span class="pre">file_name</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ManualDownloadResource</span></code>: Used files are not publicly accessible and requires instructions how to download them
+manually. If the file does not exist, an error will be raised with the supplied instructions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KaggleDownloadResource</span></code>: Used for files that are available on Kaggle. This inherits from <code class="docutils literal notranslate"><span class="pre">ManualDownloadResource</span></code>.</p></li>
+</ul>
+<p>Although optional in general, all resources used in the built-in datasets should comprise
+<a class="reference external" href="https://en.wikipedia.org/wiki/SHA-2">SHA256</a> checksum for security. It will be automatically checked after the
+download. You can compute the checksum with system utilities e.g <code class="docutils literal notranslate"><span class="pre">sha256-sum</span></code>, or this snippet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hashlib</span>
+
+<span class="k">def</span> <span class="nf">sha256sum</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">):</span>
+    <span class="n">checksum</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">()</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">),</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+            <span class="n">checksum</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">checksum</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="datapipe-self-resource-dps">
+<h3><code class="docutils literal notranslate"><span class="pre">_datapipe(self,</span> <span class="pre">resource_dps)</span></code><a class="headerlink" href="#datapipe-self-resource-dps" title="Permalink to this headline">¶</a></h3>
+<p>This method is the heart of the dataset, where we transform the raw data into a usable form. A major difference compared
+to the current stable datasets is that everything is performed through <code class="docutils literal notranslate"><span class="pre">IterDataPipe</span></code>’s. From the perspective of someone
+that is working with them rather than on them, <code class="docutils literal notranslate"><span class="pre">IterDataPipe</span></code>’s behave just as generators, i.e. you can’t do anything
+with them besides iterating.</p>
+<p>Of course, there are some common building blocks that should suffice in 95% of the cases. The most used are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Mapper</span></code>: Apply a callable to every item in the datapipe.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Filter</span></code>: Keep only items that satisfy a condition.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Demultiplexer</span></code>: Split a datapipe into multiple ones.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IterKeyZipper</span></code>: Merge two datapipes into one.</p></li>
+</ul>
+<p>All of them can be imported <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">torchdata.datapipes.iter</span></code>. In addition, use <code class="docutils literal notranslate"><span class="pre">functools.partial</span></code> in case a callable
+needs extra arguments. If the provided <code class="docutils literal notranslate"><span class="pre">IterDataPipe</span></code>’s are not sufficient for the use case, it is also not complicated
+to add one. See the MNIST or CelebA datasets for example.</p>
+<p><code class="docutils literal notranslate"><span class="pre">_datapipe()</span></code> receives <code class="docutils literal notranslate"><span class="pre">resource_dps</span></code>, which is a list of datapipes that has a 1-to-1 correspondence with the return
+value of <code class="docutils literal notranslate"><span class="pre">_resources()</span></code>. In case of archives with regular suffixes (<code class="docutils literal notranslate"><span class="pre">.tar</span></code>, <code class="docutils literal notranslate"><span class="pre">.zip</span></code>, …), the datapipe will contain
+tuples comprised of the path and the handle for every file in the archive. Otherwise, the datapipe will only contain one
+of such tuples for the file specified by the resource.</p>
+<p>Since the datapipes are iterable in nature, some datapipes feature an in-memory buffer, e.g. <code class="docutils literal notranslate"><span class="pre">IterKeyZipper</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Grouper</span></code>. There are two issues with that:</p>
+<ol class="simple">
+<li><p>If not used carefully, this can easily overflow the host memory, since most datasets will not fit in completely.</p></li>
+<li><p>This can lead to unnecessarily long warm-up times when data is buffered that is only needed at runtime.</p></li>
+</ol>
+<p>Thus, all buffered datapipes should be used as early as possible, e.g. zipping two datapipes of file handles rather than
+trying to zip already loaded images.</p>
+<p>There are two special datapipes that are not used through their class, but through the functions <code class="docutils literal notranslate"><span class="pre">hint_shuffling</span></code> and
+<code class="docutils literal notranslate"><span class="pre">hint_sharding</span></code>. As the name implies they only hint at a location in the datapipe graph where shuffling and sharding
+should take place, but are no-ops by default. They can be imported from <code class="docutils literal notranslate"><span class="pre">torchvision.prototype.datasets.utils._internal</span></code>
+and are required in each dataset. <code class="docutils literal notranslate"><span class="pre">hint_shuffling</span></code> has to be placed before <code class="docutils literal notranslate"><span class="pre">hint_sharding</span></code>.</p>
+<p>Finally, each item in the final datapipe should be a dictionary with <code class="docutils literal notranslate"><span class="pre">str</span></code> keys. There is no standardization of the
+names (yet!).</p>
+</div>
+<div class="section" id="len">
+<h3><code class="docutils literal notranslate"><span class="pre">__len__</span></code><a class="headerlink" href="#len" title="Permalink to this headline">¶</a></h3>
+<p>This returns an integer denoting the number of samples that can be drawn from the dataset. Please use
+<a class="reference external" href="https://peps.python.org/pep-0515/">underscores</a> after every three digits starting from the right to enhance the
+readability. For example, <code class="docutils literal notranslate"><span class="pre">1_281_167</span></code> vs. <code class="docutils literal notranslate"><span class="pre">1281167</span></code>.</p>
+<p>If there are only two different numbers, a simple <code class="docutils literal notranslate"><span class="pre">if</span></code> / <code class="docutils literal notranslate"><span class="pre">else</span></code> is fine:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">12_345</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split</span> <span class="o">==</span> <span class="s2">&quot;train&quot;</span> <span class="k">else</span> <span class="mi">6_789</span>
+</pre></div>
+</div>
+<p>If there are more options, using a dictionary usually is the most readable option:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;train&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;val&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;test&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">}[</span><span class="bp">self</span><span class="o">.</span><span class="n">_split</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>If the number of samples depends on more than one parameter, you can use tuples as dictionary keys:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="p">(</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">):</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="p">(</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span><span class="p">):</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">):</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span><span class="p">):</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">}[(</span><span class="bp">self</span><span class="o">.</span><span class="n">_split</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_foo</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>The length of the datapipe is only an annotation for subsequent processing of the datapipe and not needed during the
+development process. Since it is an <code class="docutils literal notranslate"><span class="pre">&#64;abstractmethod</span></code> you still have to implement it from the start. The canonical way
+is to define a dummy method like</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>and only fill it with the correct data if the implementation is otherwise finished.
+<a class="reference external" href="#how-do-i-compute-the-number-of-samples">See below</a> for a possible way to compute the number of samples.</p>
+</div>
+</div>
+<div class="section" id="tests">
+<h2>Tests<a class="headerlink" href="#tests" title="Permalink to this headline">¶</a></h2>
+<p>To test the dataset implementation, you usually don’t need to add any tests, but need to provide a mock-up of the data.
+This mock-up should resemble the original data as close as necessary, while containing only few examples.</p>
+<p>To do this, add a new function in <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">test/builtin_dataset_mocks.py</span></code></span> with the
+same name as you have used in <code class="docutils literal notranslate"><span class="pre">&#64;register_info</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;register_dataset</span></code>. This function is called “mock data function”.
+Decorate it with <code class="docutils literal notranslate"><span class="pre">&#64;register_mock(configs=[dict(...),</span> <span class="pre">...])</span></code>. Each dictionary denotes one configuration that the dataset
+will be loaded with, e.g. <code class="docutils literal notranslate"><span class="pre">datasets.load(&quot;my-dataset&quot;,</span> <span class="pre">**config)</span></code>. For the most common case of a product of all options,
+you can use the <code class="docutils literal notranslate"><span class="pre">combinations_grid()</span></code> helper function, e.g.
+<code class="docutils literal notranslate"><span class="pre">configs=combinations_grid(split=(&quot;train&quot;,</span> <span class="pre">&quot;test&quot;),</span> <span class="pre">foo=(&quot;bar&quot;,</span> <span class="pre">&quot;baz&quot;))</span></code>.</p>
+<p>In case the name of the dataset includes hyphens <code class="docutils literal notranslate"><span class="pre">-</span></code>, replace them with underscores <code class="docutils literal notranslate"><span class="pre">_</span></code> in the function name and pass
+the <code class="docutils literal notranslate"><span class="pre">name</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">&#64;register_mock</span></code></p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># this is defined in torchvision/prototype/datasets/_builtin</span>
+<span class="nd">@register_dataset</span><span class="p">(</span><span class="s2">&quot;my-dataset&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">MyDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="nd">@register_mock</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-dataset&quot;</span><span class="p">,</span> <span class="n">configs</span><span class="o">=...</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">my_dataset</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>The mock data function receives two arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">root</span></code>: A <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path"><code class="docutils literal notranslate"><span class="pre">pathlib.Path</span></code></a> of a folder, in which the data
+needs to be placed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code>: The configuration to generate the data for. This is one of the dictionaries defined in
+<code class="docutils literal notranslate"><span class="pre">&#64;register_mock(configs=...)</span></code></p></li>
+</ul>
+<p>The function should generate all files that are needed for the current <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each file should be complete, e.g. if
+the dataset only has a single archive that contains multiple splits, you need to generate the full archive regardless of
+the current <code class="docutils literal notranslate"><span class="pre">config</span></code>. Although this seems odd at first, this is important. Consider the following original data setup:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>root
+├── test
+│   ├── test_image0.jpg
+│   ...
+└── train
+    ├── train_image0.jpg
+    ...
+</pre></div>
+</div>
+<p>For map-style datasets (like the one currently in <code class="docutils literal notranslate"><span class="pre">torchvision.datasets</span></code>), one explicitly selects the files they want to
+load. For example, something like <code class="docutils literal notranslate"><span class="pre">(root</span> <span class="pre">/</span> <span class="pre">split).iterdir()</span></code> works fine even if only the specific split folder is
+present. With iterable-style datasets though, we get something like <code class="docutils literal notranslate"><span class="pre">root.iterdir()</span></code> from <code class="docutils literal notranslate"><span class="pre">resource_dps</span></code> in
+<code class="docutils literal notranslate"><span class="pre">_datapipe()</span></code> and need to manually <code class="docutils literal notranslate"><span class="pre">Filter</span></code> it to only keep the files we want. If we would only generate the data for
+the current <code class="docutils literal notranslate"><span class="pre">config</span></code>, the test would also pass if the dataset is missing the filtering, but would fail on the real data.</p>
+<p>For datasets that are ported from the old API, we already have some mock data in
+<span class="xref myst"><code class="docutils literal notranslate"><span class="pre">test/test_datasets.py</span></code></span>. You can find the test case corresponding test case there
+and have a look at the <code class="docutils literal notranslate"><span class="pre">inject_fake_data</span></code> function. There are a few differences though:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tmp_dir</span></code> corresponds to <code class="docutils literal notranslate"><span class="pre">root</span></code>, but is a <code class="docutils literal notranslate"><span class="pre">str</span></code> rather than a
+<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path"><code class="docutils literal notranslate"><span class="pre">pathlib.Path</span></code></a>. Thus, you often see something like
+<code class="docutils literal notranslate"><span class="pre">folder</span> <span class="pre">=</span> <span class="pre">pathlib.Path(tmp_dir)</span></code>. This is not needed.</p></li>
+<li><p>The data generated by <code class="docutils literal notranslate"><span class="pre">inject_fake_data</span></code> was supposed to be in an extracted state. This is no longer the case for the
+new mock-ups. Thus, you need to use helper functions like <code class="docutils literal notranslate"><span class="pre">make_zip</span></code> or <code class="docutils literal notranslate"><span class="pre">make_tar</span></code> to actually generate the files
+specified in the dataset.</p></li>
+<li><p>As explained in the paragraph above, the generated data is often “incomplete” and only valid for given the config.
+Make sure you follow the instructions above.</p></li>
+</ul>
+<p>The function should return an integer indicating the number of samples in the dataset for the current <code class="docutils literal notranslate"><span class="pre">config</span></code>.
+Preferably, this number should be different for different <code class="docutils literal notranslate"><span class="pre">config</span></code>’s to have more confidence in the dataset
+implementation.</p>
+<p>Finally, you can run the tests with <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">test/test_prototype_builtin_datasets.py</span> <span class="pre">-k</span> <span class="pre">{name}</span></code>.</p>
+</div>
+<div class="section" id="faq">
+<h2>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-do-i-start">
+<h3>How do I start?<a class="headerlink" href="#how-do-i-start" title="Permalink to this headline">¶</a></h3>
+<p>Get the skeleton of your dataset class ready with all 4 methods. For <code class="docutils literal notranslate"><span class="pre">_datapipe()</span></code>, you can just do
+<code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">resources_dp[0]</span></code> to get started. Then import the dataset class in
+<code class="docutils literal notranslate"><span class="pre">torchvision/prototype/datasets/_builtin/__init__.py</span></code>: this will automatically register the dataset, and it will be
+instantiable via <code class="docutils literal notranslate"><span class="pre">datasets.load(&quot;mydataset&quot;)</span></code>. On a separate script, try something like</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchvision.prototype</span> <span class="kn">import</span> <span class="n">datasets</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;mydataset&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>  <span class="c1"># this is the content of an item in datapipe returned by _datapipe()</span>
+    <span class="k">break</span>
+<span class="c1"># Or you can also inspect the sample in a debugger</span>
+</pre></div>
+</div>
+<p>This will give you an idea of what the first datapipe in <code class="docutils literal notranslate"><span class="pre">resources_dp</span></code> contains. You can also do that with
+<code class="docutils literal notranslate"><span class="pre">resources_dp[1]</span></code> or <code class="docutils literal notranslate"><span class="pre">resources_dp[2]</span></code> (etc.) if they exist. Then follow the instructions above to manipulate these
+datapipes and return the appropriate dictionary format.</p>
+</div>
+<div class="section" id="how-do-i-handle-a-dataset-that-defines-many-categories">
+<h3>How do I handle a dataset that defines many categories?<a class="headerlink" href="#how-do-i-handle-a-dataset-that-defines-many-categories" title="Permalink to this headline">¶</a></h3>
+<p>As a rule of thumb, <code class="docutils literal notranslate"><span class="pre">categories</span></code> in the info dictionary should only be set manually for ten categories or fewer. If more
+categories are needed, you can add a <code class="docutils literal notranslate"><span class="pre">$NAME.categories</span></code> file to the <code class="docutils literal notranslate"><span class="pre">_builtin</span></code> folder in which each line specifies a
+category. To load such a file, use the <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">torchvision.prototype.datasets.utils._internal</span> <span class="pre">import</span> <span class="pre">read_categories_file</span></code>
+function and pass it <code class="docutils literal notranslate"><span class="pre">$NAME</span></code>.</p>
+<p>In case the categories can be generated from the dataset files, e.g. the dataset follows an image folder approach where
+each folder denotes the name of the category, the dataset can overwrite the <code class="docutils literal notranslate"><span class="pre">_generate_categories</span></code> method. The method
+should return a sequence of strings representing the category names. In the method body, you’ll have to manually load
+the resources, e.g.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">resources</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resources</span><span class="p">()</span>
+<span class="n">dp</span> <span class="o">=</span> <span class="n">resources</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_root</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that it is not necessary here to keep a datapipe until the final step. Stick with datapipes as long as it makes
+sense and afterwards materialize the data with <code class="docutils literal notranslate"><span class="pre">next(iter(dp))</span></code> or <code class="docutils literal notranslate"><span class="pre">list(dp)</span></code> and proceed with that.</p>
+<p>To generate the <code class="docutils literal notranslate"><span class="pre">$NAME.categories</span></code> file, run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">torchvision.prototype.datasets.generate_category_files</span> <span class="pre">$NAME</span></code>.</p>
+</div>
+<div class="section" id="what-if-a-resource-file-forms-an-i-o-bottleneck">
+<h3>What if a resource file forms an I/O bottleneck?<a class="headerlink" href="#what-if-a-resource-file-forms-an-i-o-bottleneck" title="Permalink to this headline">¶</a></h3>
+<p>In general, we are ok with small performance hits of iterating archives rather than their extracted content. However, if
+the performance hit becomes significant, the archives can still be preprocessed. <code class="docutils literal notranslate"><span class="pre">OnlineResource</span></code> accepts the
+<code class="docutils literal notranslate"><span class="pre">preprocess</span></code> parameter that can be a <code class="docutils literal notranslate"><span class="pre">Callable[[pathlib.Path],</span> <span class="pre">pathlib.Path]</span></code> where the input points to the file to be
+preprocessed and the return value should be the result of the preprocessing to load. For convenience, <code class="docutils literal notranslate"><span class="pre">preprocess</span></code> also
+accepts <code class="docutils literal notranslate"><span class="pre">&quot;decompress&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;extract&quot;</span></code> to handle these common scenarios.</p>
+</div>
+<div class="section" id="how-do-i-compute-the-number-of-samples">
+<h3>How do I compute the number of samples?<a class="headerlink" href="#how-do-i-compute-the-number-of-samples" title="Permalink to this headline">¶</a></h3>
+<p>Unless the authors of the dataset published the exact numbers (even in this case we should check), there is no other way
+than to iterate over the dataset and count the number of samples:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">torchvision.prototype</span> <span class="kn">import</span> <span class="n">datasets</span>
+
+
+<span class="k">def</span> <span class="nf">combinations_grid</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">values</span><span class="p">))</span> <span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">kwargs</span><span class="o">.</span><span class="n">values</span><span class="p">())]</span>
+
+
+<span class="c1"># If you have implemented the mock data function for the dataset tests, you can simply copy-paste from there</span>
+<span class="n">configs</span> <span class="o">=</span> <span class="n">combinations_grid</span><span class="p">(</span><span class="n">split</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">),</span> <span class="n">foo</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">configs</span><span class="p">:</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;my-dataset&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="n">num_samples</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">:</span>
+        <span class="n">num_samples</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">num_samples</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To speed this up, it is useful to temporarily comment out all unnecessary I/O, such as loading of images or annotation
+files.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./others/vision/torchvision/prototype/datasets/_builtin"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../../../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

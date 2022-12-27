@@ -1,0 +1,561 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Classification &#8212; My sample book</title>
+    
+  <link href="../../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/togglebutton.js"></script>
+    <script src="../../../../_static/clipboard.min.js"></script>
+    <script src="../../../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Cheat Sheet
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../pytorch/pytorch_cheatsheet.html">
+   1. Pytorch Cheatsheet
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tensorflow basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../old/1.tensor.html">
+   2. Introduction to Tensors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../old/2.variable.html">
+   3. Introduction to Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../old/3.autodiff.html">
+   4. Introduction to gradients and automatic differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../old/5.intro_to_modules.html">
+   5. Introduction to modules, layers, and models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../old/6.basic_training_loops.html">
+   7. Basic training loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../old/7.keras_sequential_model.html">
+   8. The Sequential model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../tf_create_model.html">
+   9. 三種搭建神經網路的方式
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../hands_on_ml3/tf_customization.html">
+   10. Customization
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Pytorch resource summarise
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../pytorch/d2l/d2l_linear_regression.html">
+   11. Linear regression (d2l)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../pytorch/d2l/d2l_softmax_regression.html">
+   12. Softmax regression (d2l)
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../../_sources/others/vision/references/video_classification/README.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fothers/vision/references/video_classification/README.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preparation">
+   Data preparation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training">
+   Training
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multiple-gpus">
+     Multiple GPUs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#single-gpu">
+     Single GPU
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#additional-kinetics-versions">
+     Additional Kinetics versions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#video-classification-models">
+   Video classification models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#video-resnet-models">
+     Video ResNet models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3d">
+     S3D
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#additional-video-modelling-resources">
+     Additional video modelling resources
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#references">
+     References
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Video Classification</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preparation">
+   Data preparation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training">
+   Training
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multiple-gpus">
+     Multiple GPUs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#single-gpu">
+     Single GPU
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#additional-kinetics-versions">
+     Additional Kinetics versions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#video-classification-models">
+   Video classification models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#video-resnet-models">
+     Video ResNet models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#s3d">
+     S3D
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#additional-video-modelling-resources">
+     Additional video modelling resources
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#references">
+     References
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="video-classification">
+<h1>Video Classification<a class="headerlink" href="#video-classification" title="Permalink to this headline">¶</a></h1>
+<p>We present a simple training script that can be used for replicating the result of <a class="reference external" href="https://research.fb.com/wp-content/uploads/2018/04/a-closer-look-at-spatiotemporal-convolutions-for-action-recognition.pdf">resenet-based video models</a>. All models are trained on <a class="reference external" href="https://deepmind.com/research/open-source/kinetics">Kinetics400 dataset</a>, a benchmark dataset for human-action recognition. The accuracy is reported on the traditional validation split.</p>
+<div class="section" id="data-preparation">
+<h2>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
+<p>If you already have downloaded <a class="reference external" href="https://deepmind.com/research/open-source/kinetics">Kinetics400 dataset</a>,
+please proceed directly to the next section.</p>
+<p>To download videos, one can use <a class="reference external" href="https://github.com/Showmax/kinetics-downloader">https://github.com/Showmax/kinetics-downloader</a>. Please note that the dataset can take up upwards of 400GB, depending on the quality setting during download.</p>
+</div>
+<div class="section" id="training">
+<h2>Training<a class="headerlink" href="#training" title="Permalink to this headline">¶</a></h2>
+<p>We assume the training and validation AVI videos are stored at <code class="docutils literal notranslate"><span class="pre">/data/kinectics400/train</span></code> and
+<code class="docutils literal notranslate"><span class="pre">/data/kinectics400/val</span></code>. For training we suggest starting with the hyperparameters reported in the <a class="reference external" href="https://research.fb.com/wp-content/uploads/2018/04/a-closer-look-at-spatiotemporal-convolutions-for-action-recognition.pdf">paper</a>, in order to match the performance of said models. Clip sampling strategy is a particularly important parameter during training, and we suggest using random temporal jittering during training - in other words sampling multiple training clips from each video with random start times during at every epoch. This functionality is built into our training script, and optimal hyperparameters are set by default.</p>
+<div class="section" id="multiple-gpus">
+<h3>Multiple GPUs<a class="headerlink" href="#multiple-gpus" title="Permalink to this headline">¶</a></h3>
+<p>Run the training on a single node with 8 GPUs:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>torchrun --nproc_per_node<span class="o">=</span><span class="m">8</span> train.py --data-path<span class="o">=</span>/data/kinectics400 --kinetics-version<span class="o">=</span><span class="s2">&quot;400&quot;</span> --lr <span class="m">0</span>.08 --cache-dataset --sync-bn --amp 
+</pre></div>
+</div>
+<p><strong>Note:</strong> all our models were trained on 8 nodes with 8 V100 GPUs each for a total of 64 GPUs. Expected training time for 64 GPUs is 24 hours, depending on the storage solution.
+<strong>Note 2:</strong> hyperparameters for exact replication of our training can be found on the section below. Some hyperparameters such as learning rate must be scaled linearly in proportion to the number of GPUs. The default values assume 64 GPUs.</p>
+</div>
+<div class="section" id="single-gpu">
+<h3>Single GPU<a class="headerlink" href="#single-gpu" title="Permalink to this headline">¶</a></h3>
+<p><strong>Note:</strong> training on a single gpu can be extremely slow.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python train.py --data-path<span class="o">=</span>/data/kinectics400 --kinetics-version<span class="o">=</span><span class="s2">&quot;400&quot;</span> --batch-size<span class="o">=</span><span class="m">8</span> --cache-dataset
+</pre></div>
+</div>
+</div>
+<div class="section" id="additional-kinetics-versions">
+<h3>Additional Kinetics versions<a class="headerlink" href="#additional-kinetics-versions" title="Permalink to this headline">¶</a></h3>
+<p>Since the original release, additional versions of Kinetics dataset became available (Kinetics 600).
+Our training scripts support these versions of dataset as well by setting the <code class="docutils literal notranslate"><span class="pre">--kinetics-version</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">&quot;600&quot;</span></code>.</p>
+<p><strong>Note:</strong> training on Kinetics 600 requires a different set of hyperparameters for optimal performance. We do not provide Kinetics 600 pretrained models.</p>
+</div>
+</div>
+<div class="section" id="video-classification-models">
+<h2>Video classification models<a class="headerlink" href="#video-classification-models" title="Permalink to this headline">¶</a></h2>
+<p>Starting with version <code class="docutils literal notranslate"><span class="pre">0.4.0</span></code> we have introduced support for basic video tasks and video classification modelling.
+For more information about the available models check <a class="reference external" href="https://pytorch.org/docs/stable/torchvision/models.html#video-classification">here</a>.</p>
+<div class="section" id="video-resnet-models">
+<h3>Video ResNet models<a class="headerlink" href="#video-resnet-models" title="Permalink to this headline">¶</a></h3>
+<p>See reference training script <a class="reference external" href="https://github.com/pytorch/vision/blob/main/references/video_classification/train.py">here</a>:</p>
+<ul class="simple">
+<li><p>input space: RGB</p></li>
+<li><p>resize size: [128, 171]</p></li>
+<li><p>crop size: [112, 112]</p></li>
+<li><p>mean: [0.43216, 0.394666, 0.37645]</p></li>
+<li><p>std: [0.22803, 0.22145, 0.216989]</p></li>
+<li><p>number of classes: 400</p></li>
+</ul>
+<p>Input data augmentations at training time (with optional parameters):</p>
+<ol class="simple">
+<li><p>ConvertImageDtype</p></li>
+<li><p>Resize (resize size value above)</p></li>
+<li><p>Random horizontal flip (0.5)</p></li>
+<li><p>Normalization (mean, std, see values above)</p></li>
+<li><p>Random Crop (crop size value above)</p></li>
+<li><p>Convert BCHW to CBHW</p></li>
+</ol>
+<p>Input data augmentations at validation time (with optional parameters):</p>
+<ol class="simple">
+<li><p>ConvertImageDtype</p></li>
+<li><p>Resize (resize size value above)</p></li>
+<li><p>Normalization (mean, std, see values above)</p></li>
+<li><p>Center Crop (crop size value above)</p></li>
+<li><p>Convert BCHW to CBHW</p></li>
+</ol>
+<p>This translates in the following set of command-line arguments. Please note that <code class="docutils literal notranslate"><span class="pre">--batch-size</span></code> parameter controls the
+batch size per GPU. Moreover note that our default <code class="docutils literal notranslate"><span class="pre">--lr</span></code> is configured for 64 GPUs which is how many we used for the
+Video resnet models:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># number of frames per clip</span>
+<span class="o">--</span><span class="n">clip_len</span> <span class="mi">16</span> \ 
+<span class="o">--</span><span class="n">frame</span><span class="o">-</span><span class="n">rate</span> <span class="mi">15</span> \
+<span class="c1"># allow for temporal jittering</span>
+<span class="o">--</span><span class="n">clips_per_video</span> <span class="mi">5</span> \
+<span class="o">--</span><span class="n">batch</span><span class="o">-</span><span class="n">size</span> <span class="mi">24</span> \
+<span class="o">--</span><span class="n">epochs</span> <span class="mi">45</span> \
+<span class="o">--</span><span class="n">lr</span> <span class="mf">0.64</span> \
+<span class="c1"># we use 10 epochs for linear warmup</span>
+<span class="o">--</span><span class="n">lr</span><span class="o">-</span><span class="n">warmup</span><span class="o">-</span><span class="n">epochs</span> <span class="mi">10</span> \
+<span class="c1"># learning rate is decayed at 20, 30, and 40 epoch by a factor of 10</span>
+<span class="o">--</span><span class="n">lr</span><span class="o">-</span><span class="n">milestones</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span> \
+<span class="o">--</span><span class="n">lr</span><span class="o">-</span><span class="n">gamma</span> <span class="mf">0.1</span> \
+<span class="o">--</span><span class="n">train</span><span class="o">-</span><span class="n">resize</span><span class="o">-</span><span class="n">size</span> <span class="mi">128</span> <span class="mi">171</span> \
+<span class="o">--</span><span class="n">train</span><span class="o">-</span><span class="n">crop</span><span class="o">-</span><span class="n">size</span> <span class="mi">112</span> <span class="mi">112</span> \
+<span class="o">--</span><span class="n">val</span><span class="o">-</span><span class="n">resize</span><span class="o">-</span><span class="n">size</span> <span class="mi">128</span> <span class="mi">171</span> \
+<span class="o">--</span><span class="n">val</span><span class="o">-</span><span class="n">crop</span><span class="o">-</span><span class="n">size</span> <span class="mi">112</span> <span class="mi">112</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="s3d">
+<h3>S3D<a class="headerlink" href="#s3d" title="Permalink to this headline">¶</a></h3>
+<p>The S3D model was trained similarly to the above but with the following changes on the default configuration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">batch</span><span class="o">-</span><span class="n">size</span><span class="o">=</span><span class="mi">12</span> <span class="o">--</span><span class="n">lr</span> <span class="mf">0.2</span> <span class="o">--</span><span class="n">clip</span><span class="o">-</span><span class="nb">len</span> <span class="mi">64</span> <span class="o">--</span><span class="n">clips</span><span class="o">-</span><span class="n">per</span><span class="o">-</span><span class="n">video</span> <span class="mi">5</span> <span class="o">--</span><span class="n">sync</span><span class="o">-</span><span class="n">bn</span> \
+<span class="o">--</span><span class="n">train</span><span class="o">-</span><span class="n">resize</span><span class="o">-</span><span class="n">size</span> <span class="mi">256</span> <span class="mi">256</span> <span class="o">--</span><span class="n">train</span><span class="o">-</span><span class="n">crop</span><span class="o">-</span><span class="n">size</span> <span class="mi">224</span> <span class="mi">224</span> <span class="o">--</span><span class="n">val</span><span class="o">-</span><span class="n">resize</span><span class="o">-</span><span class="n">size</span> <span class="mi">256</span> <span class="mi">256</span> <span class="o">--</span><span class="n">val</span><span class="o">-</span><span class="n">crop</span><span class="o">-</span><span class="n">size</span> <span class="mi">224</span> <span class="mi">224</span>
+</pre></div>
+</div>
+<p>We used 64 GPUs to train the architecture.</p>
+<p>To estimate the validation statistics of the model, we run the reference script with the following configuration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">batch</span><span class="o">-</span><span class="n">size</span><span class="o">=</span><span class="mi">16</span> <span class="o">--</span><span class="n">test</span><span class="o">-</span><span class="n">only</span> <span class="o">--</span><span class="n">clip</span><span class="o">-</span><span class="nb">len</span> <span class="mi">128</span> <span class="o">--</span><span class="n">clips</span><span class="o">-</span><span class="n">per</span><span class="o">-</span><span class="n">video</span> <span class="mi">1</span> 
+</pre></div>
+</div>
+</div>
+<div class="section" id="additional-video-modelling-resources">
+<h3>Additional video modelling resources<a class="headerlink" href="#additional-video-modelling-resources" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/facebookresearch/VMZ">Video Model Zoo</a></p></li>
+<li><p><a class="reference external" href="https://github.com/facebookresearch/SlowFast">PySlowFast</a></p></li>
+</ul>
+</div>
+<div class="section" id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
+<p>[0] <em>D. Tran, H. Wang, L. Torresani, J. Ray, Y. LeCun and M. Paluri</em>: A Closer Look at Spatiotemporal Convolutions for Action Recognition. <em>CVPR 2018</em> (<a class="reference external" href="https://research.fb.com/wp-content/uploads/2018/04/a-closer-look-at-spatiotemporal-convolutions-for-action-recognition.pdf">paper</a>)</p>
+<p>[1] <em>W. Kay, J. Carreira, K. Simonyan, B. Zhang, C. Hillier, S. Vijayanarasimhan, F. Viola, T. Green, T. Back, P. Natsev, M. Suleyman, A. Zisserman</em>: The Kinetics Human Action Video Dataset (<a class="reference external" href="https://arxiv.org/abs/1705.06950">paper</a>)</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./others/vision/references/video_classification"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

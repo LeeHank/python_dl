@@ -1,0 +1,1224 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SSD (single shot) &#8212; My sample book</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Cheat Sheet
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../pytorch/pytorch_cheatsheet.html">
+   1. Pytorch Cheatsheet
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tensorflow basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/1.tensor.html">
+   2. Introduction to Tensors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/2.variable.html">
+   3. Introduction to Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/3.autodiff.html">
+   4. Introduction to gradients and automatic differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/5.intro_to_modules.html">
+   5. Introduction to modules, layers, and models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/6.basic_training_loops.html">
+   7. Basic training loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/7.keras_sequential_model.html">
+   8. The Sequential model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tf_create_model.html">
+   9. 三種搭建神經網路的方式
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../hands_on_ml3/tf_customization.html">
+   10. Customization
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Pytorch resource summarise
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../pytorch/d2l/d2l_linear_regression.html">
+   11. Linear regression (d2l)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../pytorch/d2l/d2l_softmax_regression.html">
+   12. Softmax regression (d2l)
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/d2l_li_mu/computer_vision/ssd.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fd2l_li_mu/computer_vision/ssd.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/d2l_li_mu/computer_vision/ssd.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model">
+   Model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     類別預測層
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bounding-box">
+     bounding box 預測層
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multi-scale-prediction">
+     連結到 multi-scale prediction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#block">
+     高和寬減半 block
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     [
+     <strong>
+      基本网络块
+     </strong>
+     ]
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     完整的模型
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   训练模型
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     读取数据集和初始化
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     [
+     <strong>
+      定义损失函数和评价函数
+     </strong>
+     ]
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     [
+     <strong>
+      训练模型
+     </strong>
+     ]
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   [
+   <strong>
+    预测目标
+   </strong>
+   ]
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   小结
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id10">
+   练习
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>SSD (single shot)</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model">
+   Model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     類別預測層
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bounding-box">
+     bounding box 預測層
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multi-scale-prediction">
+     連結到 multi-scale prediction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#block">
+     高和寬減半 block
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     [
+     <strong>
+      基本网络块
+     </strong>
+     ]
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     完整的模型
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   训练模型
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     读取数据集和初始化
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     [
+     <strong>
+      定义损失函数和评价函数
+     </strong>
+     ]
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     [
+     <strong>
+      训练模型
+     </strong>
+     ]
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   [
+   <strong>
+    预测目标
+   </strong>
+   ]
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   小结
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id10">
+   练习
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="ssd-single-shot">
+<h1>SSD (single shot)<a class="headerlink" href="#ssd-single-shot" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>這一章會用到前幾章的先備知識，來自己寫一個簡單的 ssd</p>
+<ul>
+<li><p>bounding box</p></li>
+<li><p>anchor box.</p></li>
+<li><p>multiscale-object detection.</p></li>
+<li><p>banana dataset.</p></li>
+</ul>
+</li>
+<li><p>ssd 簡單快速且被廣泛使用，儘管他只是 object detection 的其中一種模型，但學到的這些概念也都可以類化到其他模型</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
+<span class="kn">from</span> <span class="nn">d2l</span> <span class="kn">import</span> <span class="n">torch</span> <span class="k">as</span> <span class="n">d2l</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<p><img alt="单发多框检测模型主要由一个基础网络块和若干多尺度特征块串联而成。" src="../../_images/ssd.svg" /></p>
+<ul class="simple">
+<li><p>上圖描述了 SSD 的 model 設計</p></li>
+</ul>
+<p>上圖描述了单发多框检测模型的设计。
+此模型主要由基础网络组成，其后是几个多尺度特征块。
+基本网络用于从输入图像中提取特征，因此它可以使用深度卷积神经网络。
+单发多框检测论文中选用了在分类层之前截断的VGG :cite:<code class="docutils literal notranslate"><span class="pre">Liu.Anguelov.Erhan.ea.2016</span></code>，现在也常用ResNet替代。
+我们可以设计基础网络，使它输出的高和宽较大。
+这样一来，基于该特征图生成的锚框数量较多，可以用来检测尺寸较小的目标。
+接下来的每个多尺度特征块将上一层提供的特征图的高和宽缩小（如减半），并使特征图中每个单元在输入图像上的感受野变得更广阔。</p>
+<p>回想一下在 :numref:<code class="docutils literal notranslate"><span class="pre">sec_multiscale-object-detection</span></code>中，通过深度神经网络分层表示图像的多尺度目标检测的设计。
+由于接近 :numref:<code class="docutils literal notranslate"><span class="pre">fig_ssd</span></code>顶部的多尺度特征图较小，但具有较大的感受野，它们适合检测较少但较大的物体。
+简而言之，通过多尺度特征块，单发多框检测生成不同大小的锚框，并通过预测边界框的类别和偏移量来检测大小不同的目标，因此这是一个多尺度目标检测模型。</p>
+<p>:label:<code class="docutils literal notranslate"><span class="pre">fig_ssd</span></code></p>
+<p>在下面，我们将介绍 :numref:<code class="docutils literal notranslate"><span class="pre">fig_ssd</span></code>中不同块的实施细节。
+首先，我们将讨论如何实施类别和边界框预测。</p>
+<div class="section" id="id1">
+<h3>類別預測層<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>假設 object detection 的 object 總數量為 <span class="math notranslate nohighlight">\(q\)</span>，那總類別就會是 <span class="math notranslate nohighlight">\(q+1\)</span>，因為會多放一個背景類 0 進去</p></li>
+<li><p>在某個 image scale 下 (就是某種 img size 下)，假設 feature map 的高寬分別為 <span class="math notranslate nohighlight">\(h\)</span> 和 <span class="math notranslate nohighlight">\(w\)</span></p></li>
+<li><p>在這張 feature map 下，以每個 pixel 為中心，生成 <span class="math notranslate nohighlight">\(a\)</span> 個 anchor box (<span class="math notranslate nohighlight">\(a\)</span> = anchor box 縮寫)，就需要進行 <span class="math notranslate nohighlight">\(hwa\)</span> 個 anchor box 的 classification.</p></li>
+<li><p>每一次的 anchor box 預測，都需要輸出 <span class="math notranslate nohighlight">\(q+1\)</span> 個 pred_prob</p></li>
+<li><p>所以，如果使用以往常用的 fully connected layer 來當預測層，這個 layer 就會是拉直成 <span class="math notranslate nohighlight">\(h \times w \times a \times (q+1)\)</span> 維的向量，然後才做預測。</p></li>
+<li><p>很明顯，這個 fully connected layer 會使得參數變過多</p></li>
+<li><p>所以，這邊借用 NiN (Network in Network) 時學到的概念，我們不要用 fully connected layer 來當 class prediction layer，而是用 convolution layer:</p>
+<ul>
+<li><p>此 conv layer 的輸出，會和輸入的feature map 高寬相同，都是 h, w，那等於 pixedl-wise 一一對應.</p></li>
+<li><p>通道數就會是 anchor 的數量 乘上 類別的數量 = <span class="math notranslate nohighlight">\(a \times (q+1)\)</span></p></li>
+<li><p>總體來說，就是建立了 (h, w, <span class="math notranslate nohighlight">\(q \times (q+1)\)</span>) 的 convolution layer，該通道就負責該 pixel 對應的所有 anchor box 的預測結果.</p></li>
+<li><p>該 pixecl 對應的通道的向量叫 v，那我們要取該 pixel 所對應的第 i 個 anchor box 的分類結果，就利用 index 去取</p></li>
+<li><p>寫成 code 就長下面這樣</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cls_predictor</span><span class="p">(</span><span class="n">num_inputs</span><span class="p">,</span> <span class="n">num_anchors</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    args:  </span>
+<span class="sd">      - num_inputs: 前一層 conv layer 的 通道數</span>
+<span class="sd">      - num_anchors: 做預測時，每個 pixel 會生出幾個 anchor box. </span>
+<span class="sd">      - num_classes: 總共有多少個類別要做預測</span>
+<span class="sd">    return:</span>
+<span class="sd">      - conv layer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span>
+        <span class="n">num_inputs</span><span class="p">,</span> 
+        <span class="n">num_anchors</span> <span class="o">*</span> <span class="p">(</span><span class="n">num_classes</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span> <span class="c1"># same padding</span>
+    <span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>舉例來說</p>
+<ul>
+<li><p>上一層的 feature map 如果 高寬是 4, 通道數是 512 的 conv layer (此時 shape 為 (batch_size, 512, 4, 4)</p></li>
+<li><p>我要對每個 pixel 生出 5 個 anchor box (所以會生出 4x4x5 個 anchor box).</p></li>
+<li><p>對每個 anchor box，做 2 類 (貓 vs 狗) 的預測.</p></li>
+<li><p>那我的 classification layer 會長這樣：</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fake feature map</span>
+<span class="n">feature_map</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="c1"># batch size = 2, 通道數 512, 高寬都是 4</span>
+
+<span class="c1"># classifcation layer</span>
+<span class="n">cls_conv</span> <span class="o">=</span> <span class="n">cls_predictor</span><span class="p">(</span><span class="n">num_inputs</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span> <span class="n">num_anchors</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">num_classes</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># predict</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">cls_conv</span><span class="p">(</span><span class="n">feature_map</span><span class="p">)</span>
+
+<span class="c1"># print shape</span>
+<span class="n">y1</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 15, 4, 4])
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，batch size 為 2，然後通道數 15, 高寬仍然是 4.</p></li>
+<li><p>這個通道數 = 15，就是 5 個 anchor box 乘上 (2+1) 個類別的預測結果 (+1 是背景類)</p></li>
+</ul>
+</div>
+<div class="section" id="bounding-box">
+<h3>bounding box 預測層<a class="headerlink" href="#bounding-box" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>除了預測每個 anchor box 所 crop 下來的圖，他的類別外，我們還要預測這個 anchor box 與 真實 bounding box 的 4 個 offset (分別是對 cx, cy, width ,height 的偏移量).</p></li>
+<li><p>所以，做法同上，code 寫成：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bbox_predictor</span><span class="p">(</span><span class="n">num_inputs</span><span class="p">,</span> <span class="n">num_anchors</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">num_inputs</span><span class="p">,</span> <span class="n">num_anchors</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>一樣來試試效果</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fake feature map</span>
+<span class="n">feature_map</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="c1"># batch size = 2, 通道數 512, 高寬都是 4</span>
+
+<span class="c1"># bbox offset prediction layer</span>
+<span class="n">bbox_pred_conv</span> <span class="o">=</span> <span class="n">bbox_predictor</span><span class="p">(</span><span class="n">num_inputs</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span> <span class="n">num_anchors</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># predict</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">bbox_pred_conv</span><span class="p">(</span><span class="n">feature_map</span><span class="p">)</span>
+
+<span class="c1"># print shape</span>
+<span class="n">y1</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 20, 4, 4])
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>從通道數可以證實，20 = 5(個anchor box) x 4 (個 offset 預測值)</p></li>
+</ul>
+</div>
+<div class="section" id="multi-scale-prediction">
+<h3>連結到 multi-scale prediction<a class="headerlink" href="#multi-scale-prediction" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>因為 SSD 會一路將原圖轉出來的 feature map，一路 down-sampling 下去成好幾個 feature map，並對每個 feature map 做上面的預測.</p></li>
+<li><p>所以，可能第一個 feature map 的寬高，和第二個 feature map 的寬高就不同了，那預測出來的 conv layer 當然 shape 也不同，就不方便把結果統合再一起，去算 loss</p></li>
+<li><p>舉例來說：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fake feature maps</span>
+<span class="n">first_scale_feature_map</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="c1"># 這個 feature map，他的寬高是 20</span>
+<span class="n">second_scale_feature_map</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="c1"># 這個 feature map ，他的寬高已經減半成 20</span>
+
+<span class="c1"># 對這兩張 feature maps 的預測</span>
+<span class="n">first_cls_conv</span> <span class="o">=</span> <span class="n">cls_predictor</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># 對第一張 feature map，他 input 的 channel 是 8，然後對每個 pixel 我想生 5 個 anchor box</span>
+<span class="n">second_cls_conv</span> <span class="o">=</span> <span class="n">cls_predictor</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># 對第二張 feature map，他 input 的 channel 是 16，然後對每個 pixel 我想生 3 個 anchor box</span>
+
+<span class="c1"># prediction</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">first_cls_conv</span><span class="p">(</span><span class="n">first_scale_feature_map</span><span class="p">)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">second_cls_conv</span><span class="p">(</span><span class="n">second_scale_feature_map</span><span class="p">)</span>
+
+<span class="c1"># shape</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 55, 20, 20])
+torch.Size([2, 33, 10, 10])
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，這兩個預測結果，除了 batch size 這一維外，其他都長不一樣。</p>
+<ul>
+<li><p>第一張 feature map，最後的通道數 55，因為 5x(10+1)</p></li>
+<li><p>第二張 feature map，最後的通道數 33，因為 3x(10+1)</p></li>
+<li><p>且最後的高寬也都不同，一個是 20x20, 一個是 10x10.</p></li>
+</ul>
+</li>
+<li><p>所以，解決的辦法是我只保留第一維(batch_size)，其他三維，先把順序調整成(h,w,channel)再flatten，那就可以 concat 起來了</p></li>
+<li><p>至於要先把順序調成 (h, w, channel) 才 flatten，是因為這樣 flatten 後，他的排列會是 該h該w 下 (i.e. 該空間座標(x,y)下) 的預測結果 (anchor box1 的 q+1 個 class 的 pred_prob, anchor box2 的 q+1 個 class 的 pred_prob, …)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flatten_pred</span><span class="p">(</span><span class="n">pred</span><span class="p">):</span>
+    <span class="n">reorder_res</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">flatten_res</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">reorder_res</span><span class="p">,</span> <span class="n">start_dim</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># 從第 1 維開始 flatten(i.e. 保留第 0 維的 batch size)</span>
+    <span class="k">return</span> <span class="n">flatten_res</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y1_flatten</span> <span class="o">=</span> <span class="n">flatten_pred</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span>
+<span class="n">y2_flatten</span> <span class="o">=</span> <span class="n">flatten_pred</span><span class="p">(</span><span class="n">y2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y1_flatten</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y2_flatten</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 22000])
+torch.Size([2, 3300])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">concat_preds</span><span class="p">(</span><span class="n">preds</span><span class="p">):</span>
+    <span class="n">flatten_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">flatten_pred</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">preds</span><span class="p">]</span>
+    <span class="n">concat_res</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">flatten_list</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">concat_res</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">concat_preds</span><span class="p">([</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">])</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 25300])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="block">
+<h3>高和寬減半 block<a class="headerlink" href="#block" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>在 multi-scale detection 的時候，他的 multi-scale 其實就是把原圖經 feature extraction (e.g. 用 resnet50 做 feature extraction) 的 feature map，一路高寬減半下去得到越來越小的 feature map，並對每個 feature map 做預測</p></li>
+<li><p>那這個高寬減半的過程，當然不是只做個 max-pooling 而已，而是會連續做兩個 (conv-batchnorm-relu) 再 max-pooling 來讓他高寬減半 (這邊的設計就隨意啦，這樣的連續兩個 conv-batchnorm-relu 的設計，只是參考 vgg block 的設計)</p></li>
+<li><p>這句看不懂：对于此高和宽减半块的输入和输出特征图，因为 1x2 + (3-1) + (3-1) = 6，所以输出中的每个单元在输入上都有一个 6x6 的感受野。因此，高和宽减半块会扩大每个单元在其输出特征图中的感受野。</p></li>
+<li><p>所以，這邊定義一個這種 block，後續就可以一直再利用：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">down_sample_blk</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">):</span>
+    <span class="n">blk</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">blk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span>
+                <span class="n">in_channels</span><span class="p">,</span> 
+                <span class="n">out_channels</span><span class="p">,</span>
+                <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
+                <span class="n">padding</span><span class="o">=</span><span class="mi">1</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">blk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">out_channels</span><span class="p">))</span>
+        <span class="n">blk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">())</span>
+        <span class="n">in_channels</span> <span class="o">=</span> <span class="n">out_channels</span>
+    <span class="n">blk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="n">blk</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>來測試一下，如果前一層的 feature map 的 shape 是 (2, 3, 20, 20) # batch_size = 2, 通道數 3, 高寬 20x20.</p></li>
+<li><p>那經過高寬減半block，shape 應該要變成 (2, out_channel, 10, 10)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">block</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">block</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">forward</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span> <span class="n">down_sample_blk</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 10, 10, 10])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>[<strong>基本网络块</strong>]<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>基本网络块用于从输入图像中抽取特征。
+为了计算简洁，我们构造了一个小的基础网络，该网络串联3个高和宽减半块，并逐步将通道数翻倍。
+给定输入图像的形状为<span class="math notranslate nohighlight">\(256\times256\)</span>，此基本网络块输出的特征图形状为<span class="math notranslate nohighlight">\(32 \times 32\)</span>（<span class="math notranslate nohighlight">\(256/2^3=32\)</span>）。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">base_net</span><span class="p">():</span>
+    <span class="n">blk</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">num_filters</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num_filters</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">blk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">down_sample_blk</span><span class="p">(</span><span class="n">num_filters</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">num_filters</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="n">blk</span><span class="p">)</span>
+
+<span class="n">forward</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">)),</span> <span class="n">base_net</span><span class="p">())</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 64, 32, 32])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>完整的模型<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>[<strong>完整的单发多框检测模型由五个模块组成</strong>]。每个块生成的特征图既用于生成锚框，又用于预测这些锚框的类别和偏移量。在这五个模块中，第一个是基本网络块，第二个到第四个是高和宽减半块，最后一个模块使用全局最大池将高度和宽度都降到1。从技术上讲，第二到第五个区块都是 :numref:<code class="docutils literal notranslate"><span class="pre">fig_ssd</span></code>中的多尺度特征块。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_blk</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">blk</span> <span class="o">=</span> <span class="n">base_net</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">blk</span> <span class="o">=</span> <span class="n">down_sample_blk</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">blk</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">AdaptiveMaxPool2d</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">blk</span> <span class="o">=</span> <span class="n">down_sample_blk</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">blk</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>现在我们[<strong>为每个块定义前向传播</strong>]。与图像分类任务不同，此处的输出包括：CNN特征图<code class="docutils literal notranslate"><span class="pre">Y</span></code>；在当前尺度下根据<code class="docutils literal notranslate"><span class="pre">Y</span></code>生成的锚框；预测的这些锚框的类别和偏移量（基于<code class="docutils literal notranslate"><span class="pre">Y</span></code>）。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">blk_forward</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">blk</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">ratio</span><span class="p">,</span> <span class="n">cls_predictor</span><span class="p">,</span> <span class="n">bbox_predictor</span><span class="p">):</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">blk</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">anchors</span> <span class="o">=</span> <span class="n">d2l</span><span class="o">.</span><span class="n">multibox_prior</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">sizes</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">ratios</span><span class="o">=</span><span class="n">ratio</span><span class="p">)</span>
+    <span class="n">cls_preds</span> <span class="o">=</span> <span class="n">cls_predictor</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+    <span class="n">bbox_preds</span> <span class="o">=</span> <span class="n">bbox_predictor</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">anchors</span><span class="p">,</span> <span class="n">cls_preds</span><span class="p">,</span> <span class="n">bbox_preds</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>回想一下，在 :numref:<code class="docutils literal notranslate"><span class="pre">fig_ssd</span></code>中，一个较接近顶部的多尺度特征块是用于检测较大目标的，因此需要生成更大的锚框。
+在上面的前向传播中，在每个多尺度特征块上，我们通过调用的<code class="docutils literal notranslate"><span class="pre">multibox_prior</span></code>函数（见 :numref:<code class="docutils literal notranslate"><span class="pre">sec_anchor</span></code>）的<code class="docutils literal notranslate"><span class="pre">sizes</span></code>参数传递两个比例值的列表。
+在下面，0.2和1.05之间的区间被均匀分成五个部分，以确定五个模块的在不同尺度下的较小值：0.2、0.37、0.54、0.71和0.88。
+之后，他们较大的值由<span class="math notranslate nohighlight">\(\sqrt{0.2 \times 0.37} = 0.272\)</span>、<span class="math notranslate nohighlight">\(\sqrt{0.37 \times 0.54} = 0.447\)</span>等给出。</p>
+<p>[~~超参数~~]</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sizes</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.272</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.37</span><span class="p">,</span> <span class="mf">0.447</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.54</span><span class="p">,</span> <span class="mf">0.619</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.71</span><span class="p">,</span> <span class="mf">0.79</span><span class="p">],</span>
+         <span class="p">[</span><span class="mf">0.88</span><span class="p">,</span> <span class="mf">0.961</span><span class="p">]]</span>
+<span class="n">ratios</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]]</span> <span class="o">*</span> <span class="mi">5</span>
+<span class="n">num_anchors</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sizes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">ratios</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>现在，我们就可以按如下方式[<strong>定义完整的模型</strong>]<code class="docutils literal notranslate"><span class="pre">TinySSD</span></code>了。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TinySSD</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TinySSD</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span> <span class="o">=</span> <span class="n">num_classes</span>
+        <span class="n">idx_to_in_channels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+            <span class="c1"># 即赋值语句self.blk_i=get_blk(i)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;blk_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">get_blk</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;cls_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">cls_predictor</span><span class="p">(</span><span class="n">idx_to_in_channels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                                                    <span class="n">num_anchors</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">))</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;bbox_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">bbox_predictor</span><span class="p">(</span><span class="n">idx_to_in_channels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                                                      <span class="n">num_anchors</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">anchors</span><span class="p">,</span> <span class="n">cls_preds</span><span class="p">,</span> <span class="n">bbox_preds</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+            <span class="c1"># getattr(self,&#39;blk_%d&#39;%i)即访问self.blk_i</span>
+            <span class="n">X</span><span class="p">,</span> <span class="n">anchors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cls_preds</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">bbox_preds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">blk_forward</span><span class="p">(</span>
+                <span class="n">X</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;blk_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">),</span> <span class="n">sizes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ratios</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;cls_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">),</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;bbox_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">))</span>
+        <span class="n">anchors</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">anchors</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">cls_preds</span> <span class="o">=</span> <span class="n">concat_preds</span><span class="p">(</span><span class="n">cls_preds</span><span class="p">)</span>
+        <span class="n">cls_preds</span> <span class="o">=</span> <span class="n">cls_preds</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+            <span class="n">cls_preds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">bbox_preds</span> <span class="o">=</span> <span class="n">concat_preds</span><span class="p">(</span><span class="n">bbox_preds</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">anchors</span><span class="p">,</span> <span class="n">cls_preds</span><span class="p">,</span> <span class="n">bbox_preds</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>我们[<strong>创建一个模型实例，然后使用它</strong>]对一个<span class="math notranslate nohighlight">\(256 \times 256\)</span>像素的小批量图像<code class="docutils literal notranslate"><span class="pre">X</span></code>(<strong>执行前向传播</strong>)。</p>
+<p>如本节前面部分所示，第一个模块输出特征图的形状为<span class="math notranslate nohighlight">\(32 \times 32\)</span>。
+回想一下，第二到第四个模块为高和宽减半块，第五个模块为全局汇聚层。
+由于以特征图的每个单元为中心有<span class="math notranslate nohighlight">\(4\)</span>个锚框生成，因此在所有五个尺度下，每个图像总共生成<span class="math notranslate nohighlight">\((32^2 + 16^2 + 8^2 + 4^2 + 1)\times 4 = 5444\)</span>个锚框。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">net</span> <span class="o">=</span> <span class="n">TinySSD</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">))</span>
+<span class="n">anchors</span><span class="p">,</span> <span class="n">cls_preds</span><span class="p">,</span> <span class="n">bbox_preds</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;output anchors:&#39;</span><span class="p">,</span> <span class="n">anchors</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;output class preds:&#39;</span><span class="p">,</span> <span class="n">cls_preds</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;output bbox preds:&#39;</span><span class="p">,</span> <span class="n">bbox_preds</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>output anchors: torch.Size([1, 5444, 4])
+output class preds: torch.Size([32, 5444, 2])
+output bbox preds: torch.Size([32, 21776])
+/home/d2l-worker/miniconda3/envs/d2l-zh-release-0/lib/python3.8/site-packages/torch/functional.py:445: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at  ../aten/src/ATen/native/TensorShape.cpp:2157.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>训练模型<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>现在，我们将描述如何训练用于目标检测的单发多框检测模型。</p>
+<div class="section" id="id5">
+<h3>读取数据集和初始化<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>首先，让我们[<strong>读取</strong>] :numref:<code class="docutils literal notranslate"><span class="pre">sec_object-detection-dataset</span></code>中描述的(<strong>香蕉检测数据集</strong>)。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">train_iter</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">d2l</span><span class="o">.</span><span class="n">load_data_bananas</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>read 1000 training examples
+read 100 validation examples
+</pre></div>
+</div>
+</div>
+</div>
+<p>香蕉检测数据集中，目标的类别数为1。
+定义好模型后，我们需要(<strong>初始化其参数并定义优化算法</strong>)。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">device</span><span class="p">,</span> <span class="n">net</span> <span class="o">=</span> <span class="n">d2l</span><span class="o">.</span><span class="n">try_gpu</span><span class="p">(),</span> <span class="n">TinySSD</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">5e-4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>[<strong>定义损失函数和评价函数</strong>]<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>目标检测有两种类型的损失。
+第一种有关锚框类别的损失：我们可以简单地复用之前图像分类问题里一直使用的交叉熵损失函数来计算；
+第二种有关正类锚框偏移量的损失：预测偏移量是一个回归问题。
+但是，对于这个回归问题，我们在这里不使用 :numref:<code class="docutils literal notranslate"><span class="pre">subsec_normal_distribution_and_squared_loss</span></code>中描述的平方损失，而是使用<span class="math notranslate nohighlight">\(L_1\)</span>范数损失，即预测值和真实值之差的绝对值。
+掩码变量<code class="docutils literal notranslate"><span class="pre">bbox_masks</span></code>令负类锚框和填充锚框不参与损失的计算。
+最后，我们将锚框类别和偏移量的损失相加，以获得模型的最终损失函数。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cls_loss</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<span class="n">bbox_loss</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">L1Loss</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">calc_loss</span><span class="p">(</span><span class="n">cls_preds</span><span class="p">,</span> <span class="n">cls_labels</span><span class="p">,</span> <span class="n">bbox_preds</span><span class="p">,</span> <span class="n">bbox_labels</span><span class="p">,</span> <span class="n">bbox_masks</span><span class="p">):</span>
+    <span class="n">batch_size</span><span class="p">,</span> <span class="n">num_classes</span> <span class="o">=</span> <span class="n">cls_preds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cls_preds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="bp">cls</span> <span class="o">=</span> <span class="n">cls_loss</span><span class="p">(</span><span class="n">cls_preds</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">),</span>
+                   <span class="n">cls_labels</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">bbox</span> <span class="o">=</span> <span class="n">bbox_loss</span><span class="p">(</span><span class="n">bbox_preds</span> <span class="o">*</span> <span class="n">bbox_masks</span><span class="p">,</span>
+                     <span class="n">bbox_labels</span> <span class="o">*</span> <span class="n">bbox_masks</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">cls</span> <span class="o">+</span> <span class="n">bbox</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>我们可以沿用准确率评价分类结果。
+由于偏移量使用了<span class="math notranslate nohighlight">\(L_1\)</span>范数损失，我们使用<em>平均绝对误差</em>来评价边界框的预测结果。这些预测结果是从生成的锚框及其预测偏移量中获得的。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cls_eval</span><span class="p">(</span><span class="n">cls_preds</span><span class="p">,</span> <span class="n">cls_labels</span><span class="p">):</span>
+    <span class="c1"># 由于类别预测结果放在最后一维，argmax需要指定最后一维。</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">((</span><span class="n">cls_preds</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">(</span>
+        <span class="n">cls_labels</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="o">==</span> <span class="n">cls_labels</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+<span class="k">def</span> <span class="nf">bbox_eval</span><span class="p">(</span><span class="n">bbox_preds</span><span class="p">,</span> <span class="n">bbox_labels</span><span class="p">,</span> <span class="n">bbox_masks</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">((</span><span class="n">torch</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">bbox_labels</span> <span class="o">-</span> <span class="n">bbox_preds</span><span class="p">)</span> <span class="o">*</span> <span class="n">bbox_masks</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id7">
+<h3>[<strong>训练模型</strong>]<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>在训练模型时，我们需要在模型的前向传播过程中生成多尺度锚框（<code class="docutils literal notranslate"><span class="pre">anchors</span></code>），并预测其类别（<code class="docutils literal notranslate"><span class="pre">cls_preds</span></code>）和偏移量（<code class="docutils literal notranslate"><span class="pre">bbox_preds</span></code>）。
+然后，我们根据标签信息<code class="docutils literal notranslate"><span class="pre">Y</span></code>为生成的锚框标记类别（<code class="docutils literal notranslate"><span class="pre">cls_labels</span></code>）和偏移量（<code class="docutils literal notranslate"><span class="pre">bbox_labels</span></code>）。
+最后，我们根据类别和偏移量的预测和标注值计算损失函数。为了代码简洁，这里没有评价测试数据集。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_epochs</span><span class="p">,</span> <span class="n">timer</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">d2l</span><span class="o">.</span><span class="n">Timer</span><span class="p">()</span>
+<span class="n">animator</span> <span class="o">=</span> <span class="n">d2l</span><span class="o">.</span><span class="n">Animator</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;epoch&#39;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_epochs</span><span class="p">],</span>
+                        <span class="n">legend</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;class error&#39;</span><span class="p">,</span> <span class="s1">&#39;bbox mae&#39;</span><span class="p">])</span>
+<span class="n">net</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+    <span class="c1"># 训练精确度的和，训练精确度的和中的示例数</span>
+    <span class="c1"># 绝对误差的和，绝对误差的和中的示例数</span>
+    <span class="n">metric</span> <span class="o">=</span> <span class="n">d2l</span><span class="o">.</span><span class="n">Accumulator</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">net</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">train_iter</span><span class="p">:</span>
+        <span class="n">timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">trainer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">target</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="c1"># 生成多尺度的锚框，为每个锚框预测类别和偏移量</span>
+        <span class="n">anchors</span><span class="p">,</span> <span class="n">cls_preds</span><span class="p">,</span> <span class="n">bbox_preds</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="c1"># 为每个锚框标注类别和偏移量</span>
+        <span class="n">bbox_labels</span><span class="p">,</span> <span class="n">bbox_masks</span><span class="p">,</span> <span class="n">cls_labels</span> <span class="o">=</span> <span class="n">d2l</span><span class="o">.</span><span class="n">multibox_target</span><span class="p">(</span><span class="n">anchors</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+        <span class="c1"># 根据类别和偏移量的预测和标注值计算损失函数</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">calc_loss</span><span class="p">(</span><span class="n">cls_preds</span><span class="p">,</span> <span class="n">cls_labels</span><span class="p">,</span> <span class="n">bbox_preds</span><span class="p">,</span> <span class="n">bbox_labels</span><span class="p">,</span>
+                      <span class="n">bbox_masks</span><span class="p">)</span>
+        <span class="n">l</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">trainer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="n">metric</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cls_eval</span><span class="p">(</span><span class="n">cls_preds</span><span class="p">,</span> <span class="n">cls_labels</span><span class="p">),</span> <span class="n">cls_labels</span><span class="o">.</span><span class="n">numel</span><span class="p">(),</span>
+                   <span class="n">bbox_eval</span><span class="p">(</span><span class="n">bbox_preds</span><span class="p">,</span> <span class="n">bbox_labels</span><span class="p">,</span> <span class="n">bbox_masks</span><span class="p">),</span>
+                   <span class="n">bbox_labels</span><span class="o">.</span><span class="n">numel</span><span class="p">())</span>
+    <span class="n">cls_err</span><span class="p">,</span> <span class="n">bbox_mae</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">metric</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">metric</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">metric</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">metric</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">animator</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">cls_err</span><span class="p">,</span> <span class="n">bbox_mae</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;class err </span><span class="si">{</span><span class="n">cls_err</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">, bbox mae </span><span class="si">{</span><span class="n">bbox_mae</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">train_iter</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span> <span class="o">/</span> <span class="n">timer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> examples/sec on &#39;</span>
+      <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>class err 3.30e-03, bbox mae 3.18e-03
+5437.7 examples/sec on cuda:0
+</pre></div>
+</div>
+<img alt="../../_images/ssd_53_1.svg" src="../../_images/ssd_53_1.svg" /></div>
+</div>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>[<strong>预测目标</strong>]<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>在预测阶段，我们希望能把图像里面所有我们感兴趣的目标检测出来。在下面，我们读取并调整测试图像的大小，然后将其转成卷积层需要的四维格式。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_image</span><span class="p">(</span><span class="s1">&#39;../img/banana.jpg&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>使用下面的<code class="docutils literal notranslate"><span class="pre">multibox_detection</span></code>函数，我们可以根据锚框及其预测偏移量得到预测边界框。然后，通过非极大值抑制来移除相似的预测边界框。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">net</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">anchors</span><span class="p">,</span> <span class="n">cls_preds</span><span class="p">,</span> <span class="n">bbox_preds</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">))</span>
+    <span class="n">cls_probs</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">cls_preds</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">d2l</span><span class="o">.</span><span class="n">multibox_detection</span><span class="p">(</span><span class="n">cls_probs</span><span class="p">,</span> <span class="n">bbox_preds</span><span class="p">,</span> <span class="n">anchors</span><span class="p">)</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>最后，我们[<strong>筛选所有置信度不低于0.9的边界框，做为最终输出</strong>]。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+    <span class="n">d2l</span><span class="o">.</span><span class="n">set_figsize</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">d2l</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">bbox</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">((</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="n">row</span><span class="o">.</span><span class="n">device</span><span class="p">)]</span>
+        <span class="n">d2l</span><span class="o">.</span><span class="n">show_bboxes</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">score</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">cpu</span><span class="p">(),</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ssd_59_0.svg" src="../../_images/ssd_59_0.svg" /></div>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>小结<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>单发多框检测是一种多尺度目标检测模型。基于基础网络块和各个多尺度特征块，单发多框检测生成不同数量和不同大小的锚框，并通过预测这些锚框的类别和偏移量检测不同大小的目标。</p></li>
+<li><p>在训练单发多框检测模型时，损失函数是根据锚框的类别和偏移量的预测及标注值计算得出的。</p></li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h2>练习<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>你能通过改进损失函数来改进单发多框检测吗？例如，将预测偏移量用到的<span class="math notranslate nohighlight">\(L_1\)</span>范数损失替换为平滑<span class="math notranslate nohighlight">\(L_1\)</span>范数损失。它在零点附近使用平方函数从而更加平滑，这是通过一个超参数<span class="math notranslate nohighlight">\(\sigma\)</span>来控制平滑区域的：</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x) =
+    \begin{cases}
+    (\sigma x)^2/2,&amp; \text{if }|x| &lt; 1/\sigma^2\\
+    |x|-0.5/\sigma^2,&amp; \text{otherwise}
+    \end{cases}
+\end{split}\]</div>
+<p>当<span class="math notranslate nohighlight">\(\sigma\)</span>非常大时，这种损失类似于<span class="math notranslate nohighlight">\(L_1\)</span>范数损失。当它的值较小时，损失函数较平滑。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">smooth_l1</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">scalar</span> <span class="o">**</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(((</span><span class="n">scalar</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">/</span> <span class="p">(</span><span class="n">scalar</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
+<span class="n">sigmas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39;-.&#39;</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">d2l</span><span class="o">.</span><span class="n">set_figsize</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">sigmas</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">smooth_l1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">scalar</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">d2l</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sigma=</span><span class="si">%.1f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">s</span><span class="p">)</span>
+<span class="n">d2l</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ssd_61_0.svg" src="../../_images/ssd_61_0.svg" /></div>
+</div>
+<p>此外，在类别预测时，实验中使用了交叉熵损失：设真实类别<span class="math notranslate nohighlight">\(j\)</span>的预测概率是<span class="math notranslate nohighlight">\(p_j\)</span>，交叉熵损失为<span class="math notranslate nohighlight">\(-\log p_j\)</span>。我们还可以使用焦点损失 :cite:<code class="docutils literal notranslate"><span class="pre">Lin.Goyal.Girshick.ea.2017</span></code>：给定超参数<span class="math notranslate nohighlight">\(\gamma &gt; 0\)</span>和<span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>，此损失的定义为：</p>
+<div class="math notranslate nohighlight">
+\[ - \alpha (1-p_j)^{\gamma} \log p_j.\]</div>
+<p>可以看到，增大<span class="math notranslate nohighlight">\(\gamma\)</span>可以有效地减少正类预测概率较大时（例如<span class="math notranslate nohighlight">\(p_j &gt; 0.5\)</span>）的相对损失，因此训练可以更集中在那些错误分类的困难示例上。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">focal_loss</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">gamma</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">]):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">d2l</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">focal_loss</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">l</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;gamma=</span><span class="si">%.1f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="n">d2l</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ssd_63_0.svg" src="../../_images/ssd_63_0.svg" /></div>
+</div>
+<ol class="simple">
+<li><p>由于篇幅限制，我们在本节中省略了单发多框检测模型的一些实现细节。你能否从以下几个方面进一步改进模型：</p>
+<ol class="simple">
+<li><p>当目标比图像小得多时，模型可以将输入图像调大。</p></li>
+<li><p>通常会存在大量的负锚框。为了使类别分布更加平衡，我们可以将负锚框的高和宽减半。</p></li>
+<li><p>在损失函数中，给类别损失和偏移损失设置不同比重的超参数。</p></li>
+<li><p>使用其他方法评估目标检测模型，例如单发多框检测论文 :cite:<code class="docutils literal notranslate"><span class="pre">Liu.Anguelov.Erhan.ea.2016</span></code>中的方法。</p></li>
+</ol>
+</li>
+</ol>
+<p><a class="reference external" href="https://discuss.d2l.ai/t/3204">Discussions</a></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./d2l_li_mu/computer_vision"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
