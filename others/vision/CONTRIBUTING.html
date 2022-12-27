@@ -1,0 +1,739 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contributing to Torchvision &#8212; My sample book</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Cheat Sheet
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../pytorch/pytorch_cheatsheet.html">
+   1. Pytorch Cheatsheet
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tensorflow basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/1.tensor.html">
+   2. Introduction to Tensors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/2.variable.html">
+   3. Introduction to Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/3.autodiff.html">
+   4. Introduction to gradients and automatic differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/5.intro_to_modules.html">
+   5. Introduction to modules, layers, and models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/6.basic_training_loops.html">
+   7. Basic training loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/7.keras_sequential_model.html">
+   8. The Sequential model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tf_create_model.html">
+   9. 三種搭建神經網路的方式
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../hands_on_ml3/tf_customization.html">
+   10. Customization
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Pytorch resource summarise
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../pytorch/d2l/d2l_linear_regression.html">
+   11. Linear regression (d2l)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../pytorch/d2l/d2l_softmax_regression.html">
+   12. Softmax regression (d2l)
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/others/vision/CONTRIBUTING.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fothers/vision/CONTRIBUTING.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tl-dr">
+   TL;DR
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#issues">
+   Issues
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#development-installation">
+   Development installation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install-pytorch-nightly">
+     Install PyTorch Nightly
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install-torchvision">
+     Install Torchvision
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#development-process">
+   Development Process
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#code-formatting-and-typing">
+     Code formatting and typing
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#formatting">
+       Formatting
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#pre-commit-hooks">
+         Pre-commit hooks
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#type-annotations">
+       Type annotations
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unit-tests">
+     Unit tests
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#documentation">
+     Documentation
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#install-requirements">
+       Install requirements
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#build">
+       Build
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#building-the-example-gallery-or-not">
+       Building the example gallery - or not
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#new-architecture-or-improved-model-weights">
+     New architecture or improved model weights
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#new-dataset">
+     New dataset
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pull-request">
+     Pull Request
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#license">
+   License
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Contributing to Torchvision</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tl-dr">
+   TL;DR
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#issues">
+   Issues
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#development-installation">
+   Development installation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install-pytorch-nightly">
+     Install PyTorch Nightly
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install-torchvision">
+     Install Torchvision
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#development-process">
+   Development Process
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#code-formatting-and-typing">
+     Code formatting and typing
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#formatting">
+       Formatting
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#pre-commit-hooks">
+         Pre-commit hooks
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#type-annotations">
+       Type annotations
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unit-tests">
+     Unit tests
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#documentation">
+     Documentation
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#install-requirements">
+       Install requirements
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#build">
+       Build
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#building-the-example-gallery-or-not">
+       Building the example gallery - or not
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#new-architecture-or-improved-model-weights">
+     New architecture or improved model weights
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#new-dataset">
+     New dataset
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pull-request">
+     Pull Request
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#license">
+   License
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="contributing-to-torchvision">
+<h1>Contributing to Torchvision<a class="headerlink" href="#contributing-to-torchvision" title="Permalink to this headline">¶</a></h1>
+<p>We want to make contributing to this project as easy and transparent as possible.</p>
+<div class="section" id="tl-dr">
+<h2>TL;DR<a class="headerlink" href="#tl-dr" title="Permalink to this headline">¶</a></h2>
+<p>We appreciate all contributions. If you are interested in contributing to Torchvision, there are many ways to help out.
+Your contributions may fall into the following categories:</p>
+<ul class="simple">
+<li><p>It helps the project if you could</p>
+<ul>
+<li><p>Report issues you’re facing</p></li>
+<li><p>Give a :+1: on issues that others reported and that are relevant to you</p></li>
+</ul>
+</li>
+<li><p>Answering queries on the issue tracker, investigating bugs are very valuable contributions to the project.</p></li>
+<li><p>You would like to improve the documentation. This is no less important than improving the library itself!
+If you find a typo in the documentation, do not hesitate to submit a GitHub pull request.</p></li>
+<li><p>If you would like to fix a bug</p>
+<ul>
+<li><p>please pick one from the <a class="reference external" href="https://github.com/pytorch/vision/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22">list of open issues labelled as “help wanted”</a></p></li>
+<li><p>comment on the issue that you want to work on this issue</p></li>
+<li><p>send a PR with your fix, see below.</p></li>
+</ul>
+</li>
+<li><p>If you plan to contribute new features, utility functions or extensions, please first open an issue and discuss the feature with us.</p></li>
+</ul>
+</div>
+<div class="section" id="issues">
+<h2>Issues<a class="headerlink" href="#issues" title="Permalink to this headline">¶</a></h2>
+<p>We use GitHub issues to track public bugs. Please ensure your description is
+clear and has sufficient instructions to be able to reproduce the issue.</p>
+</div>
+<div class="section" id="development-installation">
+<h2>Development installation<a class="headerlink" href="#development-installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="install-pytorch-nightly">
+<h3>Install PyTorch Nightly<a class="headerlink" href="#install-pytorch-nightly" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install pytorch -c pytorch-nightly
+<span class="c1"># or with pip (see https://pytorch.org/get-started/locally/)</span>
+<span class="c1"># pip install numpy</span>
+<span class="c1"># pip install --pre torch -f https://download.pytorch.org/whl/nightly/cu102/torch_nightly.html</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-torchvision">
+<h3>Install Torchvision<a class="headerlink" href="#install-torchvision" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/pytorch/vision.git
+<span class="nb">cd</span> vision
+python setup.py develop
+<span class="c1"># or, for OSX</span>
+<span class="c1"># MACOSX_DEPLOYMENT_TARGET=10.9 CC=clang CXX=clang++ python setup.py develop</span>
+<span class="c1"># for C++ debugging, please use DEBUG=1</span>
+<span class="c1"># DEBUG=1 python setup.py develop</span>
+pip install flake8 typing mypy pytest pytest-mock scipy
+</pre></div>
+</div>
+<p>You may also have to install <code class="docutils literal notranslate"><span class="pre">libpng-dev</span></code> and <code class="docutils literal notranslate"><span class="pre">libjpeg-turbo8-dev</span></code> libraries:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install libpng jpeg
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="development-process">
+<h2>Development Process<a class="headerlink" href="#development-process" title="Permalink to this headline">¶</a></h2>
+<p>If you plan to modify the code or documentation, please follow the steps below:</p>
+<ol class="simple">
+<li><p>Fork the repository and create your branch from <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p></li>
+<li><p>If you have modified the code (new feature or bug-fix), please add unit tests.</p></li>
+<li><p>If you have changed APIs, update the documentation. Make sure the documentation builds.</p></li>
+<li><p>Ensure the test suite passes.</p></li>
+<li><p>Make sure your code passes the formatting checks (see below).</p></li>
+</ol>
+<p>For more details about pull requests,
+please read <a class="reference external" href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request">GitHub’s guides</a>.</p>
+<p>If you would like to contribute a new model, please see <a class="reference external" href="#New-model">here</a>.</p>
+<p>If you would like to contribute a new dataset, please see <a class="reference external" href="#New-dataset">here</a>.</p>
+<div class="section" id="code-formatting-and-typing">
+<h3>Code formatting and typing<a class="headerlink" href="#code-formatting-and-typing" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="formatting">
+<h4>Formatting<a class="headerlink" href="#formatting" title="Permalink to this headline">¶</a></h4>
+<p>The torchvision code is formatted by <a class="reference external" href="https://black.readthedocs.io/en/stable/">black</a>,
+and checked against pep8 compliance with <a class="reference external" href="https://flake8.pycqa.org/en/latest/">flake8</a>.
+Instead of relying directly on <code class="docutils literal notranslate"><span class="pre">black</span></code> however, we rely on
+<a class="reference external" href="https://github.com/omnilib/ufmt">ufmt</a>, for compatibility reasons with Facebook
+internal infrastructure.</p>
+<p>To format your code, install <code class="docutils literal notranslate"><span class="pre">ufmt</span></code> with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">ufmt==1.3.2</span> <span class="pre">black==22.3.0</span> <span class="pre">usort==1.0.2</span></code> and use e.g.:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ufmt format torchvision
+</pre></div>
+</div>
+<p>For the vast majority of cases, this is all you should need to run. For the
+formatting to be a bit faster, you can also choose to only apply <code class="docutils literal notranslate"><span class="pre">ufmt</span></code> to the
+files that were edited in your PR with e.g.:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ufmt format <span class="sb">`</span>git diff main --name-only<span class="sb">`</span>
+</pre></div>
+</div>
+<p>Similarly, you can check for <code class="docutils literal notranslate"><span class="pre">flake8</span></code> errors with <code class="docutils literal notranslate"><span class="pre">flake8</span> <span class="pre">torchvision</span></code>, although
+they should be fairly rare considering that most of the errors are automatically
+taken care of by <code class="docutils literal notranslate"><span class="pre">ufmt</span></code> already.</p>
+<div class="section" id="pre-commit-hooks">
+<h5>Pre-commit hooks<a class="headerlink" href="#pre-commit-hooks" title="Permalink to this headline">¶</a></h5>
+<p>For convenience and <strong>purely optionally</strong>, you can rely on <a class="reference external" href="https://pre-commit.com/">pre-commit
+hooks</a> which will run both <code class="docutils literal notranslate"><span class="pre">ufmt</span></code> and <code class="docutils literal notranslate"><span class="pre">flake8</span></code> prior to
+every commit.</p>
+<p>First install the <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> package with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pre-commit</span></code>, and then
+run <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">install</span></code> at the root of the repo for the hooks to be set up -
+that’s it.</p>
+<p>Feel free to read the <a class="reference external" href="https://pre-commit.com/#usage">pre-commit docs</a> to learn
+more and improve your workflow. You’ll see for example that <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">run</span> <span class="pre">--all-files</span></code> will run both <code class="docutils literal notranslate"><span class="pre">ufmt</span></code> and <code class="docutils literal notranslate"><span class="pre">flake8</span></code> without the need for you to
+commit anything, and that the <code class="docutils literal notranslate"><span class="pre">--no-verify</span></code> flag can be added to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> to
+temporarily deactivate the hooks.</p>
+</div>
+</div>
+<div class="section" id="type-annotations">
+<h4>Type annotations<a class="headerlink" href="#type-annotations" title="Permalink to this headline">¶</a></h4>
+<p>The codebase has type annotations, please make sure to add type hints if required. We use <code class="docutils literal notranslate"><span class="pre">mypy</span></code> tool for type checking:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mypy --config-file mypy.ini
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="unit-tests">
+<h3>Unit tests<a class="headerlink" href="#unit-tests" title="Permalink to this headline">¶</a></h3>
+<p>If you have modified the code by adding a new feature or a bug-fix, please add unit tests for that. To run a specific
+test:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest test/&lt;test-module.py&gt; -vvv -k &lt;test_myfunc&gt;
+<span class="c1"># e.g. pytest test/test_transforms.py -vvv -k test_center_crop</span>
+</pre></div>
+</div>
+<p>If you would like to run all tests:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest <span class="nb">test</span> -vvv
+</pre></div>
+</div>
+<p>Tests that require internet access should be in
+<code class="docutils literal notranslate"><span class="pre">test/test_internet.py</span></code>.</p>
+</div>
+<div class="section" id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h3>
+<p>Torchvision uses <a class="reference external" href="http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">Google style</a>
+for formatting docstrings. Length of line inside docstrings block must be limited to 120 characters.</p>
+<p>Please, follow the instructions to build and deploy the documentation locally.</p>
+<div class="section" id="install-requirements">
+<h4>Install requirements<a class="headerlink" href="#install-requirements" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> docs
+pip install -r requirements.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="build">
+<h4>Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> docs
+make html-noplot
+</pre></div>
+</div>
+<p>Then open <code class="docutils literal notranslate"><span class="pre">docs/build/html/index.html</span></code> in your favorite browser.</p>
+<p>The docs are also automatically built when you submit a PR. The job that
+builds the docs is named <code class="docutils literal notranslate"><span class="pre">build_docs</span></code>. You can access the rendered docs by
+clicking on that job and then going to the “Artifacts” tab.</p>
+<p>You can clean the built docs and re-start the build from scratch by doing <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code>.</p>
+</div>
+<div class="section" id="building-the-example-gallery-or-not">
+<h4>Building the example gallery - or not<a class="headerlink" href="#building-the-example-gallery-or-not" title="Permalink to this headline">¶</a></h4>
+<p>In most cases, running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html-noplot</span></code> is enough to build the docs for your
+specific use-case. The <code class="docutils literal notranslate"><span class="pre">noplot</span></code> part tells sphinx <strong>not</strong> to build the examples
+in the <a class="reference external" href="https://pytorch.org/vision/stable/auto_examples/index.html">gallery</a>,
+which saves a lot of building time.</p>
+<p>If you need to build all the examples in the gallery, then you can use <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code>.</p>
+<p>You can also choose to only build a subset of the examples by using the
+<code class="docutils literal notranslate"><span class="pre">EXAMPLES_PATTERN</span></code> env variable, which accepts a regular expression. For
+example <code class="docutils literal notranslate"><span class="pre">EXAMPLES_PATTERN=&quot;transforms&quot;</span> <span class="pre">make</span> <span class="pre">html</span></code> will only build the examples
+with “transforms” in their name.</p>
+</div>
+</div>
+<div class="section" id="new-architecture-or-improved-model-weights">
+<h3>New architecture or improved model weights<a class="headerlink" href="#new-architecture-or-improved-model-weights" title="Permalink to this headline">¶</a></h3>
+<p>Please refer to the guidelines in <a class="reference external" href="https://github.com/pytorch/vision/blob/main/CONTRIBUTING_MODELS.md">Contributing to Torchvision - Models</a>.</p>
+</div>
+<div class="section" id="new-dataset">
+<h3>New dataset<a class="headerlink" href="#new-dataset" title="Permalink to this headline">¶</a></h3>
+<p>More details on how to add a new dataset will be provided later. Please, do not send any PR with a new dataset without discussing
+it in an issue as, most likely, it will not be accepted.</p>
+</div>
+<div class="section" id="pull-request">
+<h3>Pull Request<a class="headerlink" href="#pull-request" title="Permalink to this headline">¶</a></h3>
+<p>If all previous checks (flake8, mypy, unit tests) are passing, please send a PR. Submitted PR will pass other tests on
+different operation systems, python versions and hardwares.</p>
+<p>For more details about pull requests workflow,
+please read <a class="reference external" href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request">GitHub’s guides</a>.</p>
+</div>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>By contributing to Torchvision, you agree that your contributions will be licensed
+under the LICENSE file in the root directory of this source tree.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./others/vision"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

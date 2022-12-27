@@ -1,0 +1,607 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stereo Matching reference training scripts &#8212; My sample book</title>
+    
+  <link href="../../../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/togglebutton.js"></script>
+    <script src="../../../../../_static/clipboard.min.js"></script>
+    <script src="../../../../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Cheat Sheet
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../pytorch/pytorch_cheatsheet.html">
+   1. Pytorch Cheatsheet
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tensorflow basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../old/1.tensor.html">
+   2. Introduction to Tensors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../old/2.variable.html">
+   3. Introduction to Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../old/3.autodiff.html">
+   4. Introduction to gradients and automatic differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../old/5.intro_to_modules.html">
+   5. Introduction to modules, layers, and models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../old/6.basic_training_loops.html">
+   7. Basic training loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../old/7.keras_sequential_model.html">
+   8. The Sequential model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../tf_create_model.html">
+   9. 三種搭建神經網路的方式
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../hands_on_ml3/tf_customization.html">
+   10. Customization
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Pytorch resource summarise
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../pytorch/d2l/d2l_linear_regression.html">
+   11. Linear regression (d2l)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../../pytorch/d2l/d2l_softmax_regression.html">
+   12. Softmax regression (d2l)
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../../../_sources/others/vision/references/depth/stereo/README.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fothers/vision/references/depth/stereo/README.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Stereo Matching reference training scripts
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#crestereo">
+     CREStereo
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#evaluation">
+     Evaluation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#concerns-when-training">
+   Concerns when training
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#disparity-scaling">
+     Disparity scaling
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sample-a">
+       Sample A
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sample-b">
+       Sample B
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#metric-overfitting">
+     Metric overfitting
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#learning-is-critical-in-the-beginning">
+       Learning is critical in the beginning
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gradient-norm-saves-time">
+       Gradient norm saves time
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Stereo Matching reference training scripts</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Stereo Matching reference training scripts
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#crestereo">
+     CREStereo
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#evaluation">
+     Evaluation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#concerns-when-training">
+   Concerns when training
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#disparity-scaling">
+     Disparity scaling
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sample-a">
+       Sample A
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sample-b">
+       Sample B
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#metric-overfitting">
+     Metric overfitting
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#learning-is-critical-in-the-beginning">
+       Learning is critical in the beginning
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gradient-norm-saves-time">
+       Gradient norm saves time
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="stereo-matching-reference-training-scripts">
+<h1>Stereo Matching reference training scripts<a class="headerlink" href="#stereo-matching-reference-training-scripts" title="Permalink to this headline">¶</a></h1>
+<p>This folder contains reference training scripts for Stereo Matching.
+They serve as a log of how to train specific models, so as to provide baseline
+training and evaluation scripts to quickly bootstrap research.</p>
+<div class="section" id="crestereo">
+<h2>CREStereo<a class="headerlink" href="#crestereo" title="Permalink to this headline">¶</a></h2>
+<p>The CREStereo model was trained on a dataset mixture between <strong>CREStereo</strong>, <strong>ETH3D</strong> and the additional split from <strong>Middlebury2014</strong>.
+A ratio of <strong>88-6-6</strong> was used in order to train a baseline weight set. We provide multi-set variant as well.
+Both used 8 A100 GPUs and a batch size of 2 (so effective batch size is 16). The
+rest of the hyper-parameters loosely follow the recipe from <a class="reference external" href="https://github.com/megvii-research/CREStereo">https://github.com/megvii-research/CREStereo</a>.
+The original recipe trains for <strong>300000</strong> updates (or steps) on the dataset mixture. We modify the learning rate
+schedule to one that starts decaying the weight much sooner. Throughout experiments we found that this reduces overfitting
+during evaluation time and gradient clip help stabilize the loss during a pre-mature learning rate change.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>torchrun --nproc_per_node 8 --nnodes 1 train.py \
+    --dataset-root $dataset_root \
+    --name $name_cre \
+    --model crestereo_base \
+    --train-datasets crestereo eth3d-train middlebury2014-other \
+    --dataset-steps 264000 18000 18000
+    --batch-size 2 \
+    --lr 0.0004 \
+    --min-lr 0.00002 \
+    --lr-decay-method cosine \
+    --warmup-steps 6000 \
+    --decay-after-steps 30000 \
+    --clip-grad-norm 1.0 \
+</pre></div>
+</div>
+<p>We employ a multi-set fine-tuning stage where we uniformly sample from multiple datasets. Given hat some of these datasets have extremely large images (<code class="docutils literal notranslate"><span class="pre">2048x2048</span></code> or more) we opt for a very aggresive scale-range <code class="docutils literal notranslate"><span class="pre">[0.2</span> <span class="pre">-</span> <span class="pre">0.8]</span></code> such that as much of the original frame composition is captured inside the <code class="docutils literal notranslate"><span class="pre">384x512</span></code> crop.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>torchrun --nproc_per_node 8 --nnodes 1 train.py \
+    --dataset-root $dataset_root \
+    --name $name_things \
+    --model crestereo_base \
+    --train-datasets crestereo eth3d-train middlebury2014-other instereo2k fallingthings carla-highres sintel sceneflow-monkaa sceneflow-driving \
+    --dataset-steps 12000 12000 12000 12000 12000 12000 12000 12000 12000
+    --batch-size 2 \
+    --scale-range 0.2 0.8 \
+    --lr 0.0004 \
+    --lr-decay-method cosine \
+    --decay-after-steps 0 \
+    --warmup-steps 0 \
+    --min-lr 0.00002 \
+    --resume-path $checkpoint_dir/$name_cre.pth
+</pre></div>
+</div>
+</div>
+<div class="section" id="evaluation">
+<h2>Evaluation<a class="headerlink" href="#evaluation" title="Permalink to this headline">¶</a></h2>
+<p>Evaluating the base weights</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>torchrun --nproc_per_node 1 --nnodes 1 cascade_evaluation.py --dataset middlebury2014-train --batch-size 1 --dataset-root $dataset_root --model crestereo_base --weights CREStereo_Base_Weights.CRESTEREO_ETH_MBL_V1
+</pre></div>
+</div>
+<p>This should give an <strong>mae of about 1.416</strong> on the train set of <code class="docutils literal notranslate"><span class="pre">Middlebury2014</span></code>. Results may vary slightly depending on the batch size and the number of GPUs. For the most accurate resuts use 1 GPU and <code class="docutils literal notranslate"><span class="pre">--batch-size</span> <span class="pre">1</span></code>. The created log file should look like this, where the first key is the number of cascades and the nested key is the number of recursive iterations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Dataset</span><span class="p">:</span> <span class="n">middlebury2014</span><span class="o">-</span><span class="n">train</span> <span class="nd">@size</span><span class="p">:</span> <span class="p">[</span><span class="mi">384</span><span class="p">,</span> <span class="mi">512</span><span class="p">]:</span>
+<span class="p">{</span>
+	<span class="mi">1</span><span class="p">:</span> <span class="p">{</span>
+		<span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">2.363</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">4.352</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.611</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.828</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.891</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.176</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">64.511</span><span class="p">}</span>
+		<span class="mi">5</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">1.618</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">3.71</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.761</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.879</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.918</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.154</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">77.128</span><span class="p">}</span>
+		<span class="mi">10</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">1.416</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">3.53</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.777</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.896</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.933</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.148</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">78.388</span><span class="p">}</span>
+		<span class="mi">20</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">1.448</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">3.583</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.771</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.893</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.931</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.145</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">77.7</span><span class="p">}</span>
+	<span class="p">},</span>
+<span class="p">}</span>
+<span class="p">{</span>
+	<span class="mi">2</span><span class="p">:</span> <span class="p">{</span>
+		<span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">1.972</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">4.125</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.73</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.865</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.908</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.169</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">74.396</span><span class="p">}</span>
+		<span class="mi">5</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">1.403</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">3.448</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.793</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.905</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.937</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.151</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">80.186</span><span class="p">}</span>
+		<span class="mi">10</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">1.312</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">3.368</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.799</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.912</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.943</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.148</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">80.379</span><span class="p">}</span>
+		<span class="mi">20</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">1.376</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">3.542</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.796</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.91</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.942</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.149</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">80.054</span><span class="p">}</span>
+	<span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can also evaluate the Finetuned weights:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>torchrun --nproc_per_node 1 --nnodes 1 cascade_evaluation.py --dataset middlebury2014-train --batch-size 1 --dataset-root $dataset_root --model crestereo_base --weights CREStereo_Base_Weights.CRESTEREO_FINETUNE_MULTI_V1
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Dataset</span><span class="p">:</span> <span class="n">middlebury2014</span><span class="o">-</span><span class="n">train</span> <span class="nd">@size</span><span class="p">:</span> <span class="p">[</span><span class="mi">384</span><span class="p">,</span> <span class="mi">512</span><span class="p">]:</span>
+<span class="p">{</span>
+	<span class="mi">1</span><span class="p">:</span> <span class="p">{</span>
+		<span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">1.85</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">3.797</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.673</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.862</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.917</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.171</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">69.736</span><span class="p">}</span>
+		<span class="mi">5</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">1.111</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">3.166</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.838</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.93</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.957</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.134</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">84.596</span><span class="p">}</span>
+		<span class="mi">10</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">1.02</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">3.073</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.854</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.938</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.96</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.129</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">86.042</span><span class="p">}</span>
+		<span class="mi">20</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">0.993</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">3.059</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.855</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.942</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.967</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.126</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">85.784</span><span class="p">}</span>
+	<span class="p">},</span>
+<span class="p">}</span>
+<span class="p">{</span>
+	<span class="mi">2</span><span class="p">:</span> <span class="p">{</span>
+		<span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">1.667</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">3.867</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.78</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.891</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.922</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.165</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">78.89</span><span class="p">}</span>
+		<span class="mi">5</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">1.158</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">3.278</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.843</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.926</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.955</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.135</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">84.556</span><span class="p">}</span>
+		<span class="mi">10</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">1.046</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">3.13</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.934</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.96</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.13</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">85.464</span><span class="p">}</span>
+		<span class="mi">20</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">1.021</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">3.102</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.935</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.963</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.129</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">85.417</span><span class="p">}</span>
+	<span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Evaluating the author provided weights:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>torchrun --nproc_per_node 1 --nnodes 1 cascade_evaluation.py --dataset middlebury2014-train --batch-size 1 --dataset-root $dataset_root --model crestereo_base --weights CREStereo_Base_Weights.MEGVII_V1
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Dataset</span><span class="p">:</span> <span class="n">middlebury2014</span><span class="o">-</span><span class="n">train</span> <span class="nd">@size</span><span class="p">:</span> <span class="p">[</span><span class="mi">384</span><span class="p">,</span> <span class="mi">512</span><span class="p">]:</span>
+<span class="p">{</span>
+	<span class="mi">1</span><span class="p">:</span> <span class="p">{</span>
+		<span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">1.704</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">3.738</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.738</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.896</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.933</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.157</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">76.464</span><span class="p">}</span>
+		<span class="mi">5</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">0.956</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">2.963</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.88</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.948</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.965</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.124</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">88.186</span><span class="p">}</span>
+		<span class="mi">10</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">0.792</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">2.765</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.905</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.958</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.97</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.114</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">90.429</span><span class="p">}</span>
+		<span class="mi">20</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">0.749</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">2.706</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.907</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.961</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.972</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.113</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">90.807</span><span class="p">}</span>
+	<span class="p">},</span>
+<span class="p">}</span>
+<span class="p">{</span>
+	<span class="mi">2</span><span class="p">:</span> <span class="p">{</span>
+		<span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">1.702</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">3.784</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.784</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.894</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.924</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.172</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">80.313</span><span class="p">}</span>
+		<span class="mi">5</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">0.932</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">2.907</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.877</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.944</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.963</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">87.979</span><span class="p">}</span>
+		<span class="mi">10</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">0.773</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">2.768</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.901</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.958</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.972</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.117</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">90.43</span><span class="p">}</span>
+		<span class="mi">20</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="mf">0.854</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="mf">2.971</span><span class="p">,</span> <span class="s1">&#39;1px&#39;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span> <span class="s1">&#39;3px&#39;</span><span class="p">:</span> <span class="mf">0.957</span><span class="p">,</span> <span class="s1">&#39;5px&#39;</span><span class="p">:</span> <span class="mf">0.97</span><span class="p">,</span> <span class="s1">&#39;relepe&#39;</span><span class="p">:</span> <span class="mf">0.122</span><span class="p">,</span> <span class="s1">&#39;fl-all&#39;</span><span class="p">:</span> <span class="mf">90.269</span><span class="p">}</span>
+	<span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="concerns-when-training">
+<h1>Concerns when training<a class="headerlink" href="#concerns-when-training" title="Permalink to this headline">¶</a></h1>
+<p>We encourage users to be aware of the <strong>aspect-ratio</strong> and <strong>disparity scale</strong> they are targetting when doing any sort of training or fine-tuning. The model is highly sensitive to these two factors, as a consequence with naive multi-set fine-tuning one can achieve <code class="docutils literal notranslate"><span class="pre">0.2</span> <span class="pre">mae</span></code> relatively fast. We recommend that users pay close attention to how they <strong>balance dataset sizing</strong> when training such networks.</p>
+<p>Ideally, dataset scaling should be trated at an individual level and a thorough <strong>EDA</strong> of the disparity distribution in random crops at the desired training / inference size should be performed prior to any large compute investments.</p>
+<div class="section" id="disparity-scaling">
+<h2>Disparity scaling<a class="headerlink" href="#disparity-scaling" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sample-a">
+<h3>Sample A<a class="headerlink" href="#sample-a" title="Permalink to this headline">¶</a></h3>
+<p>The top row contains a sample from <code class="docutils literal notranslate"><span class="pre">Sintel</span></code> whereas the bottom row one from <code class="docutils literal notranslate"><span class="pre">Middlebury</span></code>.</p>
+<p><img alt="Disparity1" src="../../../../../_images/disparity-domain-drift.jpg" /></p>
+<p>From left to right (<code class="docutils literal notranslate"><span class="pre">left_image</span></code>, <code class="docutils literal notranslate"><span class="pre">right_image</span></code>, <code class="docutils literal notranslate"><span class="pre">valid_mask</span></code>, <code class="docutils literal notranslate"><span class="pre">valid_mask</span> <span class="pre">&amp;</span> <span class="pre">ground_truth</span></code>, <code class="docutils literal notranslate"><span class="pre">prediction</span></code>). <strong>Darker is further away, lighter is closer</strong>. In the case of <code class="docutils literal notranslate"><span class="pre">Sintel</span></code> which is more closely aligned to the original distribution of <code class="docutils literal notranslate"><span class="pre">CREStereo</span></code> we notice that the model accurately predicts the background scale whereas in the case of <code class="docutils literal notranslate"><span class="pre">Middlebury2014</span></code> it cannot correcly estimate the continous disparity. Notice that the frame composition is similar for both examples. The blue skybox in the <code class="docutils literal notranslate"><span class="pre">Sintel</span></code> scene behaves similarly to the <code class="docutils literal notranslate"><span class="pre">Middlebury</span></code> black background. However, because the <code class="docutils literal notranslate"><span class="pre">Middlebury</span></code> samples comes from an extremly large scene the crop size of <code class="docutils literal notranslate"><span class="pre">384x512</span></code> does not correctly capture the general training distribution.</p>
+</div>
+<div class="section" id="sample-b">
+<h3>Sample B<a class="headerlink" href="#sample-b" title="Permalink to this headline">¶</a></h3>
+<p>The top row contains a scene from <code class="docutils literal notranslate"><span class="pre">Sceneflow</span></code> using the <code class="docutils literal notranslate"><span class="pre">Monkaa</span></code> split whilst the bottom row is a scene from <code class="docutils literal notranslate"><span class="pre">Middlebury</span></code>. This sample exhibits the same issues when it comes to <strong>background estimation</strong>. Given the exagerated size of the <code class="docutils literal notranslate"><span class="pre">Middlebury</span></code> samples the model <strong>colapses the smooth background</strong> of the sample to what it considers to be a mean background disparity value.</p>
+<p><img alt="Disparity2" src="../../../../../_images/disparity-background-mode-collapse.jpg" /></p>
+<p>For more detail on why this behaviour occurs based on the training distribution proportions you can read more about the network at: <a class="reference external" href="https://github.com/pytorch/vision/pull/6629#discussion_r978160493">https://github.com/pytorch/vision/pull/6629#discussion_r978160493</a></p>
+</div>
+</div>
+<div class="section" id="metric-overfitting">
+<h2>Metric overfitting<a class="headerlink" href="#metric-overfitting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="learning-is-critical-in-the-beginning">
+<h3>Learning is critical in the beginning<a class="headerlink" href="#learning-is-critical-in-the-beginning" title="Permalink to this headline">¶</a></h3>
+<p>We also advise users to make user of faster training schedules, as the performance gain over long periods time is marginal. Here we exhibit a difference between a faster decay schedule and later decay schedule.</p>
+<p><img alt="Loss1" src="../../../../../_images/Loss.jpg" /></p>
+<p>In <strong>grey</strong> we set the lr decay to begin after <code class="docutils literal notranslate"><span class="pre">30000</span></code> steps whilst in <strong>orange</strong> we opt for a very late learning rate decay at around <code class="docutils literal notranslate"><span class="pre">180000</span></code> steps. Although exhibiting stronger variance, we can notice that unfreezing the learning rate earlier whilst employing <code class="docutils literal notranslate"><span class="pre">gradient-norm</span></code> out-performs the default configuration.</p>
+</div>
+<div class="section" id="gradient-norm-saves-time">
+<h3>Gradient norm saves time<a class="headerlink" href="#gradient-norm-saves-time" title="Permalink to this headline">¶</a></h3>
+<p><img alt="Loss2" src="../../../../../_images/gradient-norm-removal.jpg" /></p>
+<p>In <strong>grey</strong> we keep <code class="docutils literal notranslate"><span class="pre">gradient</span> <span class="pre">norm</span></code> enabled whilst in <strong>orange</strong> we do not. We can notice that remvoing the gradient norm exacerbates the performance decrease in the early stages whilst also showcasing an almost complete collapse around the <code class="docutils literal notranslate"><span class="pre">60000</span></code> steps mark where we started decaying the lr for <strong>orange</strong>.</p>
+<p>Although both runs ahieve an improvement of about <code class="docutils literal notranslate"><span class="pre">0.1</span></code> mae after the lr decay start, the benefits of it are observable much faster when <code class="docutils literal notranslate"><span class="pre">gradient</span> <span class="pre">norm</span></code> is employed as the recovery period is no longer accounted for.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./others/vision/references/depth/stereo"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

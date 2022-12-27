@@ -1,0 +1,903 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formula Trinity 🤝 DUCSS - Object Detection Workshop! &#8212; My sample book</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Cheat Sheet
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch/pytorch_cheatsheet.html">
+   1. Pytorch Cheatsheet
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tensorflow basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../old/1.tensor.html">
+   2. Introduction to Tensors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../old/2.variable.html">
+   3. Introduction to Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../old/3.autodiff.html">
+   4. Introduction to gradients and automatic differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../old/5.intro_to_modules.html">
+   5. Introduction to modules, layers, and models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../old/6.basic_training_loops.html">
+   7. Basic training loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../old/7.keras_sequential_model.html">
+   8. The Sequential model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tf_create_model.html">
+   9. 三種搭建神經網路的方式
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../hands_on_ml3/tf_customization.html">
+   10. Customization
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Pytorch resource summarise
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch/d2l/d2l_linear_regression.html">
+   11. Linear regression (d2l)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch/d2l/d2l_softmax_regression.html">
+   12. Softmax regression (d2l)
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/others/FTA_DUCSS.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fothers/FTA_DUCSS.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/others/FTA_DUCSS.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Formula Trinity 🤝 DUCSS - Object Detection Workshop!
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#installs-and-imports">
+     Installs and Imports
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-dataset">
+     The Dataset
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualization">
+   Visualization
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#augmentations">
+   Augmentations
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataloaders">
+   Dataloaders
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pre-trained-model">
+   Pre-trained Model
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training">
+   Training
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#filtering-the-outputs">
+   Filtering the outputs
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing-our-model">
+   Testing our Model
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Formula Trinity 🤝 DUCSS - Object Detection Workshop!</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Formula Trinity 🤝 DUCSS - Object Detection Workshop!
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#installs-and-imports">
+     Installs and Imports
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-dataset">
+     The Dataset
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualization">
+   Visualization
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#augmentations">
+   Augmentations
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataloaders">
+   Dataloaders
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pre-trained-model">
+   Pre-trained Model
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training">
+   Training
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#filtering-the-outputs">
+   Filtering the outputs
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing-our-model">
+   Testing our Model
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="formula-trinity-ducss-object-detection-workshop">
+<h1>Formula Trinity 🤝 DUCSS - Object Detection Workshop!<a class="headerlink" href="#formula-trinity-ducss-object-detection-workshop" title="Permalink to this headline">¶</a></h1>
+<p>Hello Everyone!</p>
+<p>Today we will be going through how to make a traffic cone detector using <a class="reference external" href="https://pytorch.org/">PyTorch</a>.</p>
+<p>This notebook was adapted from the one in <a class="reference external" href="https://www.kaggle.com/yerramvarun/fine-tuning-faster-rcnn-using-pytorch/notebook">Fine-tuning Faster-RCNN using pytorch</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;/content/drive/MyDrive/0. codepool_python/python_dl/mybook/others&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="installs-and-imports">
+<h2>Installs and Imports<a class="headerlink" href="#installs-and-imports" title="Permalink to this headline">¶</a></h2>
+<p>Install and import PyTorch along with a few helper libraries</p>
+<p>Let’s install some dependencies and clone the <a class="reference external" href="https://github.com/pytorch/vision">TorchVision Repo</a> so we can use some helper files</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install dependencies and </span>
+<span class="o">!</span>pip install <span class="nv">albumentations</span><span class="o">==</span><span class="m">0</span>.4.6
+<span class="o">!</span>pip install pycocotools --quiet
+
+<span class="c1"># Clone TorchVision repo and copy helper files</span>
+<span class="o">!</span>git clone https://github.com/pytorch/vision.git
+<span class="o">%</span><span class="k">cd</span> vision
+<span class="o">!</span>git checkout v0.3.0
+<span class="o">%</span><span class="k">cd</span> ..
+<span class="o">!</span>cp vision/references/detection/utils.py ./
+<span class="o">!</span>cp vision/references/detection/transforms.py ./
+<span class="o">!</span>cp vision/references/detection/coco_eval.py ./
+<span class="o">!</span>cp vision/references/detection/engine.py ./
+<span class="o">!</span>cp vision/references/detection/coco_utils.py ./
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># basic python and ML Libraries</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># for ignoring warnings</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="c1"># We will be reading images using OpenCV</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="c1"># matplotlib for visualization</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">patches</span>
+
+<span class="c1"># torchvision libraries</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">transforms</span> <span class="k">as</span> <span class="n">torchtrans</span>  
+<span class="kn">from</span> <span class="nn">torchvision.models.detection.faster_rcnn</span> <span class="kn">import</span> <span class="n">FastRCNNPredictor</span>
+
+<span class="c1"># helper libraries</span>
+<span class="kn">from</span> <span class="nn">engine</span> <span class="kn">import</span> <span class="n">train_one_epoch</span><span class="p">,</span> <span class="n">evaluate</span>
+<span class="kn">import</span> <span class="nn">utils</span>
+<span class="kn">import</span> <span class="nn">transforms</span> <span class="k">as</span> <span class="nn">T</span>
+
+<span class="c1"># for image augmentations</span>
+<span class="kn">import</span> <span class="nn">albumentations</span> <span class="k">as</span> <span class="nn">A</span>
+<span class="kn">from</span> <span class="nn">albumentations.pytorch.transforms</span> <span class="kn">import</span> <span class="n">ToTensorV2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lets import the libraries</p>
+</div>
+<div class="section" id="the-dataset">
+<h2>The Dataset<a class="headerlink" href="#the-dataset" title="Permalink to this headline">¶</a></h2>
+<p>Having a good dataset is essential to training an accurate model. However, just possessing the dataset is not enough. We must pre-process it so that it can be fed to the neural network - and then understood by it.</p>
+<p>Finding an existing dataset can sometimes be very difficult. When searching for your dataset you may run into the following problems:</p>
+<ul class="simple">
+<li><p><strong>Broken links</strong>: even if someone has open-sourced something, links they previously had to their datasets often end up becoming stale.</p></li>
+<li><p><strong>Poor Open-Source Practice</strong>: some “open-source” dataset providers will insist on you contributing to the dataset to be provided access.</p></li>
+</ul>
+<p>However, keep searching! Here’s some tricks:</p>
+<ul class="simple">
+<li><p><strong>Search specific websites</strong>: When searching on Google, you can search specifically on GitHub by searching something like: <code class="docutils literal notranslate"><span class="pre">cone</span> <span class="pre">detection</span> <span class="pre">dataset</span> <span class="pre">site:github.com</span></code>.</p></li>
+<li><p><strong>Reading other people’s code</strong>: Try to find the code of someone else that worked on a similar problem, and see if you can find out what dataset they used! Such as searching: <code class="docutils literal notranslate"><span class="pre">image</span> <span class="pre">classification</span> <span class="pre">on</span> <span class="pre">traffic</span> <span class="pre">cones</span></code> and trying to find other notebooks.</p></li>
+</ul>
+<p>We found the dataset for this worksop by scouring GitHub repos. It contains 123 annotated images in the training set and</p>
+<p>Let’s download it!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget -O data.rar https://www.dropbox.com/sh/ay9wf7ii81q5zif/AADwIb9HkvpBmUDJvKpNl0Xna?dl<span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">file_subpath</span><span class="o">=</span>%2Fimg<span class="p">&amp;</span><span class="nv">preview</span><span class="o">=</span>data.rar#:~:text<span class="o">=</span>Sign%20up-,Direct,-download
+<span class="o">!</span>unrar x data.rar
+<span class="c1"># image 96 had no annotations, so we&#39;ll delete it!</span>
+<span class="o">!</span>rm img/96.jpg
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># defining the files directory and testing directory</span>
+<span class="n">files_dir</span> <span class="o">=</span> <span class="s1">&#39;/content/drive/MyDrive/0. codepool_python/python_dl/mybook/others/img/&#39;</span>
+<span class="n">test_dir</span> <span class="o">=</span> <span class="s1">&#39;/content/drive/MyDrive/0. codepool_python/python_dl/mybook/others/img1/&#39;</span>
+
+<span class="c1"># we create a Dataset class which has a __getitem__ function and a __len__ function</span>
+<span class="k">class</span> <span class="nc">ConeImagesDataset</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">files_dir</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span> <span class="o">=</span> <span class="n">transforms</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">files_dir</span> <span class="o">=</span> <span class="n">files_dir</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+    
+    <span class="c1"># sorting the images for consistency</span>
+    <span class="c1"># To get images, the extension of the filename is checked to be jpg</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">imgs</span> <span class="o">=</span> <span class="p">[</span><span class="n">image</span> <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">files_dir</span><span class="p">))</span> <span class="k">if</span> <span class="n">image</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span><span class="o">==</span><span class="s1">&#39;.jpg&#39;</span><span class="p">]</span>
+    
+    <span class="c1"># classes: 0 index is reserved for background</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">_</span><span class="p">,</span> <span class="s1">&#39;cone&#39;</span><span class="p">]</span>
+
+  <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+    <span class="n">img_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">imgs</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">files_dir</span><span class="p">,</span> <span class="n">img_name</span><span class="p">)</span>
+
+    <span class="c1"># reading the images and converting them to correct size and color    </span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+    <span class="n">img_rgb</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">img_res</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">img_rgb</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">),</span> <span class="n">cv2</span><span class="o">.</span><span class="n">INTER_AREA</span><span class="p">)</span>
+    <span class="c1"># diving by 255</span>
+    <span class="n">img_res</span> <span class="o">/=</span> <span class="mf">255.0</span>
+    
+    <span class="c1"># annotation file</span>
+    <span class="n">annot_filename</span> <span class="o">=</span> <span class="n">img_name</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span>
+    <span class="n">annot_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">files_dir</span><span class="p">,</span> <span class="n">annot_filename</span><span class="p">)</span>
+    
+    <span class="n">boxes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="c1"># cv2 image gives size as height x width</span>
+    <span class="n">wt</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">ht</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># box coordinates for xml files are extracted and corrected for image size given</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">annot_file_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+      <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="n">parsed</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)]</span>
+        <span class="n">x_center</span> <span class="o">=</span> <span class="n">parsed</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">y_center</span> <span class="o">=</span> <span class="n">parsed</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">box_wt</span> <span class="o">=</span> <span class="n">parsed</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">box_ht</span> <span class="o">=</span> <span class="n">parsed</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+
+        <span class="n">xmin</span> <span class="o">=</span> <span class="n">x_center</span> <span class="o">-</span> <span class="n">box_wt</span><span class="o">/</span><span class="mi">2</span>
+        <span class="n">xmax</span> <span class="o">=</span> <span class="n">x_center</span> <span class="o">+</span> <span class="n">box_wt</span><span class="o">/</span><span class="mi">2</span>
+        <span class="n">ymin</span> <span class="o">=</span> <span class="n">y_center</span> <span class="o">-</span> <span class="n">box_ht</span><span class="o">/</span><span class="mi">2</span>
+        <span class="n">ymax</span> <span class="o">=</span> <span class="n">y_center</span> <span class="o">+</span> <span class="n">box_ht</span><span class="o">/</span><span class="mi">2</span>
+        
+        <span class="n">xmin_corr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">xmin</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+        <span class="n">xmax_corr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">xmax</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+        <span class="n">ymin_corr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ymin</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+        <span class="n">ymax_corr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ymax</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+        
+        <span class="n">boxes</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">xmin_corr</span><span class="p">,</span> <span class="n">ymin_corr</span><span class="p">,</span> <span class="n">xmax_corr</span><span class="p">,</span> <span class="n">ymax_corr</span><span class="p">])</span>
+    
+    <span class="c1"># convert boxes into a torch.Tensor</span>
+    <span class="n">boxes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    
+    <span class="c1"># getting the areas of the boxes</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="n">boxes</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">boxes</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">boxes</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">boxes</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1"># suppose all instances are not crowd</span>
+    <span class="n">iscrowd</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">boxes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+    
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+    <span class="n">target</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">target</span><span class="p">[</span><span class="s2">&quot;boxes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">boxes</span>
+    <span class="n">target</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">labels</span>
+    <span class="n">target</span><span class="p">[</span><span class="s2">&quot;area&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">area</span>
+    <span class="n">target</span><span class="p">[</span><span class="s2">&quot;iscrowd&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iscrowd</span>
+    <span class="n">image_id</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">idx</span><span class="p">])</span>
+    <span class="n">target</span><span class="p">[</span><span class="s2">&quot;image_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">image_id</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">:</span>
+      <span class="n">sample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">(</span><span class="n">image</span> <span class="o">=</span> <span class="n">img_res</span><span class="p">,</span>
+                                <span class="n">bboxes</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">],</span>
+                                <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">)</span>
+      <span class="n">img_res</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
+      <span class="n">target</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s1">&#39;bboxes&#39;</span><span class="p">])</span>
+        
+    <span class="k">return</span> <span class="n">img_res</span><span class="p">,</span> <span class="n">target</span>
+
+  <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">imgs</span><span class="p">)</span>
+
+
+<span class="c1"># check dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ConeImagesDataset</span><span class="p">(</span><span class="n">files_dir</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Length of dataset:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># getting the image and target for a test index.  Feel free to change the index.</span>
+<span class="n">img</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">78</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Image shape:&#39;</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Label example:&#39;</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="visualization">
+<h1>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h1>
+<p>Let’s make some a helper function to view our data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to visualize bounding boxes in the image</span>
+<span class="k">def</span> <span class="nf">plot_img_bbox</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+  <span class="c1"># plot the image and bboxes</span>
+  <span class="c1"># Bounding boxes are defined as follows: x-min y-min width height</span>
+  <span class="n">fig</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+  <span class="n">a</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">box</span> <span class="ow">in</span> <span class="p">(</span><span class="n">target</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">]):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span>  <span class="o">=</span> <span class="n">box</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">box</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">box</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">box</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">box</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">-</span><span class="n">box</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">rect</span> <span class="o">=</span> <span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span>
+      <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span>
+      <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span>
+      <span class="n">facecolor</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+    <span class="p">)</span>
+    <span class="c1"># Draw the bounding box on top of the image</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+<span class="c1"># plotting the image with bboxes. Feel free to change the index</span>
+<span class="n">img</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span>
+<span class="n">plot_img_bbox</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="augmentations">
+<h1>Augmentations<a class="headerlink" href="#augmentations" title="Permalink to this headline">¶</a></h1>
+<p>This is where we can apply augmentations to the image.</p>
+<p>The augmentations to object detection vary from normal augmentations becuase here we need to ensure that, bbox still aligns with the object correctly after transforming.</p>
+<p>Here we are doing a random flip transform.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Send train=True for training transforms and False for val/test transforms</span>
+<span class="k">def</span> <span class="nf">get_transform</span><span class="p">(</span><span class="n">train</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">train</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">A</span><span class="o">.</span><span class="n">Compose</span><span class="p">(</span>
+      <span class="p">[</span>
+        <span class="n">A</span><span class="o">.</span><span class="n">HorizontalFlip</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>
+        <span class="c1"># ToTensorV2 converts image to pytorch tensor without div by 255</span>
+        <span class="n">ToTensorV2</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span> 
+      <span class="p">],</span>
+      <span class="n">bbox_params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;pascal_voc&#39;</span><span class="p">,</span> <span class="s1">&#39;label_fields&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]}</span>
+    <span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">A</span><span class="o">.</span><span class="n">Compose</span><span class="p">(</span>
+      <span class="p">[</span><span class="n">ToTensorV2</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)],</span>
+      <span class="n">bbox_params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;pascal_voc&#39;</span><span class="p">,</span> <span class="s1">&#39;label_fields&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]}</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="dataloaders">
+<h1>Dataloaders<a class="headerlink" href="#dataloaders" title="Permalink to this headline">¶</a></h1>
+<p>Make a loader for feeding our data into the neural network</p>
+<p>Now lets prepare the datasets and dataloaders for training and testing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use our dataset and defined transformations</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ConeImagesDataset</span><span class="p">(</span><span class="n">files_dir</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span><span class="n">get_transform</span><span class="p">(</span><span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">dataset_test</span> <span class="o">=</span> <span class="n">ConeImagesDataset</span><span class="p">(</span><span class="n">files_dir</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span><span class="n">get_transform</span><span class="p">(</span><span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="c1"># split the dataset in train and test set</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randperm</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">))</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="c1"># train test split</span>
+<span class="n">test_split</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">tsize</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="o">*</span><span class="n">test_split</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Subset</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">indices</span><span class="p">[:</span><span class="o">-</span><span class="n">tsize</span><span class="p">])</span>
+<span class="n">dataset_test</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Subset</span><span class="p">(</span><span class="n">dataset_test</span><span class="p">,</span> <span class="n">indices</span><span class="p">[</span><span class="o">-</span><span class="n">tsize</span><span class="p">:])</span>
+
+<span class="c1"># define training and validation data loaders</span>
+<span class="n">data_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span>
+  <span class="n">dataset</span><span class="p">,</span>
+  <span class="n">batch_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+  <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+  <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+  <span class="n">collate_fn</span><span class="o">=</span><span class="n">utils</span><span class="o">.</span><span class="n">collate_fn</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">data_loader_test</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span>
+  <span class="n">dataset_test</span><span class="p">,</span>
+  <span class="n">batch_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+  <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+  <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+  <span class="n">collate_fn</span><span class="o">=</span><span class="n">utils</span><span class="o">.</span><span class="n">collate_fn</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="pre-trained-model">
+<h1>Pre-trained Model<a class="headerlink" href="#pre-trained-model" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_object_detection_model</span><span class="p">(</span><span class="n">num_classes</span><span class="p">):</span>
+  <span class="c1"># load a model pre-trained pre-trained on COCO</span>
+  <span class="n">model</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">detection</span><span class="o">.</span><span class="n">fasterrcnn_resnet50_fpn</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="c1"># get number of input features for the classifier</span>
+  <span class="n">in_features</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">roi_heads</span><span class="o">.</span><span class="n">box_predictor</span><span class="o">.</span><span class="n">cls_score</span><span class="o">.</span><span class="n">in_features</span>
+  <span class="c1"># replace the pre-trained head with a new one</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">roi_heads</span><span class="o">.</span><span class="n">box_predictor</span> <span class="o">=</span> <span class="n">FastRCNNPredictor</span><span class="p">(</span><span class="n">in_features</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)</span> 
+  <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="training">
+<h1>Training<a class="headerlink" href="#training" title="Permalink to this headline">¶</a></h1>
+<p>Let’s prepare the model for training</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># train on gpu if available</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+
+<span class="n">num_classes</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># one class (class 0) is dedicated to the &quot;background&quot;</span>
+
+<span class="c1"># get the model using our helper function</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">get_object_detection_model</span><span class="p">(</span><span class="n">num_classes</span><span class="p">)</span>
+
+<span class="c1"># move model to the right device</span>
+<span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="c1"># construct an optimizer</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">()</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">]</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.0005</span><span class="p">)</span>
+
+<span class="c1"># and a learning rate scheduler which decreases the learning rate by</span>
+<span class="c1"># 10x every 3 epochs</span>
+<span class="n">lr_scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">StepLR</span><span class="p">(</span>
+  <span class="n">optimizer</span><span class="p">,</span>
+  <span class="n">step_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+  <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let the training begin!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># training for 5 epochs</span>
+<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+    <span class="c1"># training for one epoch</span>
+    <span class="n">train_one_epoch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">data_loader</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">epoch</span><span class="p">,</span> <span class="n">print_freq</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="c1"># update the learning rate</span>
+    <span class="n">lr_scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    <span class="c1"># evaluate on the test dataset</span>
+    <span class="n">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">data_loader_test</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="filtering-the-outputs">
+<h1>Filtering the outputs<a class="headerlink" href="#filtering-the-outputs" title="Permalink to this headline">¶</a></h1>
+<p>Our model predicts a lot of bounding boxes per image, so take out the overlapping ones, we will use <strong>Non Max Suppression</strong> (NMS). If you want to brush up on that, check <a class="reference external" href="https://towardsdatascience.com/non-maximum-suppression-nms-93ce178e177c">this</a> out.</p>
+<p>Torchvision provides us a utility to apply NMS to our predictions, lets build a function <code class="docutils literal notranslate"><span class="pre">apply_nms</span></code> using that.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the function takes the original prediction and the iou threshold.</span>
+<span class="k">def</span> <span class="nf">apply_nms</span><span class="p">(</span><span class="n">orig_prediction</span><span class="p">,</span> <span class="n">iou_thresh</span><span class="o">=</span><span class="mf">0.3</span><span class="p">):</span>
+  <span class="c1"># torchvision returns the indices of the bboxes to keep</span>
+  <span class="n">keep</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">nms</span><span class="p">(</span><span class="n">orig_prediction</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">],</span> <span class="n">orig_prediction</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">],</span> <span class="n">iou_thresh</span><span class="p">)</span>
+  
+  <span class="n">final_prediction</span> <span class="o">=</span> <span class="n">orig_prediction</span>
+  <span class="n">final_prediction</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">final_prediction</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">][</span><span class="n">keep</span><span class="p">]</span>
+  <span class="n">final_prediction</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">final_prediction</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">][</span><span class="n">keep</span><span class="p">]</span>
+  <span class="n">final_prediction</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">final_prediction</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">][</span><span class="n">keep</span><span class="p">]</span>
+  
+  <span class="k">return</span> <span class="n">final_prediction</span>
+
+<span class="c1"># function to convert a torchtensor back to PIL image</span>
+<span class="k">def</span> <span class="nf">torch_to_pil</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">torchtrans</span><span class="o">.</span><span class="n">ToPILImage</span><span class="p">()(</span><span class="n">img</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;RGB&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="testing-our-model">
+<h1>Testing our Model<a class="headerlink" href="#testing-our-model" title="Permalink to this headline">¶</a></h1>
+<p>Now lets take an image from the test set and try to predict on it</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_dataset</span> <span class="o">=</span> <span class="n">ConeImagesDataset</span><span class="p">(</span><span class="n">test_dir</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span> <span class="n">get_transform</span><span class="p">(</span><span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+<span class="c1"># pick one image from the test set</span>
+<span class="n">img</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">test_dataset</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+<span class="c1"># put the model in evaluation mode</span>
+<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+  <span class="n">prediction</span> <span class="o">=</span> <span class="n">model</span><span class="p">([</span><span class="n">img</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)])[</span><span class="mi">0</span><span class="p">]</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MODEL OUTPUT</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">nms_prediction</span> <span class="o">=</span> <span class="n">apply_nms</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">iou_thresh</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">nms_prediction2</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">nms_prediction</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+<span class="n">plot_img_bbox</span><span class="p">(</span><span class="n">torch_to_pil</span><span class="p">(</span><span class="n">img</span><span class="p">),</span> <span class="n">nms_prediction2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./others"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

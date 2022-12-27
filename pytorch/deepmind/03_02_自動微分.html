@@ -1,0 +1,924 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自動微分(Automatic Differentiation) &#8212; My sample book</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Cheat Sheet
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch_cheatsheet.html">
+   1. Pytorch Cheatsheet
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tensorflow basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/1.tensor.html">
+   2. Introduction to Tensors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/2.variable.html">
+   3. Introduction to Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/3.autodiff.html">
+   4. Introduction to gradients and automatic differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/5.intro_to_modules.html">
+   5. Introduction to modules, layers, and models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/6.basic_training_loops.html">
+   7. Basic training loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/7.keras_sequential_model.html">
+   8. The Sequential model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tf_create_model.html">
+   9. 三種搭建神經網路的方式
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../hands_on_ml3/tf_customization.html">
+   10. Customization
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Pytorch resource summarise
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../d2l/d2l_linear_regression.html">
+   11. Linear regression (d2l)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../d2l/d2l_softmax_regression.html">
+   12. Softmax regression (d2l)
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/pytorch/deepmind/03_02_自動微分.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fpytorch/deepmind/03_02_自動微分.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/pytorch/deepmind/03_02_自動微分.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   自動微分(Automatic Differentiation)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   取得變數的自動微分相關屬性值
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cross-entropy">
+   交叉熵(cross entropy)範例
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   多次梯度下降
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reset">
+   梯度 reset
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   多個變數梯度下降
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-descent">
+   梯度下降法(Gradient Descent)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pytorch">
+   使用 PyTorch
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tensorflow">
+   使用 TensorFlow
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>自動微分(Automatic Differentiation)</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   自動微分(Automatic Differentiation)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   取得變數的自動微分相關屬性值
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cross-entropy">
+   交叉熵(cross entropy)範例
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   多次梯度下降
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reset">
+   梯度 reset
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   多個變數梯度下降
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-descent">
+   梯度下降法(Gradient Descent)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pytorch">
+   使用 PyTorch
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tensorflow">
+   使用 TensorFlow
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="section" id="automatic-differentiation">
+<h1>自動微分(Automatic Differentiation)<a class="headerlink" href="#automatic-differentiation" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 設定 x 參與自動微分</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span>            <span class="c1"># y = x^2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">grad_fn</span><span class="p">)</span>      <span class="c1"># y 梯度函數</span>
+<span class="n">y</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>          <span class="c1"># 反向傳導</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>         <span class="c1"># 取得梯度, dy/dx = 2x, 2x 在 x = 4 的取值 = 8</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor(16., grad_fn=&lt;PowBackward0&gt;)
+&lt;PowBackward0 object at 0x1055ccbe0&gt;
+tensor(8.)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h1>取得變數的自動微分相關屬性值<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 設定變數值</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+<span class="n">z</span><span class="o">.</span><span class="n">retain_grad</span><span class="p">()</span>
+
+<span class="c1"># 顯示自動微分相關屬性</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">],</span> <span class="s2">&quot;xyz&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s2">data: </span><span class="si">{</span><span class="n">i</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="se">\n</span><span class="s2">requires_grad: </span><span class="si">{</span><span class="n">i</span><span class="o">.</span><span class="n">requires_grad</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> 
+            <span class="sa">f</span><span class="s2">&quot;grad: </span><span class="si">{</span><span class="n">i</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="se">\n</span><span class="s2">grad_fn: </span><span class="si">{</span><span class="n">i</span><span class="o">.</span><span class="n">grad_fn</span><span class="si">}</span><span class="se">\n</span><span class="s2">is_leaf: </span><span class="si">{</span><span class="n">i</span><span class="o">.</span><span class="n">is_leaf</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x
+data: 1.0
+requires_grad: True
+grad: None
+grad_fn: None
+is_leaf: True
+
+y
+data: 2.0
+requires_grad: False
+grad: None
+grad_fn: None
+is_leaf: True
+
+z
+data: 2.0
+requires_grad: True
+grad: None
+grad_fn: &lt;MulBackward0 object at 0x1055f4490&gt;
+is_leaf: False
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="cross-entropy">
+<h1>交叉熵(cross entropy)範例<a class="headerlink" href="#cross-entropy" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="s1">&#39;./images/cross_entropy.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/03_02_自動微分_6_0.png" src="../../_images/03_02_自動微分_6_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>定義一下上圖的計算圖：</p>
+<ul>
+<li><p>假設 batch size = 3</p></li>
+<li><p>此時 y 的 shape 為 (3,)，例如 [0, 0, 0]，表示有三個樣本，他們的 y 值不是 0 就是 1，剛好這三個樣本都是 0</p></li>
+<li><p>x 如果代表 5 個 feature，那目前的 shape 為 (5,)</p></li>
+<li><p>w</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  
+<span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  
+<span class="n">w</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span><span class="o">+</span><span class="n">b</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">binary_cross_entropy_with_logits</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;z 梯度函數：&#39;</span><span class="p">,</span> <span class="n">z</span><span class="o">.</span><span class="n">grad_fn</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;loss 梯度函數：&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">grad_fn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>z 梯度函數： &lt;AddBackward0 object at 0x1055ccb80&gt;
+loss 梯度函數： &lt;BinaryCrossEntropyWithLogitsBackward object at 0x1055cca60&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>         <span class="c1"># w梯度值</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>         <span class="c1"># b梯度值</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.0043, 0.0315, 0.0737],
+        [0.0043, 0.0315, 0.0737],
+        [0.0043, 0.0315, 0.0737],
+        [0.0043, 0.0315, 0.0737],
+        [0.0043, 0.0315, 0.0737]])
+tensor([0.0043, 0.0315, 0.0737])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Variable 在 v0.4.0已被棄用，直接使用 tensor 即可</span>
+<span class="kn">from</span> <span class="nn">torch.autograd</span> <span class="kn">import</span> <span class="n">Variable</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">y</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([1.])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 替代 Variable</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">y</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x2</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([1.])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h1>多次梯度下降<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">3</span>            <span class="c1"># y = x^3</span>
+
+<span class="n">y</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">retain_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># 梯度下降</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;一次梯度下降=</span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> 
+
+<span class="n">y</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">retain_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># 梯度下降</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;二次梯度下降=</span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> 
+
+<span class="n">y</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span> <span class="c1"># 梯度下降</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;三次梯度下降=</span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>一次梯度下降=75.0
+二次梯度下降=150.0
+三次梯度下降=225.0
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="reset">
+<h1>梯度 reset<a class="headerlink" href="#reset" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">3</span>            <span class="c1"># y = x^3</span>
+
+<span class="n">y</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">retain_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># 梯度下降</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;一次梯度下降=</span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> 
+<span class="n">x</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">zero_</span><span class="p">()</span>                <span class="c1"># 梯度 reset</span>
+
+<span class="n">y</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">retain_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># 梯度下降</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;二次梯度下降=</span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> 
+<span class="n">x</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">zero_</span><span class="p">()</span>                <span class="c1"># 梯度 reset</span>
+
+<span class="n">y</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span> <span class="c1"># 梯度下降</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;三次梯度下降=</span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor(125., grad_fn=&lt;PowBackward0&gt;)
+&lt;PowBackward0 object at 0x00000287764F7FA0&gt;
+一次梯度下降=75.0
+二次梯度下降=75.0
+三次梯度下降=75.0
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h1>多個變數梯度下降<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">3</span>            <span class="c1"># y = x^3</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">y</span> <span class="o">**</span> <span class="mi">2</span>            <span class="c1"># z = y^2</span>
+
+<span class="n">z</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span> <span class="c1"># 梯度下降</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x 梯度下降 = </span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># 6 * x^5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x 梯度下降 = 18750.0
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="gradient-descent">
+<h1>梯度下降法(Gradient Descent)<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 載入套件</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># 目標函數(損失函數):y=x^2</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="c1"># 目標函數的一階導數:dy/dx=2*x</span>
+<span class="k">def</span> <span class="nf">dfunc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="c1"># 超參數(Hyperparameters)</span>
+<span class="n">x_start</span> <span class="o">=</span> <span class="mi">5</span>     <span class="c1"># 起始權重</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">15</span>     <span class="c1"># 執行週期數 </span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.3</span>        <span class="c1"># 學習率 </span>
+
+<span class="c1"># 梯度下降法 </span>
+<span class="k">def</span> <span class="nf">GD</span><span class="p">(</span><span class="n">x_start</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">lr</span><span class="p">):</span>    
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">epochs</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x_start</span>    
+    <span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>         
+        <span class="n">dx</span> <span class="o">=</span> <span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>        
+        <span class="c1"># 更新 x_new = x — learning_rate * gradient        </span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="o">-</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">lr</span>         
+        <span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>    
+    <span class="k">return</span> <span class="n">xs</span>
+
+<span class="c1"># *** Function 可以直接當參數傳遞 ***</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">GD</span><span class="p">(</span><span class="n">x_start</span><span class="p">,</span> <span class="n">dfunc</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">)</span> 
+<span class="nb">print</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>    
+
+<span class="c1"># 設定中文字型</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Microsoft JhengHei&#39;</span><span class="p">]</span> <span class="c1"># 正黑體 </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># 矯正負號</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;梯度下降法&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;損失函數&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5.   2.   0.8  0.32 0.13 0.05 0.02 0.01 0.   0.   0.   0.   0.   0.
+ 0.   0.  ]
+</pre></div>
+</div>
+<img alt="../../_images/03_02_自動微分_19_1.png" src="../../_images/03_02_自動微分_19_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="pytorch">
+<h1>使用 PyTorch<a class="headerlink" href="#pytorch" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 載入套件</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># 目標函數(損失函數):y=x^2</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="c1"># 自動微分</span>
+<span class="k">def</span> <span class="nf">dfunc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> 
+    <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="c1"># 目標函數(損失函數)</span>
+    <span class="n">y</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">grad</span>
+
+<span class="c1"># 超參數(Hyperparameters)</span>
+<span class="n">x_start</span> <span class="o">=</span> <span class="mi">5</span>     <span class="c1"># 起始權重</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">15</span>     <span class="c1"># 執行週期數 </span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.3</span>        <span class="c1"># 學習率 </span>
+
+<span class="c1"># 梯度下降法 </span>
+<span class="k">def</span> <span class="nf">GD</span><span class="p">(</span><span class="n">x_start</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">lr</span><span class="p">):</span>    
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">epochs</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x_start</span>    
+    <span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>         
+        <span class="n">dx</span> <span class="o">=</span> <span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>        
+        <span class="c1"># x更新 x_new = x — learning_rate * gradient        </span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="o">-</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">lr</span>         
+        <span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>    
+    <span class="k">return</span> <span class="n">xs</span>
+
+<span class="c1"># *** Function 可以直接當參數傳遞 ***</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">GD</span><span class="p">(</span><span class="n">x_start</span><span class="p">,</span> <span class="n">dfunc</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">)</span> 
+<span class="nb">print</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>    
+
+<span class="c1"># 設定中文字型</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Microsoft JhengHei&#39;</span><span class="p">]</span> <span class="c1"># 正黑體 </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># 矯正負號</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;梯度下降法&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;損失函數&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5.   2.   0.8  0.32 0.13 0.05 0.02 0.01 0.   0.   0.   0.   0.   0.
+ 0.   0.  ]
+</pre></div>
+</div>
+<img alt="../../_images/03_02_自動微分_21_1.png" src="../../_images/03_02_自動微分_21_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="tensorflow">
+<h1>使用 TensorFlow<a class="headerlink" href="#tensorflow" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 載入套件</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># 目標函數(損失函數):y=x^2</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="c1"># 自動微分</span>
+<span class="k">def</span> <span class="nf">dfunc</span><span class="p">(</span><span class="n">x_value</span><span class="p">):</span> 
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">x_value</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="c1"># 宣告 TensorFlow 變數(Variable)</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">g</span><span class="p">:</span> <span class="c1"># 自動微分</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span>                <span class="c1"># y = x^2</span>
+    <span class="n">dy_dx</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>     <span class="c1"># 取得梯度</span>
+    <span class="k">return</span> <span class="n">dy_dx</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>         <span class="c1"># 轉成 NumPy array</span>
+
+<span class="c1"># 超參數(Hyperparameters)</span>
+<span class="n">x_start</span> <span class="o">=</span> <span class="mi">5</span>     <span class="c1"># 起始權重</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">15</span>     <span class="c1"># 執行週期數 </span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.3</span>        <span class="c1"># 學習率 </span>
+
+<span class="c1"># 梯度下降法 </span>
+<span class="k">def</span> <span class="nf">GD</span><span class="p">(</span><span class="n">x_start</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">lr</span><span class="p">):</span>    
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">epochs</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x_start</span>    
+    <span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>         
+        <span class="n">dx</span> <span class="o">=</span> <span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>        
+        <span class="c1"># x更新 x_new = x — learning_rate * gradient        </span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="o">-</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">lr</span>         
+        <span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>    
+    <span class="k">return</span> <span class="n">xs</span>
+
+<span class="c1"># *** Function 可以直接當參數傳遞 ***</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">GD</span><span class="p">(</span><span class="n">x_start</span><span class="p">,</span> <span class="n">dfunc</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">)</span> 
+<span class="nb">print</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>    
+
+<span class="c1"># 設定中文字型</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Microsoft JhengHei&#39;</span><span class="p">]</span> <span class="c1"># 正黑體 </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># 矯正負號</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;梯度下降法&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;損失函數&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5.   2.   0.8  0.32 0.13 0.05 0.02 0.01 0.   0.   0.   0.   0.   0.
+ 0.   0.  ]
+</pre></div>
+</div>
+<img alt="../../_images/03_02_自動微分_23_1.png" src="../../_images/03_02_自動微分_23_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 損失函數</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">20</span>
+
+<span class="c1"># 自動微分</span>
+<span class="k">def</span> <span class="nf">dfunc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> 
+    <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">20</span>
+    <span class="n">y</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">grad</span>
+
+<span class="c1"># 超參數(Hyperparameters)</span>
+<span class="n">x_start</span> <span class="o">=</span> <span class="mi">5</span>     <span class="c1"># 起始權重</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">15000</span>  <span class="c1"># 執行週期數 </span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.001</span>      <span class="c1"># 學習率 </span>
+
+<span class="c1"># *** Function 可以直接當參數傳遞 ***</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">GD</span><span class="p">(</span><span class="n">x_start</span><span class="p">,</span> <span class="n">dfunc</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">)</span> 
+<span class="nb">print</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>    
+
+<span class="c1"># 設定中文字型</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Microsoft JhengHei&#39;</span><span class="p">]</span> <span class="c1"># 正黑體 </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># 矯正負號</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;梯度下降法&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;損失函數&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5.   4.03 3.53 ... 0.51 0.51 0.51]
+</pre></div>
+</div>
+<img alt="../../_images/03_02_自動微分_24_1.png" src="../../_images/03_02_自動微分_24_1.png" />
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./pytorch/deepmind"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

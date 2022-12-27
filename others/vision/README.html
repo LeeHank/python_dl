@@ -1,0 +1,681 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>torchvision &#8212; My sample book</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Cheat Sheet
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../pytorch/pytorch_cheatsheet.html">
+   1. Pytorch Cheatsheet
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tensorflow basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/1.tensor.html">
+   2. Introduction to Tensors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/2.variable.html">
+   3. Introduction to Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/3.autodiff.html">
+   4. Introduction to gradients and automatic differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/5.intro_to_modules.html">
+   5. Introduction to modules, layers, and models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/6.basic_training_loops.html">
+   7. Basic training loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/7.keras_sequential_model.html">
+   8. The Sequential model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tf_create_model.html">
+   9. 三種搭建神經網路的方式
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../hands_on_ml3/tf_customization.html">
+   10. Customization
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Pytorch resource summarise
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../pytorch/d2l/d2l_linear_regression.html">
+   11. Linear regression (d2l)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../pytorch/d2l/d2l_softmax_regression.html">
+   12. Softmax regression (d2l)
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/others/vision/README.rst"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.rst</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fothers/vision/README.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   torchvision
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installation">
+   Installation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#image-backend">
+   Image Backend
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#video-backend">
+   Video Backend
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-the-models-on-c">
+   Using the models on C++
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#torchvision-operators">
+     TorchVision Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#documentation">
+   Documentation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#contributing">
+   Contributing
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#disclaimer-on-datasets">
+   Disclaimer on Datasets
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pre-trained-model-license">
+   Pre-trained Model License
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#citing-torchvision">
+   Citing TorchVision
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>torchvision</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   torchvision
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installation">
+   Installation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#image-backend">
+   Image Backend
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#video-backend">
+   Video Backend
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-the-models-on-c">
+   Using the models on C++
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#torchvision-operators">
+     TorchVision Operators
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#documentation">
+   Documentation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#contributing">
+   Contributing
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#disclaimer-on-datasets">
+   Disclaimer on Datasets
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pre-trained-model-license">
+   Pre-trained Model License
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#citing-torchvision">
+   Citing TorchVision
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="section" id="torchvision">
+<h1>torchvision<a class="headerlink" href="#torchvision" title="Permalink to this headline">¶</a></h1>
+<a class="reference external image-reference" href="https://pepy.tech/project/torchvision"><img alt="https://pepy.tech/badge/torchvision" src="https://pepy.tech/badge/torchvision" /></a>
+<a class="reference external image-reference" href="https://pytorch.org/vision/stable/index.html"><img alt="https://img.shields.io/badge/dynamic/json.svg?label=docs&amp;url=https%3A%2F%2Fpypi.org%2Fpypi%2Ftorchvision%2Fjson&amp;query=%24.info.version&amp;colorB=brightgreen&amp;prefix=v" src="https://img.shields.io/badge/dynamic/json.svg?label=docs&amp;url=https%3A%2F%2Fpypi.org%2Fpypi%2Ftorchvision%2Fjson&amp;query=%24.info.version&amp;colorB=brightgreen&amp;prefix=v" /></a>
+<p>The torchvision package consists of popular datasets, model architectures, and common image transformations for computer vision.</p>
+</div>
+<div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>We recommend Anaconda as Python package management system. Please refer to <a class="reference external" href="https://pytorch.org/">pytorch.org</a>
+for the detail of PyTorch (<code class="docutils literal notranslate"><span class="pre">torch</span></code>) installation. The following is the corresponding <code class="docutils literal notranslate"><span class="pre">torchvision</span></code> versions and
+supported Python versions.</p>
+<table class="table">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 31%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">torch</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">torchvision</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">python</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">main</span></code> / <code class="docutils literal notranslate"><span class="pre">nightly</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">main</span></code> / <code class="docutils literal notranslate"><span class="pre">nightly</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.7.2</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.10</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1.13.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.14.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.7.2</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.10</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1.12.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.13.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.7</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.10</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1.11.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.12.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.7</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.10</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1.10.2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.11.3</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.6</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.9</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1.10.1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.11.2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.6</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.9</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1.10.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.11.1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.6</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.9</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1.9.1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.10.1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.6</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.9</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1.9.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.10.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.6</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.9</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1.8.2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.9.2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.6</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.9</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1.8.1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.9.1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.6</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.9</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1.8.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.9.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.6</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.9</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1.7.1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.8.2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.6</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.9</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1.7.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.8.1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.6</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.8</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1.7.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.8.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.6</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.8</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1.6.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.7.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.6</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.8</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1.5.1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.6.1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.5</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.8</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1.5.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.6.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=3.5</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.8</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1.4.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.5.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">==2.7</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=3.5</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.8</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1.3.1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.4.2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">==2.7</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=3.5</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.7</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1.3.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.4.1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">==2.7</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=3.5</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.7</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1.2.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.4.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">==2.7</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=3.5</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.7</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1.1.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.3.0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">==2.7</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=3.5</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.7</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;=1.0.1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.2.2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">==2.7</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=3.5</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=3.7</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Anaconda:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install torchvision -c pytorch
+</pre></div>
+</div>
+<p>pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install torchvision
+</pre></div>
+</div>
+<p>From source:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python setup.py install
+<span class="c1"># or, for OSX</span>
+<span class="c1"># MACOSX_DEPLOYMENT_TARGET=10.9 CC=clang CXX=clang++ python setup.py install</span>
+</pre></div>
+</div>
+<p>We don’t officially support building from source using <code class="docutils literal notranslate"><span class="pre">pip</span></code>, but <em>if</em> you do,
+you’ll need to use the <code class="docutils literal notranslate"><span class="pre">--no-build-isolation</span></code> flag.
+In case building TorchVision from source fails, install the nightly version of PyTorch following
+the linked guide on the  <a class="reference external" href="https://github.com/pytorch/vision/blob/main/CONTRIBUTING.md#development-installation">contributing page</a> and retry the install.</p>
+<p>By default, GPU support is built if CUDA is found and <code class="docutils literal notranslate"><span class="pre">torch.cuda.is_available()</span></code> is true.
+It’s possible to force building GPU support by setting <code class="docutils literal notranslate"><span class="pre">FORCE_CUDA=1</span></code> environment variable,
+which is useful when building a docker image.</p>
+</div>
+<div class="section" id="image-backend">
+<h1>Image Backend<a class="headerlink" href="#image-backend" title="Permalink to this headline">¶</a></h1>
+<p>Torchvision currently supports the following image backends:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://python-pillow.org/">Pillow</a> (default)</p></li>
+<li><p><a class="reference external" href="https://github.com/uploadcare/pillow-simd">Pillow-SIMD</a> - a <strong>much faster</strong> drop-in replacement for Pillow with SIMD. If installed will be used as the default.</p></li>
+<li><p><a class="reference external" href="https://github.com/pytorch/accimage">accimage</a> - if installed can be activated by calling <code class="code docutils literal notranslate"><span class="pre">torchvision.set_image_backend('accimage')</span></code></p></li>
+<li><p><a class="reference external" href="http://www.libpng.org/pub/png/libpng.html">libpng</a> - can be installed via conda <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">libpng</span></code> or any of the package managers for debian-based and RHEL-based Linux distributions.</p></li>
+<li><p><a class="reference external" href="http://ijg.org/">libjpeg</a> - can be installed via conda <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">jpeg</span></code> or any of the package managers for debian-based and RHEL-based Linux distributions. <a class="reference external" href="https://libjpeg-turbo.org/">libjpeg-turbo</a> can be used as well.</p></li>
+</ul>
+<p><strong>Notes:</strong> <code class="docutils literal notranslate"><span class="pre">libpng</span></code> and <code class="docutils literal notranslate"><span class="pre">libjpeg</span></code> must be available at compilation time in order to be available. Make sure that it is available on the standard library locations,
+otherwise, add the include and library paths in the environment variables <code class="docutils literal notranslate"><span class="pre">TORCHVISION_INCLUDE</span></code> and <code class="docutils literal notranslate"><span class="pre">TORCHVISION_LIBRARY</span></code>, respectively.</p>
+</div>
+<div class="section" id="video-backend">
+<h1>Video Backend<a class="headerlink" href="#video-backend" title="Permalink to this headline">¶</a></h1>
+<p>Torchvision currently supports the following video backends:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/PyAV-Org/PyAV">pyav</a> (default) - Pythonic binding for ffmpeg libraries.</p></li>
+</ul>
+<ul class="simple">
+<li><p>video_reader - This needs ffmpeg to be installed and torchvision to be built from source. There shouldn’t be any conflicting version of ffmpeg installed. Currently, this is only supported on Linux.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge ffmpeg
+python setup.py install
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-the-models-on-c">
+<h1>Using the models on C++<a class="headerlink" href="#using-the-models-on-c" title="Permalink to this headline">¶</a></h1>
+<p>TorchVision provides an example project for how to use the models on C++ using JIT Script.</p>
+<p>Installation From source:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir build
+<span class="nb">cd</span> build
+<span class="c1"># Add -DWITH_CUDA=on support for the CUDA if needed</span>
+cmake ..
+make
+make install
+</pre></div>
+</div>
+<p>Once installed, the library can be accessed in cmake (after properly configuring <code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code>) via the <code class="code docutils literal notranslate"><span class="pre">TorchVision::TorchVision</span></code> target:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span>find_package(TorchVision REQUIRED)
+target_link_libraries(my-target PUBLIC TorchVision::TorchVision)
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">TorchVision</span></code> package will also automatically look for the <code class="docutils literal notranslate"><span class="pre">Torch</span></code> package and add it as a dependency to <code class="docutils literal notranslate"><span class="pre">my-target</span></code>,
+so make sure that it is also available to cmake via the <code class="docutils literal notranslate"><span class="pre">CMAKE_PREFIX_PATH</span></code>.</p>
+<p>For an example setup, take a look at <code class="docutils literal notranslate"><span class="pre">examples/cpp/hello_world</span></code>.</p>
+<p>Python linking is disabled by default when compiling TorchVision with CMake, this allows you to run models without any Python
+dependency. In some special cases where TorchVision’s operators are used from Python code, you may need to link to Python. This
+can be done by passing <code class="docutils literal notranslate"><span class="pre">-DUSE_PYTHON=on</span></code> to CMake.</p>
+<div class="section" id="torchvision-operators">
+<h2>TorchVision Operators<a class="headerlink" href="#torchvision-operators" title="Permalink to this headline">¶</a></h2>
+<p>In order to get the torchvision operators registered with torch (eg. for the JIT), all you need to do is to ensure that you
+<code class="code docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;torchvision/vision.h&gt;</span></code> in your project.</p>
+</div>
+</div>
+<div class="section" id="documentation">
+<h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h1>
+<p>You can find the API documentation on the pytorch website: <a class="reference external" href="https://pytorch.org/vision/stable/index.html">https://pytorch.org/vision/stable/index.html</a></p>
+</div>
+<div class="section" id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+<p>See the <a class="reference external" href="CONTRIBUTING.md">CONTRIBUTING</a> file for how to help out.</p>
+</div>
+<div class="section" id="disclaimer-on-datasets">
+<h1>Disclaimer on Datasets<a class="headerlink" href="#disclaimer-on-datasets" title="Permalink to this headline">¶</a></h1>
+<p>This is a utility library that downloads and prepares public datasets. We do not host or distribute these datasets, vouch for their quality or fairness, or claim that you have license to use the dataset. It is your responsibility to determine whether you have permission to use the dataset under the dataset’s license.</p>
+<p>If you’re a dataset owner and wish to update any part of it (description, citation, etc.), or do not want your dataset to be included in this library, please get in touch through a GitHub issue. Thanks for your contribution to the ML community!</p>
+</div>
+<div class="section" id="pre-trained-model-license">
+<h1>Pre-trained Model License<a class="headerlink" href="#pre-trained-model-license" title="Permalink to this headline">¶</a></h1>
+<p>The pre-trained models provided in this library may have their own licenses or terms and conditions derived from the dataset used for training. It is your responsibility to determine whether you have permission to use the models for your use case.</p>
+<p>More specifically, SWAG models are released under the CC-BY-NC 4.0 license. See <a class="reference external" href="https://github.com/facebookresearch/SWAG/blob/main/LICENSE">SWAG LICENSE</a> for additional details.</p>
+</div>
+<div class="section" id="citing-torchvision">
+<h1>Citing TorchVision<a class="headerlink" href="#citing-torchvision" title="Permalink to this headline">¶</a></h1>
+<p>If you find TorchVision useful in your work, please consider citing the following BibTeX entry:</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@software</span><span class="p">{</span><span class="nl">torchvision2016</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="na">title</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="s">{TorchVision: PyTorch&#39;s Computer Vision library}</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="na">author</span><span class="w">       </span><span class="p">=</span><span class="w"> </span><span class="s">{TorchVision maintainers and contributors}</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="na">year</span><span class="w">         </span><span class="p">=</span><span class="w"> </span><span class="m">2016</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="na">journal</span><span class="w">      </span><span class="p">=</span><span class="w"> </span><span class="s">{GitHub repository}</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="na">publisher</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{GitHub}</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="na">howpublished</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{\url{https://github.com/pytorch/vision}}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./others/vision"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,1607 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>12. Softmax regression (d2l) &#8212; My sample book</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="11. Linear regression (d2l)" href="d2l_linear_regression.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Cheat Sheet
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch_cheatsheet.html">
+   1. Pytorch Cheatsheet
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tensorflow basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/1.tensor.html">
+   2. Introduction to Tensors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/2.variable.html">
+   3. Introduction to Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/3.autodiff.html">
+   4. Introduction to gradients and automatic differentiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/5.intro_to_modules.html">
+   5. Introduction to modules, layers, and models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/6.basic_training_loops.html">
+   7. Basic training loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../old/7.keras_sequential_model.html">
+   8. The Sequential model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tf_create_model.html">
+   9. 三種搭建神經網路的方式
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../hands_on_ml3/tf_customization.html">
+   10. Customization
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Pytorch resource summarise
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="d2l_linear_regression.html">
+   11. Linear regression (d2l)
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   12. Softmax regression (d2l)
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/pytorch/d2l/d2l_softmax_regression.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fpytorch/d2l/d2l_softmax_regression.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/pytorch/d2l/d2l_softmax_regression.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#utils">
+   12.1. utils
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   12.2. 讀檔
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#from-scratch">
+   12.3. from scratch
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     12.3.1. 定義模型
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loss-function">
+     12.3.2. loss function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimizer">
+     12.3.3. optimizer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#metric">
+     12.3.4. metric
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#training">
+     12.3.5. training
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prediction">
+     12.3.6. prediction
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#function">
+   12.4. 內建 function
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     12.4.1. 定義模型
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     12.4.2. loss function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     12.4.3. optimizer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     12.4.4. metric
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     12.4.5. training
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vs">
+   12.5. 內建 VS 自己寫的差別
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Softmax regression (d2l)</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#utils">
+   12.1. utils
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   12.2. 讀檔
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#from-scratch">
+   12.3. from scratch
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     12.3.1. 定義模型
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loss-function">
+     12.3.2. loss function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimizer">
+     12.3.3. optimizer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#metric">
+     12.3.4. metric
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#training">
+     12.3.5. training
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prediction">
+     12.3.6. prediction
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#function">
+   12.4. 內建 function
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     12.4.1. 定義模型
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     12.4.2. loss function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     12.4.3. optimizer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     12.4.4. metric
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     12.4.5. training
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vs">
+   12.5. 內建 VS 自己寫的差別
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="softmax-regression-d2l">
+<h1><span class="section-number">12. </span>Softmax regression (d2l)<a class="headerlink" href="#softmax-regression-d2l" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="kn">from</span> <span class="nn">torch.utils</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">transforms</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="kn">from</span> <span class="nn">d2l</span> <span class="kn">import</span> <span class="n">torch</span> <span class="k">as</span> <span class="n">d2l</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="utils">
+<h2><span class="section-number">12.1. </span>utils<a class="headerlink" href="#utils" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">load_data_fashion_mnist</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">resize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_workers</span> <span class="o">=</span> <span class="mi">4</span><span class="p">):</span>  <span class="c1">#@save</span>
+    <span class="sd">&quot;&quot;&quot; 讀 Fashion-MNIST 的 function  </span>
+<span class="sd">    args:</span>
+<span class="sd">      - batch_size: 做 DataLoader 時要用的</span>
+<span class="sd">      - resize: 例如 (224, 224), 最一開始讀檔時，trans 要用的. </span>
+<span class="sd">      - n_workers</span>
+<span class="sd">    output:</span>
+<span class="sd">      - trainning 的 iterator 和 testing 的 iterator</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># transformation</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="p">[</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">()]</span> <span class="c1"># transforms.ToTensor() 會把 PIL 物件(uint8, 0~255 int) 先轉成 float32, normalize 到 0~1 之間, 再轉成 tensor (channel first, 灰階是 1)</span>
+    <span class="k">if</span> <span class="n">resize</span><span class="p">:</span>
+        <span class="n">trans</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">(</span><span class="n">resize</span><span class="p">))</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span>
+    
+    <span class="c1"># dataset</span>
+    <span class="n">mnist_train</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">FashionMNIST</span><span class="p">(</span>
+        <span class="n">root</span><span class="o">=</span><span class="s2">&quot;../data&quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">mnist_test</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">FashionMNIST</span><span class="p">(</span>
+        <span class="n">root</span><span class="o">=</span><span class="s2">&quot;../data&quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># dataloader</span>
+    <span class="n">train_loader</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">mnist_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">num_workers</span><span class="o">=</span> <span class="n">n_workers</span><span class="p">)</span>
+    <span class="n">test_loader</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">mnist_test</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                            <span class="n">num_workers</span><span class="o">=</span> <span class="n">n_workers</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">train_loader</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_fashion_mnist_labels</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>  <span class="c1">#@save</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    原本的 label 是 0-9 的 int, 現在把他轉成 text labels</span>
+<span class="sd">    args:</span>
+<span class="sd">      - labels: list, 每個 element 都是 0-9 的 int</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">text_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;t-shirt&#39;</span><span class="p">,</span> <span class="s1">&#39;trouser&#39;</span><span class="p">,</span> <span class="s1">&#39;pullover&#39;</span><span class="p">,</span> <span class="s1">&#39;dress&#39;</span><span class="p">,</span> <span class="s1">&#39;coat&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;sandal&#39;</span><span class="p">,</span> <span class="s1">&#39;shirt&#39;</span><span class="p">,</span> <span class="s1">&#39;sneaker&#39;</span><span class="p">,</span> <span class="s1">&#39;bag&#39;</span><span class="p">,</span> <span class="s1">&#39;ankle boot&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">text_labels</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">show_images</span><span class="p">(</span><span class="n">imgs</span><span class="p">,</span> <span class="n">num_rows</span><span class="p">,</span> <span class="n">num_cols</span><span class="p">,</span> <span class="n">titles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">):</span>  <span class="c1">#@save</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    args:</span>
+<span class="sd">      - imgs: tensor; shape = (batch_size, h, w) for 灰階; (batch_size, h, w, c) for RGB; 所以要先幫他轉成 channel last</span>
+<span class="sd">      - num_rows</span>
+<span class="sd">      - num_cols</span>
+<span class="sd">      </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_cols</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span> <span class="n">num_rows</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">num_rows</span><span class="p">,</span> <span class="n">num_cols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+    <span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    
+    <span class="n">max_num_imgs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">num_cols</span><span class="o">*</span><span class="n">num_rows</span><span class="p">,</span> <span class="n">imgs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">imgs</span><span class="p">[:</span><span class="n">max_num_imgs</span><span class="p">])):</span>
+        <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">is_tensor</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># PIL圖片</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">get_yaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">titles</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">axes</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2><span class="section-number">12.2. </span>讀檔<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
+
+<span class="n">train_iter</span><span class="p">,</span> <span class="n">test_iter</span> <span class="o">=</span> <span class="n">load_data_fashion_mnist</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">train_iter</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([32, 1, 28, 28])
+torch.float32
+tensor(0.)
+tensor(1.)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([4, 2, 4, 7, 1, 9, 7, 2, 5, 9, 7, 1, 8, 1, 5, 6, 7, 6, 2, 5, 8, 0, 5, 9,
+        8, 9, 9, 9, 8, 8, 4, 0])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_fashion_mnist_labels</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;coat&#39;,
+ &#39;pullover&#39;,
+ &#39;coat&#39;,
+ &#39;sneaker&#39;,
+ &#39;trouser&#39;,
+ &#39;ankle boot&#39;,
+ &#39;sneaker&#39;,
+ &#39;pullover&#39;,
+ &#39;sandal&#39;,
+ &#39;ankle boot&#39;,
+ &#39;sneaker&#39;,
+ &#39;trouser&#39;,
+ &#39;bag&#39;,
+ &#39;trouser&#39;,
+ &#39;sandal&#39;,
+ &#39;shirt&#39;,
+ &#39;sneaker&#39;,
+ &#39;shirt&#39;,
+ &#39;pullover&#39;,
+ &#39;sandal&#39;,
+ &#39;bag&#39;,
+ &#39;t-shirt&#39;,
+ &#39;sandal&#39;,
+ &#39;ankle boot&#39;,
+ &#39;bag&#39;,
+ &#39;ankle boot&#39;,
+ &#39;ankle boot&#39;,
+ &#39;ankle boot&#39;,
+ &#39;bag&#39;,
+ &#39;bag&#39;,
+ &#39;coat&#39;,
+ &#39;t-shirt&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>畫個圖來看看</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_images</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span> <span class="n">num_rows</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">num_cols</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="n">titles</span> <span class="o">=</span> <span class="n">get_fashion_mnist_labels</span><span class="p">(</span><span class="n">y</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d2l_softmax_regression_13_0.png" src="../../_images/d2l_softmax_regression_13_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="from-scratch">
+<h2><span class="section-number">12.3. </span>from scratch<a class="headerlink" href="#from-scratch" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3><span class="section-number">12.3.1. </span>定義模型<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>假設圖形拉成向量後是 p 維，然後 label 的 class 有 c 類，那從圖形的角度來理解 softmax，就是:</p>
+<ul>
+<li><p>input層: p 個 neuron</p></li>
+<li><p>第一層： c 個 neuron</p></li>
+<li><p>output: 把 c 個 neruon 做 softmax，使其 c 個 output 值的加總為 1</p></li>
+</ul>
+</li>
+<li><p>用數學來表達的話(順便把 batch_size = n 也帶入)，符號可定義為：</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{Y} \in \mathbb{R}^{n \times c}\)</span>, label 矩陣， n個樣本，每個樣本都是 1xc 的 one-hot encoding.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{X} \in \mathbb{R}^{n \times p}\)</span>, 資料矩陣, n個樣本，每個樣本都是 1xp 的 vector (像素拉成向量)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{W} \in \mathbb{R}^{p \times c}\)</span>, 權重矩陣，shape = (p, c)，input p 個 neuron，ouput c 個 neuron</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{b} \in \mathbb{R}^{1\times c}\)</span>, bias 向量, shape = (1, c)</p></li>
+</ul>
+</li>
+<li><p>式子為：</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{aligned} \mathbf{O} &amp;= \mathbf{X} \mathbf{W} + \mathbf{b}, \\ \hat{\mathbf{Y}} &amp; = \mathrm{softmax}(\mathbf{O}). \end{aligned} \end{split}\]</div>
+<ul class="simple">
+<li><p>softmax 是對 <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\)</span> 的每一列做，做完後，每一列所有element的加總為 1</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{softmax}(\mathbf{O})_{ij} = \frac{\exp(\mathbf{O}_{ij})}{\sum_k \exp(\mathbf{O}_{ik})}.
+\]</div>
+<ul class="simple">
+<li><p>來定義一下 softmax function</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">X_exp</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="c1"># 每個 element 都先取 exp</span>
+    <span class="n">partition</span> <span class="o">=</span> <span class="n">X_exp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># 對每一列取 sum</span>
+    <span class="k">return</span> <span class="n">X_exp</span> <span class="o">/</span> <span class="n">partition</span>  <span class="c1"># 這裡用了 broadcasting</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>試試看：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">X</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[ 0.7939, -0.0138,  0.0116, -0.1706,  0.4581],
+        [-0.5037,  1.1059,  0.2747, -1.3178,  1.5509]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_prob</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">X_prob</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.3334, 0.1487, 0.1525, 0.1271, 0.2383],
+        [0.0609, 0.3045, 0.1326, 0.0270, 0.4751]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_prob</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([1.0000, 1.0000])
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>現在，可以來定義模型了：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; softmax regression &quot;&quot;&quot;</span>
+    <span class="n">W</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="n">O</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">W</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span> <span class="n">W</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="n">Y_hat</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">O</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Y_hat</span>     
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="loss-function">
+<h3><span class="section-number">12.3.2. </span>loss function<a class="headerlink" href="#loss-function" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>假設 y 有 C 個 class，資料筆數為 n，那：</p>
+<ul>
+<li><p>y 為 nxc matrix，每一列都是 one-hot encoding.</p></li>
+<li><p>y_hat 為 nxc matrix，每一列是 c 個 class 的 predict probability</p></li>
+</ul>
+</li>
+<li><p>categorical cross entropy 被定義為：  <span class="math notranslate nohighlight">\(\frac{1}{n} \sum_{i=1}^n \left( - \sum_{j=1}^C y_{ij} log \hat{y_{ij}}\right)\)</span></p></li>
+<li><p>其中，loss 就是中間那項 <span class="math notranslate nohighlight">\(- \sum_{j=1}^C y_{ij} log \hat{y_{ij}}\)</span>，cost 是用 mean 來 summarise (你要用 sum 來 summarise 也可以)</p></li>
+<li><p>一般來說，<span class="math notranslate nohighlight">\(y_i\)</span> 不是 one-hot encoding，就是 index encoding (e.g. 總共 c 類，那 y 的值域為 0 到 c-1)，在這種情況下，index encoding 的計算方法比較簡單，他就挑 y = 1 的 y_hat 出來即可</p></li>
+<li><p>但之後會慢慢接觸到，y 可能是 mix-up 的結果，也就是說， y 仍是 c 維 vector，只是它不是 one-hot 了，他是 c 個 probability.</p></li>
+<li><p>那我們仍然可以用上面的定義去計算 cross entropy，此時的解釋，就會變成去看 y 和 y_hat 的 distributioin 像不像</p></li>
+</ul>
+<ul class="simple">
+<li><p>現在，來自己寫兩個 loss function，一個給 one-hot encoding 用，一個給 index encoding 用:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyCategoricalCrossEntropy</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s2">&quot;mean&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span> <span class="o">=</span> <span class="n">reduction</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_hat_mat</span><span class="p">,</span> <span class="n">y_mat</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        args:</span>
+<span class="sd">          - y_hat_mat: shape = (batch_size, c), c = one_hot_vector_size</span>
+<span class="sd">          - y_mat: shape = (batch_size, c), c = one_hot_vector_size</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log_y_hat_mat</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y_hat_mat</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">y_mat</span><span class="o">*</span><span class="n">log_y_hat_mat</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">loss</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span> <span class="o">==</span> <span class="s2">&quot;mean&quot;</span><span class="p">:</span>
+            <span class="n">cost</span> <span class="o">=</span> <span class="n">loss</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span> <span class="o">==</span> <span class="s2">&quot;sum&quot;</span><span class="p">:</span>
+            <span class="n">cost</span> <span class="o">=</span> <span class="n">loss</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
+            <span class="n">cost</span> <span class="o">=</span> <span class="n">loss</span>
+        <span class="k">return</span> <span class="n">cost</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># instance</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="n">MyCategoricalCrossEntropy</span><span class="p">(</span><span class="n">reduction</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">)</span>
+<span class="n">y_hat_logit_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[[</span><span class="o">-</span><span class="mf">2.3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span>
+     <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">]]</span>
+<span class="p">)</span>
+<span class="n">y_hat_logit_mat</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y_hat_logit_mat</span><span class="p">)</span>
+
+<span class="n">y_hat_mat</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">y_hat_logit_mat</span><span class="p">)</span>
+<span class="c1"># y_hat_mat = np.array(</span>
+<span class="c1">#     [[0.2, 0.2, 0.6],</span>
+<span class="c1">#      [0.1, 0.8, 0.1]]</span>
+<span class="c1"># )</span>
+<span class="n">y_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="p">)</span>
+
+<span class="n">y_hat_mat</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y_hat_mat</span><span class="p">)</span>
+<span class="n">y_mat</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y_mat</span><span class="p">)</span>
+<span class="n">loss</span><span class="p">(</span><span class="n">y_hat_mat</span><span class="p">,</span> <span class="n">y_mat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-127-90f11e6105ed&gt;:19: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  y_hat_mat = torch.tensor(y_hat_mat)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([2.5806, 6.0025], dtype=torch.float64)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="p">)</span>
+<span class="n">y_mat</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y_mat</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">y_mat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0., 0., 1.],
+        [0., 1., 0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_hat_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]]</span>
+<span class="p">)</span>
+<span class="n">y_hat_mat</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y_hat_mat</span><span class="p">)</span>
+<span class="n">y_hat_mat</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y_hat_mat</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">y_hat_mat</span><span class="p">))</span>
+<span class="n">y_hat_mat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[-1.3863, -1.3863,  0.4055],
+        [-2.1972,  1.3863, -2.1972]], dtype=torch.float64)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="n">official_loss</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<span class="n">official_loss</span><span class="p">(</span><span class="n">y_hat_logit_mat</span><span class="p">,</span> <span class="n">y_mat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([2.5806, 6.0025], dtype=torch.float64)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">official_loss</span><span class="p">(</span><span class="n">y_hat_mat</span><span class="p">,</span> <span class="n">y_vec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([0.8504, 0.6897], dtype=torch.float64)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MySparseCategoricalCrossEntropy</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s2">&quot;mean&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span> <span class="o">=</span> <span class="n">reduction</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_hat_mat</span><span class="p">,</span> <span class="n">y_vec</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        args:</span>
+<span class="sd">          - y_hat_mat: shape = (batch_size, c), c = one_hot_vector_size</span>
+<span class="sd">          - y_vec: shape = (batch_size,), 每個 element 是 int，值介於 0~ (c-1)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y_hat_mat</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_hat_mat</span><span class="p">)),</span> <span class="n">y_vec</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span> <span class="o">==</span> <span class="s2">&quot;mean&quot;</span><span class="p">:</span>
+            <span class="n">cost</span> <span class="o">=</span> <span class="n">loss</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span> <span class="o">==</span> <span class="s2">&quot;sum&quot;</span><span class="p">:</span>
+            <span class="n">cost</span> <span class="o">=</span> <span class="n">loss</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
+            <span class="n">cost</span> <span class="o">=</span> <span class="n">loss</span>
+        <span class="k">return</span> <span class="n">cost</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># instance</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="n">MySparseCategoricalCrossEntropy</span><span class="p">(</span><span class="n">reduction</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">)</span>
+<span class="n">y_hat_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]]</span>
+<span class="p">)</span>
+<span class="n">y_hat_mat</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y_hat_mat</span><span class="p">)</span>
+
+<span class="n">y_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">y_vec</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y_vec</span><span class="p">)</span>
+
+<span class="n">loss</span><span class="p">(</span><span class="n">y_hat_mat</span><span class="p">,</span> <span class="n">y_vec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([0.5108, 0.2231], dtype=torch.float64)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="optimizer">
+<h3><span class="section-number">12.3.3. </span>optimizer<a class="headerlink" href="#optimizer" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>一樣用 sgd 就好：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MySGD</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.03</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">params</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lr</span> <span class="o">=</span> <span class="n">lr</span>
+    
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+                <span class="n">param</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lr</span> <span class="o">*</span> <span class="n">param</span><span class="o">.</span><span class="n">grad</span>
+                
+    <span class="k">def</span> <span class="nf">zero_grad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">grad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">param</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">zero_</span><span class="p">()</span> <span class="c1"># 清空 gradient</span>
+<span class="c1"># def optimizer(params, lr = 0.03):  #@save</span>
+<span class="c1">#     &quot;&quot;&quot; sgd &quot;&quot;&quot;</span>
+<span class="c1">#     with torch.no_grad():</span>
+<span class="c1">#         for param in params:</span>
+<span class="c1">#             param -= lr * param.grad</span>
+<span class="c1">#             param.grad.zero_() # 清空 gradient</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="metric">
+<h3><span class="section-number">12.3.4. </span>metric<a class="headerlink" href="#metric" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyAcc</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">true_decision</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_number</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">def</span> <span class="nf">update_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="c1"># 計算預測正確的數量</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_hat</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">y_hat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">y_hat</span> <span class="o">=</span> <span class="n">y_hat</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">cmp</span> <span class="o">=</span> <span class="n">y_hat</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="o">==</span> <span class="n">y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">true_decision</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">cmp</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_number</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">accuracy</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">accuracy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">true_decision</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_number</span>
+        <span class="k">return</span> <span class="n">accuracy</span>
+
+    <span class="k">def</span> <span class="nf">reset_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">true_decision</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_number</span> <span class="o">=</span> <span class="mf">0.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_acc</span> <span class="o">=</span> <span class="n">MyAcc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_hat</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.8</span><span class="p">],[</span><span class="mf">0.9</span><span class="p">,</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.05</span><span class="p">]],</span> <span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_acc</span><span class="o">.</span><span class="n">update_state</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">my_acc</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6666666666666666
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_acc</span><span class="o">.</span><span class="n">update_state</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">my_acc</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6666666666666666
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_acc</span><span class="o">.</span><span class="n">reset_state</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_acc</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="training">
+<h3><span class="section-number">12.3.5. </span>training<a class="headerlink" href="#training" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>這次，來定義一些好用的 function 吧：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_epoch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_iter</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">metric</span><span class="p">):</span>
+    <span class="n">metric</span><span class="o">.</span><span class="n">reset_state</span><span class="p">()</span>
+    <span class="n">cost_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">train_iter</span><span class="p">):</span>
+        
+        <span class="c1"># forward</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+            <span class="n">y_hat</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">y_hat</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+        <span class="n">batch_cost</span> <span class="o">=</span> <span class="n">loss</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">metric</span><span class="o">.</span><span class="n">update_state</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        
+        <span class="c1"># 清空 gradient</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        
+        <span class="c1"># backward</span>
+        <span class="n">batch_cost</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span> <span class="c1"># 算 gradient</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span> <span class="c1"># 更新參數</span>
+        
+        <span class="c1"># add to cost_list</span>
+        <span class="n">cost_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">batch_cost</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+        
+        <span class="k">if</span> <span class="n">batch</span> <span class="o">%</span> <span class="mi">300</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">current_cost</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cost_list</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;batch </span><span class="si">{</span><span class="n">batch</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s2"> training loss: </span><span class="si">{</span><span class="n">current_cost</span><span class="si">}</span><span class="s2">; training accuracy: </span><span class="si">{</span><span class="n">metric</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="n">epoch_cost</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cost_list</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">epoch_acc</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">epoch_cost</span><span class="p">,</span> <span class="n">epoch_acc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">valid_epoch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_iter</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">metric</span><span class="p">):</span>
+    
+    <span class="n">metric</span><span class="o">.</span><span class="n">reset_state</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="n">cost_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">test_iter</span><span class="p">:</span>
+            <span class="c1"># forward only</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+                <span class="n">y_hat</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">y_hat</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+            <span class="n">batch_cost</span> <span class="o">=</span> <span class="n">loss</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="n">cost_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">batch_cost</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+            <span class="n">metric</span><span class="o">.</span><span class="n">update_state</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            
+    <span class="n">epoch_cost</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cost_list</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">epoch_acc</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">epoch_cost</span><span class="p">,</span> <span class="n">epoch_acc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_iter</span><span class="p">,</span> <span class="n">test_iter</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">num_epochs</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">metric</span><span class="p">):</span>  <span class="c1">#@save</span>
+    <span class="n">train_history</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">valid_history</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;---------- epoch: </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> ----------&quot;</span><span class="p">)</span>
+        
+        <span class="n">train_epoch_cost</span><span class="p">,</span> <span class="n">train_epoch_acc</span> <span class="o">=</span> <span class="n">train_epoch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_iter</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
+        <span class="n">valid_epoch_cost</span><span class="p">,</span> <span class="n">valid_epoch_acc</span> <span class="o">=</span> <span class="n">valid_epoch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_iter</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;training loss: </span><span class="si">{</span><span class="n">train_epoch_cost</span><span class="si">}</span><span class="s2">; validation loss: </span><span class="si">{</span><span class="n">valid_epoch_cost</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;training acc: </span><span class="si">{</span><span class="n">train_epoch_acc</span><span class="si">}</span><span class="s2">; validation acc: </span><span class="si">{</span><span class="n">valid_epoch_acc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">train_history</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="n">train_epoch_cost</span><span class="p">,</span> <span class="s2">&quot;acc&quot;</span><span class="p">:</span> <span class="n">train_epoch_acc</span><span class="p">})</span>
+        <span class="n">valid_history</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="n">valid_epoch_cost</span><span class="p">,</span> <span class="s2">&quot;acc&quot;</span><span class="p">:</span> <span class="n">valid_epoch_acc</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">train_history</span><span class="p">,</span> <span class="n">valid_history</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># hyper-parameter</span>
+<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+
+<span class="c1"># 初始化參數</span>
+<span class="n">num_inputs</span> <span class="o">=</span> <span class="mi">28</span><span class="o">*</span><span class="mi">28</span>
+<span class="n">num_outputs</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">W</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">num_inputs</span><span class="p">,</span> <span class="n">num_outputs</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_outputs</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span>
+
+<span class="c1"># loss</span>
+<span class="n">loss</span> <span class="o">=</span>  <span class="n">MySparseCategoricalCrossEntropy</span><span class="p">()</span>
+
+<span class="c1"># optimizer</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">MySGD</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">lr</span> <span class="o">=</span> <span class="n">learning_rate</span><span class="p">)</span>
+
+<span class="c1"># metric</span>
+<span class="n">metric</span> <span class="o">=</span> <span class="n">MyAcc</span><span class="p">()</span>
+
+<span class="c1"># training</span>
+<span class="n">train_history</span><span class="p">,</span> <span class="n">valid_history</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_iter</span><span class="p">,</span> <span class="n">test_iter</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">num_epochs</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>---------- epoch: 1 ----------
+batch 1 training loss: 2.2930948734283447; training accuracy: 0.03125
+batch 301 training loss: 0.8190287714978786; training accuracy: 0.7291320598006644
+batch 601 training loss: 0.7239517746570702; training accuracy: 0.7584234608985025
+batch 901 training loss: 0.6713733558484108; training accuracy: 0.7761861820199778
+batch 1201 training loss: 0.6385236556310638; training accuracy: 0.7858295170691091
+batch 1501 training loss: 0.6109974273119984; training accuracy: 0.7948034643570953
+batch 1801 training loss: 0.5959260584760678; training accuracy: 0.7991220155469184
+training loss: 0.5925289306561152; validation loss: 0.5071188468997851
+training acc: 0.8003166666666667; validation acc: 0.8237
+
+---------- epoch: 2 ----------
+batch 1 training loss: 0.6844662427902222; training accuracy: 0.8125
+batch 301 training loss: 0.49228916997925387; training accuracy: 0.8324335548172758
+batch 601 training loss: 0.4993857322090279; training accuracy: 0.8273190515806988
+batch 901 training loss: 0.49838475749045447; training accuracy: 0.8273446170921198
+batch 1201 training loss: 0.49313573891624224; training accuracy: 0.8298293089092423
+batch 1501 training loss: 0.4880894674391527; training accuracy: 0.8320078281145903
+batch 1801 training loss: 0.4860999575882803; training accuracy: 0.8324368406440866
+training loss: 0.48404501222372054; validation loss: 0.4993036704512831
+training acc: 0.8329166666666666; validation acc: 0.8322
+
+---------- epoch: 3 ----------
+batch 1 training loss: 0.49877896904945374; training accuracy: 0.8125
+batch 301 training loss: 0.4654339632619655; training accuracy: 0.8416735880398671
+batch 601 training loss: 0.46685775229319953; training accuracy: 0.841514143094842
+batch 901 training loss: 0.4642828342222612; training accuracy: 0.8418770810210877
+batch 1201 training loss: 0.4630293133331278; training accuracy: 0.8420847210657785
+batch 1501 training loss: 0.46148545784921663; training accuracy: 0.842542471685543
+batch 1801 training loss: 0.45975072789463584; training accuracy: 0.8423965852304275
+training loss: 0.4618278339385986; validation loss: 0.4724312952151314
+training acc: 0.8415166666666667; validation acc: 0.8377
+
+---------- epoch: 4 ----------
+batch 1 training loss: 0.752126932144165; training accuracy: 0.75
+batch 301 training loss: 0.4566462513220271; training accuracy: 0.8402200996677741
+batch 601 training loss: 0.45347931152968957; training accuracy: 0.8428660565723793
+batch 901 training loss: 0.4574048738021168; training accuracy: 0.8426748057713651
+batch 1201 training loss: 0.4538820588916267; training accuracy: 0.8438540799333888
+batch 1501 training loss: 0.451838077037911; training accuracy: 0.8448742504996669
+batch 1801 training loss: 0.45143803642201197; training accuracy: 0.8444267073847862
+training loss: 0.4506406066338221; validation loss: 0.4746488459860555
+training acc: 0.8448833333333333; validation acc: 0.8329
+
+---------- epoch: 5 ----------
+batch 1 training loss: 0.3627922534942627; training accuracy: 0.84375
+batch 301 training loss: 0.44672198222325094; training accuracy: 0.8476951827242525
+batch 601 training loss: 0.44790385678385736; training accuracy: 0.8466098169717138
+batch 901 training loss: 0.4498924219217999; training accuracy: 0.8464553274139844
+batch 1201 training loss: 0.4476724240950601; training accuracy: 0.8468203580349709
+batch 1501 training loss: 0.44572621827162084; training accuracy: 0.8484551965356429
+batch 1801 training loss: 0.44528925549166526; training accuracy: 0.8479317046085508
+training loss: 0.4448719442089399; validation loss: 0.4765161728135313
+training acc: 0.8481833333333333; validation acc: 0.8305
+
+---------- epoch: 6 ----------
+batch 1 training loss: 0.26377439498901367; training accuracy: 0.90625
+batch 301 training loss: 0.438816733633561; training accuracy: 0.8480066445182725
+batch 601 training loss: 0.4382005668122836; training accuracy: 0.848481697171381
+batch 901 training loss: 0.43852038368930035; training accuracy: 0.8477039400665927
+batch 1201 training loss: 0.43726639850972393; training accuracy: 0.8486417568692756
+batch 1501 training loss: 0.43858158362559047; training accuracy: 0.8482261825449701
+batch 1801 training loss: 0.4411187084771275; training accuracy: 0.8481052193225985
+training loss: 0.4408056870738665; validation loss: 0.47684303087929186
+training acc: 0.84795; validation acc: 0.8299
+
+---------- epoch: 7 ----------
+batch 1 training loss: 0.6044304370880127; training accuracy: 0.75
+batch 301 training loss: 0.4405321858055964; training accuracy: 0.8491486710963455
+batch 601 training loss: 0.43504094135344723; training accuracy: 0.8507175540765392
+batch 901 training loss: 0.4337968794209314; training accuracy: 0.8504786348501665
+batch 1201 training loss: 0.4375404339596989; training accuracy: 0.8488499167360533
+batch 1501 training loss: 0.43609161344887337; training accuracy: 0.8500999333777481
+batch 1801 training loss: 0.4356451380267731; training accuracy: 0.8500832870627429
+training loss: 0.4355355701724688; validation loss: 0.4765955810063182
+training acc: 0.8500833333333333; validation acc: 0.8313
+
+---------- epoch: 8 ----------
+batch 1 training loss: 0.5011204481124878; training accuracy: 0.8125
+batch 301 training loss: 0.44911604077614026; training accuracy: 0.8490448504983389
+batch 601 training loss: 0.4359223718279213; training accuracy: 0.8520694675540765
+batch 901 training loss: 0.42745239596057283; training accuracy: 0.8539816870144284
+batch 1201 training loss: 0.4263410305388762; training accuracy: 0.8536896336386345
+batch 1501 training loss: 0.4269639897612553; training accuracy: 0.8531812125249834
+batch 1801 training loss: 0.4291854333473801; training accuracy: 0.8523736812881733
+training loss: 0.4298478712320328; validation loss: 0.46099243877223506
+training acc: 0.8521333333333333; validation acc: 0.8414
+
+---------- epoch: 9 ----------
+batch 1 training loss: 0.3525997996330261; training accuracy: 0.9375
+batch 301 training loss: 0.4286440979701736; training accuracy: 0.8513289036544851
+batch 601 training loss: 0.43236852765777545; training accuracy: 0.8509255407653911
+batch 901 training loss: 0.4297431426889756; training accuracy: 0.8513110432852387
+batch 1201 training loss: 0.43217974043234897; training accuracy: 0.8498386761032473
+batch 1501 training loss: 0.43002170976065224; training accuracy: 0.8499125582944703
+batch 1801 training loss: 0.431127583298797; training accuracy: 0.8499791782343142
+training loss: 0.4303571875214577; validation loss: 0.47739782224828825
+training acc: 0.8500333333333333; validation acc: 0.8355
+
+---------- epoch: 10 ----------
+batch 1 training loss: 0.4089989960193634; training accuracy: 0.8125
+batch 301 training loss: 0.4038677517064782; training accuracy: 0.8604651162790697
+batch 601 training loss: 0.42295997381557443; training accuracy: 0.8531094009983361
+batch 901 training loss: 0.4204221637578439; training accuracy: 0.8530452275249722
+batch 1201 training loss: 0.4241272190230574; training accuracy: 0.8523886344712739
+batch 1501 training loss: 0.4252326993853707; training accuracy: 0.8515572951365756
+batch 1801 training loss: 0.42654917436728934; training accuracy: 0.8516796224319823
+training loss: 0.426084530989329; validation loss: 0.47719197420361703
+training acc: 0.8522; validation acc: 0.8313
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="prediction">
+<h3><span class="section-number">12.3.6. </span>prediction<a class="headerlink" href="#prediction" title="Permalink to this headline">¶</a></h3>
+<p>现在训练已经完成，我们的模型已经准备好[<strong>对图像进行分类预测</strong>]。
+给定一系列图像，我们将比较它们的实际标签（文本输出的第一行）和模型预测（文本输出的第二行）。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_iter</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>  <span class="c1">#@save</span>
+    <span class="sd">&quot;&quot;&quot;预测标签（定义见第3章）&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">test_iter</span><span class="p">:</span>
+        <span class="k">break</span> <span class="c1"># 只取第一個 batch 的意思</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">trues</span> <span class="o">=</span> <span class="n">get_fashion_mnist_labels</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">preds</span> <span class="o">=</span> <span class="n">get_fashion_mnist_labels</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="n">true</span> <span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">pred</span> <span class="k">for</span> <span class="n">true</span><span class="p">,</span> <span class="n">pred</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">trues</span><span class="p">,</span> <span class="n">preds</span><span class="p">)]</span>
+    <span class="n">show_images</span><span class="p">(</span>
+        <span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">titles</span><span class="o">=</span><span class="n">titles</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">])</span>
+
+<span class="n">my_predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_iter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([9, 2, 1, 1, 6, 1, 4, 6, 5, 7, 4, 5, 7, 3, 4, 1, 2, 4, 8, 0, 2, 5, 7, 9,
+        1, 4, 6, 0, 9, 3, 8, 8])
+</pre></div>
+</div>
+<img alt="../../_images/d2l_softmax_regression_57_1.png" src="../../_images/d2l_softmax_regression_57_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="function">
+<h2><span class="section-number">12.4. </span>內建 function<a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3><span class="section-number">12.4.1. </span>定義模型<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Flatten</span><span class="p">(),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">28</span><span class="o">*</span><span class="mi">28</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3><span class="section-number">12.4.2. </span>loss function<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>用內建的 <code class="docutils literal notranslate"><span class="pre">nn.CrossEntropyLoss()</span></code>，使用方法和之前一樣： <code class="docutils literal notranslate"><span class="pre">loss</span> <span class="pre">=</span> <span class="pre">nn.CrossEntropyLoss()</span></code>，然後<code class="docutils literal notranslate"><span class="pre">loss(y_hat,</span> <span class="pre">y)</span></code></p></li>
+<li><p>要注意的是：</p>
+<ul>
+<li><p>y_hat 要放的是 logits (還沒做 softmax)的結果。這樣做的原因，是因為數值的穩定性的考量.</p></li>
+<li><p>y 可以放 [0, C) 的 integer，或是 one-hot encoding (但 dtype 要改為 float32，原因是可以通用到 blended-label).</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loss</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3><span class="section-number">12.4.3. </span>optimizer<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3><span class="section-number">12.4.4. </span>metric<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metric</span> <span class="o">=</span> <span class="n">MyAcc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id7">
+<h3><span class="section-number">12.4.5. </span>training<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_history</span><span class="p">,</span> <span class="n">valid_history</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_iter</span><span class="p">,</span> <span class="n">test_iter</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">num_epochs</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>---------- epoch: 1 ----------
+batch 1 training loss: 0.2760540843009949; training accuracy: 0.90625
+batch 301 training loss: 0.4194850102562049; training accuracy: 0.8523671096345515
+batch 601 training loss: 0.4186703875884042; training accuracy: 0.8544093178036606
+batch 901 training loss: 0.4168739371936144; training accuracy: 0.853808268590455
+batch 1201 training loss: 0.41391293170375687; training accuracy: 0.8543921731890092
+batch 1501 training loss: 0.4162772057961417; training accuracy: 0.8542638241172552
+batch 1801 training loss: 0.41838816321273437; training accuracy: 0.8537791504719601
+training loss: 0.42017893958886465; validation loss: 0.4601927140412239
+training acc: 0.8530666666666666; validation acc: 0.8414
+
+---------- epoch: 2 ----------
+batch 1 training loss: 0.39312267303466797; training accuracy: 0.8125
+batch 301 training loss: 0.407473469914194; training accuracy: 0.8565199335548173
+batch 601 training loss: 0.40750258228743136; training accuracy: 0.8571651414309485
+batch 901 training loss: 0.4134164113183397; training accuracy: 0.8550221975582686
+batch 1201 training loss: 0.4172303157980297; training accuracy: 0.8538197335553706
+batch 1501 training loss: 0.41699684872915554; training accuracy: 0.8539931712191872
+batch 1801 training loss: 0.4182056664907555; training accuracy: 0.8538312048861744
+training loss: 0.4167207231005033; validation loss: 0.4617531546198141
+training acc: 0.8543666666666667; validation acc: 0.8386
+
+---------- epoch: 3 ----------
+batch 1 training loss: 0.21020445227622986; training accuracy: 0.9375
+batch 301 training loss: 0.39938764736996935; training accuracy: 0.8596345514950167
+batch 601 training loss: 0.40986907363136277; training accuracy: 0.8578410981697171
+batch 901 training loss: 0.4162394596257564; training accuracy: 0.8558892896781354
+batch 1201 training loss: 0.41704956571153556; training accuracy: 0.8555890924229809
+batch 1501 training loss: 0.42006259712872707; training accuracy: 0.8543471019320453
+batch 1801 training loss: 0.4183133905055389; training accuracy: 0.8545773181565797
+training loss: 0.4184689321398735; validation loss: 0.47002472833227427
+training acc: 0.8545166666666667; validation acc: 0.8372
+
+---------- epoch: 4 ----------
+batch 1 training loss: 0.5089763402938843; training accuracy: 0.8125
+batch 301 training loss: 0.4168938092664627; training accuracy: 0.8573504983388704
+batch 601 training loss: 0.4145228750693818; training accuracy: 0.8572691347753744
+batch 901 training loss: 0.4180211562841105; training accuracy: 0.8556811875693674
+batch 1201 training loss: 0.41757332773058736; training accuracy: 0.8550947127393839
+batch 1501 training loss: 0.41422225450035893; training accuracy: 0.8566788807461693
+batch 1801 training loss: 0.4140817682852949; training accuracy: 0.8573188506385342
+training loss: 0.41417200604279836; validation loss: 0.5011046351954198
+training acc: 0.8572833333333333; validation acc: 0.8279
+
+---------- epoch: 5 ----------
+batch 1 training loss: 0.37356817722320557; training accuracy: 0.875
+batch 301 training loss: 0.4041610992578573; training accuracy: 0.8588039867109635
+batch 601 training loss: 0.4117486807897365; training accuracy: 0.8563331946755408
+batch 901 training loss: 0.4119780889064173; training accuracy: 0.8567216981132075
+batch 1201 training loss: 0.4130154121713674; training accuracy: 0.8561875520399667
+batch 1501 training loss: 0.4119384880118732; training accuracy: 0.8564915056628915
+batch 1801 training loss: 0.4138048914556434; training accuracy: 0.8566247917823432
+training loss: 0.413866045721372; validation loss: 0.4563162605316875
+training acc: 0.85675; validation acc: 0.8408
+
+---------- epoch: 6 ----------
+batch 1 training loss: 0.3489759862422943; training accuracy: 0.84375
+batch 301 training loss: 0.4100171427344563; training accuracy: 0.8557931893687708
+batch 601 training loss: 0.4145066224274143; training accuracy: 0.8543053244592346
+batch 901 training loss: 0.41525910867504223; training accuracy: 0.853912319644839
+batch 1201 training loss: 0.41507272571821596; training accuracy: 0.8541840133222315
+batch 1501 training loss: 0.4156796067039781; training accuracy: 0.854721852098601
+batch 1801 training loss: 0.41509056804926114; training accuracy: 0.855479594669628
+training loss: 0.4149472252488136; validation loss: 0.4544931400698214
+training acc: 0.8554833333333334; validation acc: 0.8421
+
+---------- epoch: 7 ----------
+batch 1 training loss: 0.3232419490814209; training accuracy: 0.90625
+batch 301 training loss: 0.399986172806583; training accuracy: 0.8583887043189369
+batch 601 training loss: 0.4029200790874573; training accuracy: 0.8593490016638935
+batch 901 training loss: 0.40746594569361566; training accuracy: 0.8582824639289678
+batch 1201 training loss: 0.41075665754988033; training accuracy: 0.856473771856786
+batch 1501 training loss: 0.41316802269077396; training accuracy: 0.8555129913391073
+batch 1801 training loss: 0.4123198016071439; training accuracy: 0.8559827873403665
+training loss: 0.4123239260236422; validation loss: 0.5108196877728636
+training acc: 0.8556166666666667; validation acc: 0.8259
+
+---------- epoch: 8 ----------
+batch 1 training loss: 0.2686026692390442; training accuracy: 0.90625
+batch 301 training loss: 0.39633925354411437; training accuracy: 0.8620224252491694
+batch 601 training loss: 0.4100435714170758; training accuracy: 0.8579970881863561
+batch 901 training loss: 0.40710506402576274; training accuracy: 0.8581090455049944
+batch 1201 training loss: 0.405784776792563; training accuracy: 0.8581650707743547
+batch 1501 training loss: 0.4074982617678323; training accuracy: 0.8576782145236509
+batch 1801 training loss: 0.4099115320749742; training accuracy: 0.8569544697390339
+training loss: 0.40996687454183894; validation loss: 0.5048220109063596
+training acc: 0.85685; validation acc: 0.8333
+
+---------- epoch: 9 ----------
+batch 1 training loss: 0.5238355398178101; training accuracy: 0.75
+batch 301 training loss: 0.3980180616691659; training accuracy: 0.8650332225913622
+batch 601 training loss: 0.40896938309792474; training accuracy: 0.8596089850249584
+batch 901 training loss: 0.4058504473670209; training accuracy: 0.8582477802441731
+batch 1201 training loss: 0.40951391710255364; training accuracy: 0.8576446711074105
+batch 1501 training loss: 0.4083509028484073; training accuracy: 0.8581362425049966
+batch 1801 training loss: 0.4099285071017608; training accuracy: 0.8576832315380344
+training loss: 0.41094837238788606; validation loss: 0.4975788382866893
+training acc: 0.85745; validation acc: 0.8218
+
+---------- epoch: 10 ----------
+batch 1 training loss: 0.4953480064868927; training accuracy: 0.75
+batch 301 training loss: 0.39248133037375454; training accuracy: 0.863891196013289
+batch 601 training loss: 0.40346336842029545; training accuracy: 0.8597649750415973
+batch 901 training loss: 0.40110374794452225; training accuracy: 0.8599125971143174
+batch 1201 training loss: 0.4051802050288174; training accuracy: 0.8586074104912573
+batch 1501 training loss: 0.4077464541659841; training accuracy: 0.8582611592271818
+batch 1801 training loss: 0.4072158080688587; training accuracy: 0.858411993337035
+training loss: 0.4082008256157239; validation loss: 0.46867902812580714
+training acc: 0.8582833333333333; validation acc: 0.8386
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="vs">
+<h2><span class="section-number">12.5. </span>內建 VS 自己寫的差別<a class="headerlink" href="#vs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>主要在 loss function，內建的 <code class="docutils literal notranslate"><span class="pre">nn.CrossEntropyLoss()</span></code> 放進去的 y_hat 必須是 logits，不能是 softmax 後的機率值。</p></li>
+<li><p>所以，在定義模型時，內建的 model，必須將輸定為 logit (i.e. 只用 linear 層，沒有用 nn.softmax() 層)，但自己 from scratch 建的時候，model 的輸出是要經過 softmax 的處理</p></li>
+<li><p>至於，為啥內建 <code class="docutils literal notranslate"><span class="pre">nn.CrossEntropyLoss()</span></code> 一定要餵 logits 給他，是因為數值穩定性的考量</p></li>
+<li><p>d2l 的 <code class="docutils literal notranslate"><span class="pre">3.7</span> <span class="pre">Softmax回歸的簡潔實現</span></code> 有很清楚的說明，再去看就好，有空再整理過來。</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./pytorch/d2l"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="d2l_linear_regression.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">11. </span>Linear regression (d2l)</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
